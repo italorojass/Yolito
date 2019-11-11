@@ -1,0 +1,265 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="pruebaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="pruebaEntities2" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="CabeceraPedido" EntityType="pruebaModel.CabeceraPedido" />
+    <EntitySet Name="Categoria1Set" EntityType="pruebaModel.Categoria1Set" />
+    <EntitySet Name="Categoria2Set" EntityType="pruebaModel.Categoria2Set" />
+    <EntitySet Name="Categoria3Set" EntityType="pruebaModel.Categoria3Set" />
+    <EntitySet Name="CorreosVentasWeb" EntityType="pruebaModel.CorreosVentasWeb" />
+    <EntitySet Name="DetallePedido" EntityType="pruebaModel.DetallePedido" />
+    <EntitySet Name="Ordenes_pagadas" EntityType="pruebaModel.Ordenes_pagadas" />
+    <EntitySet Name="ProductosSet" EntityType="pruebaModel.ProductosSet" />
+    <EntitySet Name="Usuarios" EntityType="pruebaModel.Usuarios" />
+    <AssociationSet Name="FK_CabeceraPedido_Usuarios" Association="pruebaModel.FK_CabeceraPedido_Usuarios">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="CabeceraPedido" EntitySet="CabeceraPedido" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetallePedido_CabeceraPedido" Association="pruebaModel.FK_DetallePedido_CabeceraPedido">
+      <End Role="CabeceraPedido" EntitySet="CabeceraPedido" />
+      <End Role="DetallePedido" EntitySet="DetallePedido" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ordenes_pagadas_Usuarios" Association="pruebaModel.FK_Ordenes_pagadas_Usuarios">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="Ordenes_pagadas" EntitySet="Ordenes_pagadas" />
+    </AssociationSet>
+    <EntitySet Name="ADDRESSSTATE" EntityType="pruebaModel.ADDRESSSTATE" />
+    <EntitySet Name="ADDRESSCOUNTRYREGION" EntityType="pruebaModel.ADDRESSCOUNTRYREGION" />
+    <EntitySet Name="ADDRESSCOUNTY" EntityType="pruebaModel.ADDRESSCOUNTY" />
+    <AssociationSet Name="FK_ADDRESSCOUNTY_ADDRESSSTATE" Association="pruebaModel.FK_ADDRESSCOUNTY_ADDRESSSTATE">
+      <End Role="ADDRESSSTATE" EntitySet="ADDRESSSTATE" />
+      <End Role="ADDRESSCOUNTY" EntitySet="ADDRESSCOUNTY" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="CabeceraPedido">
+    <Key>
+      <PropertyRef Name="npedido" />
+    </Key>
+    <Property Name="npedido" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="rut" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="monto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="estado_oc" Type="Boolean" />
+    <NavigationProperty Name="Usuarios" Relationship="pruebaModel.FK_CabeceraPedido_Usuarios" FromRole="CabeceraPedido" ToRole="Usuarios" />
+    <NavigationProperty Name="DetallePedido" Relationship="pruebaModel.FK_DetallePedido_CabeceraPedido" FromRole="CabeceraPedido" ToRole="DetallePedido" />
+  </EntityType>
+  <EntityType Name="Categoria1Set">
+    <Key>
+      <PropertyRef Name="Clasif1" />
+    </Key>
+    <Property Name="Clasif1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Categoria2Set">
+    <Key>
+      <PropertyRef Name="Clasif2" />
+    </Key>
+    <Property Name="Clasif1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Clasif2" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Categoria3Set">
+    <Key>
+      <PropertyRef Name="Clasif3" />
+    </Key>
+    <Property Name="Clasif2" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Clasif3" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="CorreosVentasWeb">
+    <Key>
+      <PropertyRef Name="id_correo" />
+    </Key>
+    <Property Name="id_correo" Type="Int32" Nullable="false" />
+    <Property Name="correo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="DetallePedido">
+    <Key>
+      <PropertyRef Name="nproducto" />
+    </Key>
+    <Property Name="nproducto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="npedido" Type="Int32" Nullable="false" />
+    <Property Name="itembarcode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="itemname" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="cantidad" Type="Int32" Nullable="false" />
+    <Property Name="precio" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="subtotal" Type="Int32" Nullable="false" />
+    <Property Name="photo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="CabeceraPedido" Relationship="pruebaModel.FK_DetallePedido_CabeceraPedido" FromRole="DetallePedido" ToRole="CabeceraPedido" />
+  </EntityType>
+  <EntityType Name="Ordenes_pagadas">
+    <Key>
+      <PropertyRef Name="IdOrden" />
+    </Key>
+    <Property Name="IdOrden" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="npedido" Type="Int32" Nullable="false" />
+    <Property Name="rut" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="nombre_usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="codigo_compra" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="num_tarjeta" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="numero_cuotas" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="fecha_compra" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="monto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="estado_oc" Type="Boolean" />
+    <Property Name="tipo_cuota" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Usuarios" Relationship="pruebaModel.FK_Ordenes_pagadas_Usuarios" FromRole="Ordenes_pagadas" ToRole="Usuarios" />
+  </EntityType>
+  <EntityType Name="ProductosSet">
+    <Key>
+      <PropertyRef Name="IDPr" />
+    </Key>
+    <Property Name="ItemId" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ItemName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Clasif1" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Clasif2" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IDPr" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Clasif3" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ConfigId" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="InventSizeId" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="InventColorId" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ItemBarCode" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Price" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Photo" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Usuarios">
+    <Key>
+      <PropertyRef Name="rut" />
+    </Key>
+    <Property Name="rut" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="UserId" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="dig" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="fecnac" Type="DateTime" Precision="0" />
+    <Property Name="nacionalidad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="telfijo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="telmovil" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="pais" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="region" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="comuna" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="CabeceraPedido" Relationship="pruebaModel.FK_CabeceraPedido_Usuarios" FromRole="Usuarios" ToRole="CabeceraPedido" />
+    <NavigationProperty Name="Ordenes_pagadas" Relationship="pruebaModel.FK_Ordenes_pagadas_Usuarios" FromRole="Usuarios" ToRole="Ordenes_pagadas" />
+  </EntityType>
+  <Association Name="FK_CabeceraPedido_Usuarios">
+    <End Type="pruebaModel.Usuarios" Role="Usuarios" Multiplicity="1" />
+    <End Type="pruebaModel.CabeceraPedido" Role="CabeceraPedido" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="rut" />
+      </Principal>
+      <Dependent Role="CabeceraPedido">
+        <PropertyRef Name="rut" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetallePedido_CabeceraPedido">
+    <End Type="pruebaModel.CabeceraPedido" Role="CabeceraPedido" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="pruebaModel.DetallePedido" Role="DetallePedido" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CabeceraPedido">
+        <PropertyRef Name="npedido" />
+      </Principal>
+      <Dependent Role="DetallePedido">
+        <PropertyRef Name="npedido" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ordenes_pagadas_Usuarios">
+    <End Type="pruebaModel.Usuarios" Role="Usuarios" Multiplicity="0..1" />
+    <End Type="pruebaModel.Ordenes_pagadas" Role="Ordenes_pagadas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="rut" />
+      </Principal>
+      <Dependent Role="Ordenes_pagadas">
+        <PropertyRef Name="rut" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ADDRESSSTATE">
+    <Key>
+      <PropertyRef Name="STATEID" />
+    </Key>
+    <Property Name="NAME" Type="String" Nullable="false" MaxLength="120" FixedLength="false" Unicode="true" />
+    <Property Name="STATEID" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="COUNTRYREGIONID" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="TIMEZONE" Type="Int32" Nullable="false" />
+    <Property Name="DATAAREAID" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="true" />
+    <Property Name="RECVERSION" Type="Int32" Nullable="false" />
+    <Property Name="RECID" Type="Int64" Nullable="false" />
+    <Property Name="DLVROUTE" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ADDRESSCOUNTY" Relationship="pruebaModel.FK_ADDRESSCOUNTY_ADDRESSSTATE" FromRole="ADDRESSSTATE" ToRole="ADDRESSCOUNTY" />
+  </EntityType>
+  <EntityType Name="ADDRESSCOUNTRYREGION">
+    <Key>
+      <PropertyRef Name="COUNTRYREGIONID" />
+      <PropertyRef Name="TYPE" />
+      <PropertyRef Name="ISOCODE" />
+      <PropertyRef Name="ADDRFORMAT" />
+      <PropertyRef Name="NAME" />
+      <PropertyRef Name="GIROACCOUNTVALIDATIONMETHOD" />
+      <PropertyRef Name="BANKACCOUNTNUMVALIDATION" />
+      <PropertyRef Name="CURRENCYCODE" />
+      <PropertyRef Name="TAXVATNUMFORMATCHECK" />
+      <PropertyRef Name="TIMEZONE" />
+      <PropertyRef Name="ADDRESSUSEZIPPLUS4" />
+      <PropertyRef Name="DATAAREAID" />
+      <PropertyRef Name="RECVERSION" />
+      <PropertyRef Name="RECID" />
+      <PropertyRef Name="EEACOUNTRY" />
+      <PropertyRef Name="VALIDATEVERIFIERDIGIT" />
+    </Key>
+    <Property Name="COUNTRYREGIONID" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="TYPE" Type="Int32" Nullable="false" />
+    <Property Name="ISOCODE" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+    <Property Name="ADDRFORMAT" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="NAME" Type="String" Nullable="false" MaxLength="120" FixedLength="false" Unicode="true" />
+    <Property Name="GIROACCOUNTVALIDATIONMETHOD" Type="Int32" Nullable="false" />
+    <Property Name="BANKACCOUNTNUMVALIDATION" Type="Int32" Nullable="false" />
+    <Property Name="CURRENCYCODE" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
+    <Property Name="TAXVATNUMFORMATCHECK" Type="Int32" Nullable="false" />
+    <Property Name="TIMEZONE" Type="Int32" Nullable="false" />
+    <Property Name="ADDRESSUSEZIPPLUS4" Type="Int32" Nullable="false" />
+    <Property Name="DATAAREAID" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="true" />
+    <Property Name="RECVERSION" Type="Int32" Nullable="false" />
+    <Property Name="RECID" Type="Int64" Nullable="false" />
+    <Property Name="EEACOUNTRY" Type="Int32" Nullable="false" />
+    <Property Name="VALIDATEVERIFIERDIGIT" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ADDRESSCOUNTY">
+    <Key>
+      <PropertyRef Name="COUNTRYREGIONID" />
+      <PropertyRef Name="COUNTYID" />
+      <PropertyRef Name="STATEID" />
+      <PropertyRef Name="NAME" />
+      <PropertyRef Name="DATAAREAID" />
+      <PropertyRef Name="RECVERSION" />
+      <PropertyRef Name="RECID" />
+      <PropertyRef Name="DLVROUTE" />
+    </Key>
+    <Property Name="COUNTRYREGIONID" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="COUNTYID" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="STATEID" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="NAME" Type="String" Nullable="false" MaxLength="120" FixedLength="false" Unicode="true" />
+    <Property Name="DATAAREAID" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="true" />
+    <Property Name="RECVERSION" Type="Int32" Nullable="false" />
+    <Property Name="RECID" Type="Int64" Nullable="false" />
+    <Property Name="DLVROUTE" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ADDRESSSTATE" Relationship="pruebaModel.FK_ADDRESSCOUNTY_ADDRESSSTATE" FromRole="ADDRESSCOUNTY" ToRole="ADDRESSSTATE" />
+  </EntityType>
+  <Association Name="FK_ADDRESSCOUNTY_ADDRESSSTATE">
+    <End Type="pruebaModel.ADDRESSSTATE" Role="ADDRESSSTATE" Multiplicity="1" />
+    <End Type="pruebaModel.ADDRESSCOUNTY" Role="ADDRESSCOUNTY" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ADDRESSSTATE">
+        <PropertyRef Name="STATEID" />
+      </Principal>
+      <Dependent Role="ADDRESSCOUNTY">
+        <PropertyRef Name="STATEID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

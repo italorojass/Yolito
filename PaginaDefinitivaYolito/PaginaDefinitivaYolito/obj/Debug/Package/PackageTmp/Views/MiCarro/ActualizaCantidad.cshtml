@@ -1,0 +1,139 @@
+﻿@model IEnumerable<PaginaDefinitivaYolito.Models.DetalleCarro>
+@using System.Linq
+@{
+    ViewBag.Title = "MiCarro";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<script>
+    $(document).ready(function () {
+        $("#quantity").change(function () {
+            $("#btn").click();
+        });
+    });
+
+</script>
+
+@if (User.Identity.IsAuthenticated)
+{
+    int total = 0;
+    int elprecio = 0;
+    int ncarro = 0;
+    int cantid = 0;
+
+    foreach (var v in Model)
+    {
+        if (v.NPedido == v.CabeceraCarro.NPedido && Convert.ToString(v.CabeceraCarro.RutCliente) == Session["RutUsuario"] && v.NPedido == null)
+        {
+            <div class="row">
+                <div class="col-sm-12">
+                    <h2 class="title2 text-center">No tienes un carro con productos</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <h2 class="text-center"><a href="@Url.Action("Productos", "Home")" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Deseo comprar</a></h2>
+                </div>
+            </div>
+        }
+    }
+    <section id="cart_items">
+        <div class="container">
+
+            <div class="table-responsive cart_info">
+                <table class="table table-condensed">
+                    <thead>
+                        <tr class="cart_menu">
+                            <td class="image">Productos</td>
+                            <td class="description"></td>
+                            <td class="price">Precio</td>
+                            <td class="quantity">Cantidad</td>
+                            <td class="total">Subtotal</td>
+                            <td></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            cantid++;
+                            if (item.NPedido == item.CabeceraCarro.NPedido && Convert.ToString(item.CabeceraCarro.RutCliente) == User.Identity.Name)
+                            {
+                                if (item.CabeceraCarro.EstadoOc != true)
+                                {
+                                    string precio = string.Format("{0:#,##}", item.Precio);
+                                    elprecio = Convert.ToInt32(Double.Parse(item.Precio));
+                                    double subtotal1 = Double.Parse(precio) * item.Cantidad;
+                                    ncarro = item.NPedido;
+                                    <tr>
+                                        <td class="cart_product">
+                                            <a href=""><img src="~/Content/productos/@item.Photo" class="img-responsive" style="max-width: 80px; max-height: 80px;" alt=""></a>
+                                        </td>
+                                        <td class="cart_description">
+                                            <h4>@item.ItemName </h4>
+                                            <p>Código: @item.ItemBarCode</p>
+
+                                        </td>
+                                        <td class="cart_price">
+                                            <p>$@string.Format("{0:#,##}",elprecio)</p>
+                                        </td>
+                                        <td class="cart_quantity">
+                                            <div class="cart_quantity_button">
+                                                <form action="/MiCarro/ActualizaCantidad" method="post">
+                                                    <input class="cart_quantity_input" type="number" name="quantity" id="quantity" value="@item.Cantidad" size="2" style="width: 45px;height:35px;">
+                                                    <input type="hidden" name="barcode" id="barcode" value="@item.ItemBarCode" />
+
+                                                    <button type="submit" name="btn" id="btn" class="btn"><i class="fa fa-refresh" aria-hidden="true"></i></button>
+                                                </form>
+                                                @*<a class="cart_quantity_up" href="@Url.Action("AgregaUno", "MiCarro", new { id = item.itembarcode })"> + </a>
+                                                    <input class="cart_quantity_input" type="text" name="quantity" id="quantity" value="@item.cantidad" autocomplete="off" size="2">*@
+                                                @*<a class="cart_quantity_down" href="@Url.Action("", "MiCarro", new { id = item.itembarcode })"> - </a>*@
+                                            </div>
+                                        </td>
+                                        <td class="cart_total">
+                                            <p class="cart_total_price">$@string.Format("{0:#,##}", subtotal1)</p>
+                                        </td>
+                                        <td class="cart_total">
+                                            <a class="cart_quantity_delete" href="@Url.Action("DeleteItem", "MiCarro", new { id = item.ItemBarCode })"><i class="fa fa-times"></i></a>
+                                        </td>
+                                    </tr>
+                                    total += Convert.ToInt32(subtotal1);
+                                }
+                            }
+
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section> <!--/#cart_items-->
+
+    <section id="do_action">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-12">
+
+                    <div class="total_area">
+                        <ul>
+                            <li>Carro numero <span>@ncarro</span></li>
+                            <li>Total <span>$@total.ToString("#,##")<input type="hidden" id="Eltotal" value="@total.ToString("#,##")" /> </span></li>
+
+                        </ul>
+                        <a class="btn btn-danger update" href="@Url.Action("VaciarCarro", "MiCarro", new { id = @ncarro })">Vaciar mi carro</a>
+                        <a class="btn btn-success update" href="@Url.Action("Productos", "Home")">Seguir Comprando</a>
+                        <a class="btn btn-success update" href="@Url.Action("Despacho", "ConfirmaCompra", new { id = @ncarro })">Comprar</a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+}
+else
+{
+    <h2 class="title2 text-center">Debes iniciar sesion para ver tu carro</h2>
+    <h2 class="text-center"><a href="@Url.Action("LogIn", "Usuarios")" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Iniciar Sesión</a></h2>
+}

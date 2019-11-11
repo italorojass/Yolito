@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<mvcSiteMap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0"
+            xsi:schemaLocation="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0 MvcSiteMapSchema.xsd">
+
+  <mvcSiteMapNode title="Home" controller="Home" action="Home">
+    
+    <mvcSiteMapNode title="Nivel1" controller="Home" action="Categoria1" preservedRouteParameters="id,nombre,id,nombre"  >
+      <mvcSiteMapNode title="Nivel2" controller="Home" action="Categoria2" preservedRouteParameters="id,Nombre" >
+        <mvcSiteMapNode title="Nivel3" controller="Home" action="Categoria3" preservedRouteParameters="id,nombre"/>
+      </mvcSiteMapNode>
+    </mvcSiteMapNode>
+
+    <mvcSiteMapNode title="Carro de compras" controller="Compra" action="CarroDeCompras">
+      
+    </mvcSiteMapNode>
+  </mvcSiteMapNode>
+  
+  
+  
+</mvcSiteMap>

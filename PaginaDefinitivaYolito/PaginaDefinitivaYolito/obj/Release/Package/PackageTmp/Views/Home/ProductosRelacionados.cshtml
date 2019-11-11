@@ -1,0 +1,66 @@
+﻿@model IEnumerable<PaginaDefinitivaYolito.Models.temporal>
+@{
+    double? valorCaja;
+    
+}
+@if(ViewBag.error != null){
+    <div class="alert alert-danger">
+        @ViewBag.error
+    </div>
+}
+else
+{
+
+    if (Model.Count() != 0)
+    {
+        <div class="col-md-12" style="padding-top:15px;">
+            <div class=" divlines">
+                <h3 class="fontUpper">También te puede interesar</h3>
+            </div>
+
+        </div>
+        foreach (var item in Model.Take(4))
+        {
+            <div class="col-md-3">
+                <div class="col-xs-12 boxcarro">
+                    <div class="mybox1">
+                        <a href="@Url.Action("FichaTecnica", "Home", new { id = item.ItemBarCode, nombre = item.ItemName, ftec = item.RefRecId })">
+                            <img src="@Url.Content("~/Content/Productos/" + item.Photo)" alt="prod" class="img-responsive " onerror="imgError(this);" style="width:100%; height:200px;">
+                        </a>
+                    </div>
+                    <div class="mybox2" style="margin-bottom:50px;">
+                        <b> @item.ItemName @item.brandInternet</b>
+                    </div>
+                    <p>Precio Internet:</p>
+                    <div>
+                        @if (item.Factor != 0)
+                        {
+                            valorCaja = item.Factor * item.Price;
+                            <h4> $ @string.Format(new System.Globalization.CultureInfo("es-CL"), "{0:#,##}", Math.Floor(Convert.ToDecimal(valorCaja))) Caja </h4>
+                            <h4> $ @string.Format(new System.Globalization.CultureInfo("es-CL"), "{0:#,##}", Math.Floor(Convert.ToDecimal(item.Price))) mt2</h4>
+                        }
+                        else
+                        {
+                            <h4> $ @string.Format(new System.Globalization.CultureInfo("es-CL"), "{0:#,##}", Math.Floor(Convert.ToDecimal(item.Price))) C/U</h4>
+                        }
+
+
+                    </div>
+                    <div class="LinkAddtocart">
+                        <a href="@Url.Action("ElCarro", "Compra", new { id = item.ItemBarCode, nombre = item.ItemName, canti = 1 })" class="btn btn-default add-to-cart btn-block" id="agregacarro">Agregar al carro <i class="fa fa-shopping-cart"></i></a>
+                    </div>
+
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        @*<div class="col-md-4">
+            <div class="alert alert-danger">
+                <p>No hay</p>
+            </div>
+        </div>*@
+    }
+}
+

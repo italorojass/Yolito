@@ -1,0 +1,193 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PaginaWebModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="CabeceraCarro">
+    <Key>
+      <PropertyRef Name="NPedido" />
+    </Key>
+    <Property Name="NPedido" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RutCliente" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="NombreCliente" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="EstadoOc" Type="Boolean" />
+    <Property Name="ComunaDespacho" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CalleDespacho" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ObservacionDespacho" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CostoDespacho" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ResponsableDespacho" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="FechaDespacho" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Clientes" Relationship="Self.FK_CabeceraCarro_Clientes" FromRole="CabeceraCarro" ToRole="Clientes" />
+    <NavigationProperty Name="DetalleCarro" Relationship="Self.FK_DetalleCarro_CabeceraCarro" FromRole="CabeceraCarro" ToRole="DetalleCarro" />
+  </EntityType>
+  <EntityType Name="CarroPagado">
+    <Key>
+      <PropertyRef Name="IdOrden" />
+    </Key>
+    <Property Name="IdOrden" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NPedido" Type="Int32" />
+    <Property Name="RutCliente" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="NombreCliente" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CodigoCompraTBK" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="NumTarjetaTBK" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="NCuotasTBK" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="FechaCompra" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Monto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="EstadoOc" Type="Boolean" />
+    <Property Name="TipoCuota" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Clientes">
+    <Key>
+      <PropertyRef Name="RutCliente" />
+    </Key>
+    <Property Name="IdCliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RutCliente" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DigCliente" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="TelFijo" Type="Int32" />
+    <Property Name="TelMovil" Type="Int32" />
+    <Property Name="Direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Comuna" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ConfirmPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="CabeceraCarro" Relationship="Self.FK_CabeceraCarro_Clientes" FromRole="Clientes" ToRole="CabeceraCarro" />
+  </EntityType>
+  <EntityType Name="DetalleCarro">
+    <Key>
+      <PropertyRef Name="IdPed" />
+    </Key>
+    <Property Name="IdPed" Type="Int32" Nullable="false" />
+    <Property Name="NPedido" Type="Int32" />
+    <Property Name="ItemBarCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ItemName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Cantidad" Type="Int32" />
+    <Property Name="Precio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Subtotal" Type="Int32" />
+    <Property Name="Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="CabeceraCarro" Relationship="Self.FK_DetalleCarro_CabeceraCarro" FromRole="DetalleCarro" ToRole="CabeceraCarro" />
+  </EntityType>
+  <EntityType Name="Nivel1">
+    <Key>
+      <PropertyRef Name="ICat1" />
+    </Key>
+    <Property Name="ICat1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="NameAlias" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Nivel2" Relationship="Self.FK_Nivel2_Nivel1" FromRole="Nivel1" ToRole="Nivel2" />
+  </EntityType>
+  <EntityType Name="Nivel2">
+    <Key>
+      <PropertyRef Name="ICat2" />
+    </Key>
+    <Property Name="ICat2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ICat1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="NameAlias" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Nivel1" Relationship="Self.FK_Nivel2_Nivel1" FromRole="Nivel2" ToRole="Nivel1" />
+    <NavigationProperty Name="Nivel3" Relationship="Self.FK_Nivel3_Nivel2" FromRole="Nivel2" ToRole="Nivel3" />
+  </EntityType>
+  <EntityType Name="Nivel3">
+    <Key>
+      <PropertyRef Name="ICat3" />
+    </Key>
+    <Property Name="ICat2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ICat3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="NameAlias" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Link" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Nivel2" Relationship="Self.FK_Nivel3_Nivel2" FromRole="Nivel3" ToRole="Nivel2" />
+  </EntityType>
+  <EntityType Name="Productos">
+    <Key>
+      <PropertyRef Name="IdProd" />
+    </Key>
+    <Property Name="IdProd" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ItemId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ItemName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Clasif1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Clasif2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Clasif3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ConfigId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="InventSizeId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="InventColorId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ItemBarCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Price" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="HighLights" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="ICat3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Stock" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="FK_CabeceraCarro_Clientes">
+    <End Role="Clientes" Type="Self.Clientes" Multiplicity="0..1" />
+    <End Role="CabeceraCarro" Type="Self.CabeceraCarro" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clientes">
+        <PropertyRef Name="RutCliente" />
+      </Principal>
+      <Dependent Role="CabeceraCarro">
+        <PropertyRef Name="RutCliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetalleCarro_CabeceraCarro">
+    <End Role="CabeceraCarro" Type="Self.CabeceraCarro" Multiplicity="0..1" />
+    <End Role="DetalleCarro" Type="Self.DetalleCarro" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CabeceraCarro">
+        <PropertyRef Name="NPedido" />
+      </Principal>
+      <Dependent Role="DetalleCarro">
+        <PropertyRef Name="NPedido" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Nivel2_Nivel1">
+    <End Role="Nivel1" Type="Self.Nivel1" Multiplicity="0..1" />
+    <End Role="Nivel2" Type="Self.Nivel2" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Nivel1">
+        <PropertyRef Name="ICat1" />
+      </Principal>
+      <Dependent Role="Nivel2">
+        <PropertyRef Name="ICat1" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Nivel3_Nivel2">
+    <End Role="Nivel2" Type="Self.Nivel2" Multiplicity="0..1" />
+    <End Role="Nivel3" Type="Self.Nivel3" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Nivel2">
+        <PropertyRef Name="ICat2" />
+      </Principal>
+      <Dependent Role="Nivel3">
+        <PropertyRef Name="ICat2" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="PaginaWebEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="CabeceraCarro" EntityType="Self.CabeceraCarro" />
+    <EntitySet Name="CarroPagado" EntityType="Self.CarroPagado" />
+    <EntitySet Name="Clientes" EntityType="Self.Clientes" />
+    <EntitySet Name="DetalleCarro" EntityType="Self.DetalleCarro" />
+    <EntitySet Name="Nivel1" EntityType="Self.Nivel1" />
+    <EntitySet Name="Nivel2" EntityType="Self.Nivel2" />
+    <EntitySet Name="Nivel3" EntityType="Self.Nivel3" />
+    <EntitySet Name="Productos" EntityType="Self.Productos" />
+    <AssociationSet Name="FK_CabeceraCarro_Clientes" Association="Self.FK_CabeceraCarro_Clientes">
+      <End Role="Clientes" EntitySet="Clientes" />
+      <End Role="CabeceraCarro" EntitySet="CabeceraCarro" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetalleCarro_CabeceraCarro" Association="Self.FK_DetalleCarro_CabeceraCarro">
+      <End Role="CabeceraCarro" EntitySet="CabeceraCarro" />
+      <End Role="DetalleCarro" EntitySet="DetalleCarro" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Nivel2_Nivel1" Association="Self.FK_Nivel2_Nivel1">
+      <End Role="Nivel1" EntitySet="Nivel1" />
+      <End Role="Nivel2" EntitySet="Nivel2" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Nivel3_Nivel2" Association="Self.FK_Nivel3_Nivel2">
+      <End Role="Nivel2" EntitySet="Nivel2" />
+      <End Role="Nivel3" EntitySet="Nivel3" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,501 @@
+﻿@model IEnumerable<PaginaDefinitivaYolito.Models.Productos>
+@{
+    ViewBag.Title = "FichaTecnica";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    long refid = 0;
+    string itemId = string.Empty;
+    string ConfigId = string.Empty;
+    string InventSizeId = string.Empty;
+    
+}
+
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 ">
+                <div class="col-md-4 pull-right buscador">
+                    <form action="/Home/Buscador/" method="get" id="formBusqueda">
+                        <div class="input-group">
+
+                            <input type="text" class="form-control" name="buscar" id="buscar" placeholder="¿Qué buscas?">
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary " type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                            </span>
+                        </div>
+
+                    </form>
+                    <p id="empty-message" style="color:#ff0000;">
+
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 ">
+                <div class="breadcrumbs">
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="@Url.Action("Home", "Home")">Home</a>
+                        </li>
+
+                        @if (ViewBag.nivel1 != null)
+                        {
+                            foreach (var n1 in ViewBag.nivel1)
+                            {
+                                
+                                <li> <a href="@Url.Action("Categoria1", "Home", new { id = n1.ICat1, nombre = n1.Name})">@n1.Name</a> </li>
+                            }
+
+                        }
+                        @if (ViewBag.Nivel2 != null)
+                        {
+                            foreach (var n2 in ViewBag.Nivel2)
+                            {
+                                
+                                <li> <a href="@Url.Action("Categoria2", "Home", new { id = n2.ICat1, N2 = n2.ICat2, Name1 = ViewBag.NameCat1, Name2 = n2.Name })">@n2.Name</a> </li>
+                            }
+                        }
+                        @if (ViewBag.Nivel3 != null)
+                        {
+                            foreach (var n3 in ViewBag.Nivel3)
+                            {
+                                <li> <a href="@Url.Action("Categoria3", "Home", new { id = ViewBag.IdCat1, N2 = ViewBag.IdCat2, N3 = n3.ICat3, Name1 = ViewBag.NameCat1, Name2 = ViewBag.NameCat2, Name3 = n3.Name })">@n3.Name</a> </li>
+                            }
+                        }
+
+                        
+                        <li class="active">
+                            @ViewBag.nombre
+                        </li>
+                        
+                    </ol>
+                    
+                </div>
+                
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 ">
+                <div class="divlines">
+                </div>
+            </div>
+        </div>
+        <div class="row" >
+            <div class="col-xs-12">
+                @if (ViewBag.err != null)
+                {
+                    <div class="alert-danger">
+                        @ViewBag.err
+                    </div>
+                }
+            </div>
+
+            @foreach (var item in Model)
+            {
+
+                refid = item.RefRecId.Value;
+                itemId = item.ItemId;
+                ConfigId = item.ConfigId;
+                InventSizeId = item.InventSizeId;
+                
+                <div class="col-md-6 col-sm-4 gallery">
+                    <div class="container">
+                        <p style="font-family:Arial">SKU @item.ItemBarCode</p>
+                        <img src="@Url.Content("~/Content/Productos/" + item.Photo)" alt="prod"
+                             class="img-responsive img-thumbnail" id="zoom_01" onerror="imgError(this);" rel="ligthbox" />
+                    </div>
+                </div>
+                <div class="col-md-4">
+
+                    @if (ViewBag.Kit != null)
+                    {
+                        @*Producto tiene kit*@
+                       
+                        foreach (var kit in ViewBag.Kit)
+                        {
+                            
+                            <h5 class="fontUpper">
+                                @item.ItemName @item.brandInternet 
+                            </h5>
+    <p>Precio internet :</p>
+    <h2>
+        <span style="font-size:20px; ">
+            $
+        </span>
+        @string.Format(new System.Globalization.CultureInfo("es-CL"), "{0:#,##}", Math.Floor(Convert.ToDecimal(item.Price)))  <span style="font-size:20px; ">C/U</span>
+
+    </h2>
+    <i class="fa fa-plus" aria-hidden="true"></i>
+    <h5 class="fontUpper">@kit.ItemName @kit.brandInternet</h5>
+    
+
+                            int sumaKit = item.Price + kit.Price;
+                        
+                        
+    <p>Precio internet :</p>
+                        <h2>
+                            <span style="font-size:20px; ">$</span> @string.Format(new System.Globalization.CultureInfo("es-CL"), "{0:#,##}", Math.Floor(Convert.ToDecimal(kit.Price)))  <span style="font-size:20px; ">C/U</span>  
+                        </h2>
+
+
+    <p>Precio internet KIT:</p>
+                        <h1> <span style="font-size:20px; ">$</span> @string.Format(new System.Globalization.CultureInfo("es-CL"), "{0:#,##}", Math.Floor(Convert.ToDecimal(sumaKit)))  <span style="font-size:20px; ">KIT</span>  </h1><br />
+    <table>
+        <tr>
+            <td><b>Cantidad</b></td>
+        </tr>
+        <tr>
+            <td>
+                <input type="number" value="1" name="canti" style="width:80px;" id="cantiCaja" class="form-control bfh-number" onchange="check_cantidad(this), SendMT2(this)" />
+            </td>
+            <td align="right">
+                <b>KIT</b>
+                <input type="hidden" name="kit" value="1" id="kit"/>
+            </td>
+        </tr>
+      
+    </table>
+                        <br />
+                        }
+
+                    }
+                    else
+                    {
+                        @*No tiene kit*@
+                        <h5 class="fontUpper">
+                            @item.ItemName @item.brandInternet
+                        </h5>
+        if (item.Factor != 0)
+        {
+            <p>Precio internet:</p>
+            if (item.ItemName.Contains("Cerámica"))
+            {
+                @*Precio Caja*@
+                <h1> <span style="font-size:20px; ">$</span> @string.Format(new System.Globalization.CultureInfo("es-CL"), "{0:#,##}", Math.Floor(Convert.ToDecimal(ViewBag.valorCaja)))  <span style="font-size:20px; ">Caja</span>  </h1><br />
+    
+            }
+            else
+            {
+                @*Precio C/U*@
+                        
+                <h1> <span style="font-size:20px; ">$</span> @string.Format(new System.Globalization.CultureInfo("es-CL"), "{0:#,##}", Math.Floor(Convert.ToDecimal(ViewBag.valorCaja)))  <span style="font-size:20px; ">C/U</span>  </h1><br />
+            }
+            @*Precio MT2*@
+            <h1> <span style="font-size:20px; ">$</span> @string.Format(new System.Globalization.CultureInfo("es-CL"), "{0:#,##}", Math.Floor(Convert.ToDecimal(item.Price)))  <span style="font-size:20px; ">mt2</span>  </h1><br />
+    
+            <table>
+                    <tr>
+                        <td><b>Cantidad</b></td>
+                    </tr>
+                <tr>
+                    <td>
+                        <input type="number" value="1" name="canti" style="width:80px;" id="cantiCaja" class="form-control bfh-number" onchange="check_cantidad(this), SendMT2(this)" />
+                    </td>
+                    <td align="right"><b>Cajas</b></td>
+                </tr>
+                <tr>
+                    <td><b>A comprar</b></td>
+                </tr>
+                <tr>
+                    <td align="center">
+                        <input type="number" value="@item.Factor" name="canti" id="cantiMt2" class="form-control bfh-number" style="width:80px;" disabled />
+                    </td>
+                    <td><b>Mt2</b></td>
+                </tr>
+            </table> 
+                        <br />
+
+        }
+        else
+        {
+            @*Precio C/U*@
+            <p>Precio internet:</p>
+                <h1>
+                <span style="font-size:20px; ">$</span>
+                @string.Format(new System.Globalization.CultureInfo("es-CL"), "{0:#,##}", Math.Floor(Convert.ToDecimal(item.Price)))
+                <span style="font-size:20px; ">C/U</span>   </h1><br />
+    <table>
+        <tr>
+            <td><b>Cantidad</b></td>
+        </tr>
+        <tr>
+            <td>
+                <input type="number" value="1" name="canti" style="width:80px;" id="cantiCaja" class="form-control bfh-number" onchange="check_cantidad(this), SendMT2(this)" />
+            </td>
+            <td align="right" colspan="2"><b>C/U</b></td>
+        </tr>
+        
+    </table>
+<br />
+
+        }
+
+
+
+                    }
+                   
+                    <table class="table table-hover ">
+                        <tr style="background-color: #007A9F;color:#fff;">
+                            <td colspan="4">MÉTODOS DE ENVÍO Y RETIRO </td>
+                        </tr>
+                        <tr style="background-color: #fff;">
+                            <td>
+                            <i class=" fa fa-truck fa-2x" aria-hidden="true">
+                            </i></td>
+                            <td align="center">Despacho a domicilio</td>
+                            <td >
+                                <form action="/Home/CheckStock/" method="get">
+                                    <select class="form-control " id="SelectComuna">
+                                        <option></option>
+                                        @foreach (var comunas in ViewBag.Comunas)
+                                        {
+                                            <option name="@comunas.Name" value="@comunas.Name"> @comunas.Name</option>
+                                        }
+                                    </select>
+                                </form>
+                            </td>
+                            <td>
+                                <p id="ResultStockComuna"></p>
+                            </td>
+                    </tr>
+                       
+                        <tr style="background-color: #fff;">
+                            <td><i class="fa fa-cart-arrow-down fa-2x" aria-hidden="true"></i></td>
+                            <td align="center">Retiro en tienda</td>
+                            <td>
+                                <form action="/Home/CheckStock/" method="post" >
+                                    <select class="form-control " id="SelectLocal">
+                                        <option></option>
+                                        <option value="01">Las Condes</option>
+                                        <option value="03">Quilicura</option>
+                                        <option value="02">Colina</option>
+                                    </select>
+                                </form>
+                                
+                            </td>
+                            <td >
+                                <div id="ResultStockLocal"></div>
+                            </td>
+                           
+                        </tr>
+                       
+
+                    </table>
+                    
+                    <a href="#" class="btn btn-default add-to-cart btn-block" id="lnk">Agregar al carro <i class="fa fa-shopping-cart"></i></a>
+                    
+                    
+                    <input type="hidden" value="@item.RefRecId" id="ftec" />
+                    <input type="hidden" value="@item.ItemBarCode" id="barc" /><input type="hidden" id="nombrepr" value="@item.ItemName" />
+                    
+                </div>
+               
+                        
+            }
+
+        </div>
+      
+        
+        <div class="row">
+            <div class="col-md-12" style="padding-top:15px;">
+                @Html.Action("DetalleFTecnica", "Home", new { id = refid })
+
+            </div>
+        </div>
+        
+        <div class="row">
+            
+            @Html.Action("ProductosRelacionados", "Home", new { id = refid, itemId = itemId, ConfigId = ConfigId, InventSizeId = InventSizeId })
+           
+        </div>
+
+    </div>
+</section><br />
+
+<script type="text/javascript">
+    var baseurl = '@Url.Action("ElCarro","Compra")';
+    $('#lnk').click(function () {
+        var url = baseurl + '?id=' + $('#barc').val() + '&canti=' + $('#cantiCaja').val() + '&nombre=' + $('#nombrepr').val() + '&kit=' + $('#kit').val();
+        //ajax request
+        $.ajax({
+            url: "/Compra/ElCarro",
+            type: 'GET',
+            data: {
+                id: $("#barc").val(),
+                nombre: $('#nombrepr').val(),
+                canti: $('#cantiCaja').val(),
+                kit: $('#kit').val()
+            },
+            async: false,
+            success: function (data) {
+                alert(data);
+                location.reload();
+            },
+
+        });
+    });
+
+    
+</script>
+ 
+<script>
+    $(document).ready(function () {
+        $('#SelectLocal').change(function () {
+            $.ajax({
+                url: "/Home/CheckStock",
+                type: 'POST',
+                contentType: "application/json; charset=utf-8",
+                dataType: 'json',
+                data: JSON.stringify({
+                    Local: $("#SelectLocal").val(),
+                    itembarcode : $('#barc').val(),
+                    Cantidad: $('#cantiCaja').val()
+                }),
+                async: false,
+                success: function (data) {
+                    if (data == "1") {
+                        $('#ResultStockLocal').removeClass("alert-danger fa fa-times-circle-o");
+                        $('#ResultStockLocal').addClass("alert-success fa fa-check-square-o fa-lg");
+                        
+                    } else {
+                        $('#ResultStockLocal').removeClass("alert-success fa fa-check-square-o fa-2x");
+                        $('#ResultStockLocal').addClass("alert-danger fa fa-times-circle-o fa-lg");
+                        
+                    }
+                    
+                },
+                
+            });
+
+        });
+        $('#SelectComuna').change(function () {
+            
+            $.ajax({
+                url: "/Home/CalculaDespacho",
+                type: 'POST',
+                contentType: "application/json; charset=utf-8",
+                dataType: 'json',
+                data: JSON.stringify({
+                    Comuna: $("#SelectComuna").val(),
+                    itembarcode: $('#barc').val(),
+                    Cantidad: $('#cantiCaja').val()
+                }),
+                async: false,
+                success: function (data) {
+                    if (data == "1") {
+                        $('#ResultStockComuna').removeClass("alert-danger fa fa-times-circle-o");
+                        $('#ResultStockComuna').addClass("alert-success fa fa-check-square-o fa-lg");
+
+                    } else {
+                        $('#ResultStockComuna').removeClass("alert-success fa fa-check-square-o fa-2x");
+                        $('#ResultStockComuna').addClass("alert-danger fa fa-times-circle-o fa-lg");
+
+                    }
+
+                },
+
+            });
+        });
+    });
+</script>
+
+
+<script type="text/javascript">
+        function SendMT2(element) {
+        $.ajax({
+            url: '@Url.Action("ConvertidorMT2", "Home")',
+            data : { id: $('#barc').val(), cantidadCajas: $('#cantiCaja').val(), ftec: $('#ftec').val() },
+            datatype: "json",
+            traditional: true,
+            success: function (data) {
+                $('#cantiMt2').val(data);
+            }
+        });
+
+    }
+
+</script>
+
+
+
+<script type="text/javascript">
+
+    function check_cantidad(element) {
+        var cant = element.value;
+        var cant_es_flotante = isFloat(cant);
+        //alert('Valor introducido: '+cant+' \n\n ID: '+element.id+' | Es flotante? '+cant_es_flotante);
+        // descomentar si quieres revisar los valores del id, value y si es flotante
+
+        if (isNaN(cant)) {
+            alert('Valor introducido:       ' + cant + ' \n\n Introduce solo valores numericos');
+            document.getElementById(element.id).value = "";
+        }
+        else if (cant < 1) {
+            alert('Valor introducido:       ' + cant + ' \n\n Introduce numeros enteros mayores que 0');
+            document.getElementById(element.id).value = "";
+        }
+        else if (cant_es_flotante == true) {
+            alert('Valor introducido:       ' + cant + ' \n\n El valor es decimal.  Será convertido a entero.');
+            cant = parseInt(cant);
+            document.getElementById(element.id).value = cant;
+        }
+    }
+    function isFloat(myNum) {
+        // es true si es 1, osea si es flotante
+        var myMod = myNum % 1;
+
+        if (myMod == 0)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
+    
+
+    function imgError(image) {
+        image.onerror = "";
+        image.src = '@Url.Content("~/Content/Imagenes/Sitio/MARCA-DE-AGUA-YOLITO.jpg")';
+        return true;
+    }
+</script>
+
+
+<script type="text/javascript">
+    function check_cantidadMt2(element) {
+
+        var cant = element.value;
+        var cant_es_flotante = isFloat(cant);
+
+        if (isNaN(cant)) {
+            alert('Valor introducido:       ' + cant + ' \n\n Introduce solo valores numericos');
+            document.getElementById(element.id).value = "";
+
+        } else if (cant < 1) {
+            alert('Valor introducido:       ' + cant + ' \n\n Introduce numeros enteros mayores que 0');
+            document.getElementById(element.id).value = "";
+        }
+        else if (cant_es_flotante == true) {
+            cant_es_flotante.toFixed(2);
+            //alert('Valor introducido:       ' + cant + ' \n\n El valor es decimal.  Será convertido a entero.');
+            //cant = parseInt(cant);
+            //document.getElementById(element.id).value = cant;
+        }
+
+    }
+    function isFloat(myNum) {
+        // es true si es 1, osea si es flotante
+        var myMod = myNum % 1;
+
+        if (myMod == 0)
+        { return false; }
+        else { return true; }
+    }
+</script>
+

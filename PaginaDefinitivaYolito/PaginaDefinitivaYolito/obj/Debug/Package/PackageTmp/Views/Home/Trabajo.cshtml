@@ -1,0 +1,55 @@
+﻿@model PaginaDefinitivaYolito.Models.EnviaCVModel
+@{
+    ViewBag.Title = "Trabajo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<link href="~/Content/main.css" rel="stylesheet">
+<script>
+    $(document).ready(function () {
+        if ('@ViewBag.Message' == 'Sent') {
+            alert('Postulación de trabajo enviada correctamente.');
+        }
+    });
+</script>
+<div class="container">
+    <div class="bg">
+        <div class="row">
+            <div class="col-sm-12">
+                <h2 class="title text-center">Trabaja con nosotros</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <div class="login-form">
+                    <!--sign up form-->
+                    <h2>Complete el formulario de postulación.</h2>
+                @using (Html.BeginForm("Trabajo", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.TextBoxFor(m => m.Rut, new {@class ="form-control", @placeholder = "Rut sin puntos y con guión"})
+                    @Html.TextBoxFor(m => m.NombreCompleto, new { @class = "form-control", @placeholder = "Nombre Completo" })
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @type = "email", @placeholder = "Email" })
+                    @Html.TextBoxFor(m => m.TelefonoFijo, new { @class = "form-control", @placeholder = "Teléfono Fijo" })
+                    @Html.TextBoxFor(m => m.TelefonoMovil, new { @class = "form-control", @placeholder = "Teléfono movil" })
+                    @Html.TextBoxFor(m => m.Dirección, new { @class = "form-control", @placeholder = "Dirección" })
+    <table>
+        <tr>
+            <td width="auto">@Html.DropDownListFor(model => model.Comuna, new SelectList(ViewBag.Comunas, "NAME", "NAME", new { @class = "form-control", id = "Comunas" }))</td>
+        </tr>
+    </table>
+                    <div class="form-group">
+                        Carga tú Currículum:
+                        <input type="file" name="file" />
+                    </div>
+                    <button type="submit" class="btn btn-warning btn-block ">Enviar</button>
+                }
+                    
+                </div><!--/sign up form-->
+            </div>
+        </div>
+    </div>
+
+</div>
+<br />

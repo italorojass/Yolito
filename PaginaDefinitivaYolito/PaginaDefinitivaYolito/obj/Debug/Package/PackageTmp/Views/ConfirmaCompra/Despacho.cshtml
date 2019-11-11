@@ -1,0 +1,145 @@
+﻿
+@{
+    ViewBag.Title = "Despacho";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script>
+    $(document).ready(function () {
+        $('#formReceptor').hide();
+        $('#formDespacho').hide();
+        
+        $('#Radio').change(function () {
+            $('#formDespacho').show();
+            $('#formReceptor').hide();
+        });
+
+        $('#Radio1').change(function () {
+            $('#formReceptor').show();
+            $('#formDespacho').hide();
+        });
+        
+    });
+    
+</script>
+
+@if (User.Identity.IsAuthenticated)
+{
+    <section id="do_action">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 ">
+                    <div class="breadcrumbs">
+                        @Html.Raw(MvcBreadCrumbs.BreadCrumb.Display())
+                    </div>
+                </div>
+
+                <div class="col-md-4 pull-right buscador">
+                    @using (Html.BeginForm("Buscador", "Home", new { ReturnUrl = ViewBag.ReturnUrl, FormMethod.Post }))
+                    {
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="buscar" id="buscar" placeholder="¿Que buscas?">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default " type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                            </span>
+                        </div>
+                    }
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="pull-left col-xs-6">
+                    <label class="radio-inline">
+                        <input type="radio" name="Radio" id="Radio">Despacho a domicilio
+                    </label>
+                </div>
+                <div class="pull-left col-xs-6">
+                    <label class="radio-inline">
+                        <input type="radio" name="Radio" id="Radio1">Retire en tienda
+                    </label>
+                </div>
+            </div>
+
+            <div id="formDespacho">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3>Dirección de despacho <i class="fa fa-truck" aria-hidden="true"></i></h3> 
+                    </div>
+                </div>
+                <div class="row">
+                    @using (Html.BeginForm("TipoPago", "ConfirmaCompra", FormMethod.Post, new { id = "formDespacho" }))
+                    {
+                        <input type="hidden" name="ncarro" value="@ViewBag.ncarro" />
+                        <div class="col-xs-6">
+                            <input type="text" class="form-control " id="Calle" name="Calle" placeholder="Dirección de despacho">
+                            <input type="text" class="form-control" name="telcontacto" id="telfijo" placeholder="Teléfono de contacto" />
+                        </div>
+
+                        <div class="col-xs-6">
+                            <select name="Comunas">
+                                <option>--Comunas donde despachamos--</option>
+                                @foreach (var cc in ViewBag.Comunas)
+                                {
+                                    <option>@cc.Name</option>
+                                }
+
+                            </select>
+                            @*@Html.DropDownList("Comunas", new SelectList(ViewBag.Comunas, "NAME", "NAME", new { id = "Comunas" }))*@
+                        </div>
+
+
+                        <div class="col-xs-12">
+                            <textarea class="form-control" rows="5" id="comment" name="Obs" placeholder="Observaciones"></textarea>
+                        </div>
+
+
+                        <div class="col-md-12 " @*style="border:1px solid;"*@>
+                            <div class="pull-right">
+                                <button class="btn btn-success update" type="submit">Siguiente <i class="fa fa-chevron-right fa-rotate-right" aria-hidden="true"></i></button>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div id="formReceptor">
+                    <div class="col-md-6">
+                        <h3>Nombre contacto <i class="fa fa-id-card-o" aria-hidden="true"></i></h3>
+                    </div>
+                    @using (Html.BeginForm("TipoPago", "ConfirmaCompra", FormMethod.Post, new { id = "formReceptor" }))
+                    {
+                        <input type="hidden" name="ncarro" value="@ViewBag.ncarro" />
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" name="Responsable" id="receptordesp" placeholder="Nombre receptor despacho" />
+                        </div>
+                        <div class="col-md-4">
+
+                            <input type="text" class="form-control" name="RutResponsable" id="rutreceptordesp" placeholder="Rut" />
+                        </div>
+                        <div class="col-md-12">
+                            <div class="pull-right">
+                                <button class="btn btn-success update" type="submit">Siguiente <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                            </div>
+                        </div>
+                    }
+                </div>
+                
+            </div>
+                
+                @*<a class="btn btn-default check_out" href="@Url.Action("Pago_Webpay", "Webpay")">Pagar</a>*@
+            </div>
+  
+    </section><!--/#do_action-->
+}else
+{
+    <div class="container">
+        <div class="col-md-4 col-lg-offset-4">
+            <div class="alert alert-danger">
+                <p>No tienes acceso.</p>
+            </div>
+        </div>
+    </div>
+    
+}

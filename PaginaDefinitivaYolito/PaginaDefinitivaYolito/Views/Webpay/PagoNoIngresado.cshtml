@@ -1,0 +1,32 @@
+﻿@if (TempData["ErrorCreateSalesLine"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorCreateSalesLine"]
+    </div>
+
+}
+else
+{
+    <div class="container">
+        <div class="row">
+            @if (ViewBag.PedidoAgregado != null)
+            {
+                <div class="col-md-4 col-md-offset-4">
+                    <div class="alert alert-success">
+                        <p>@ViewBag.PedidoAgregado<i class="fa fa-check-square-o" aria-hidden="true"></i></p>
+                    </div>
+                </div>
+            }
+            
+            @if (ViewBag.error != null)
+            {
+                <div class="col-md-4 col-md-offset-4">
+                    <div class="alert alert-danger">
+                        <p>@ViewBag.error<i class="fa fa-times-circle-o" aria-hidden="true"></i></p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    
+}

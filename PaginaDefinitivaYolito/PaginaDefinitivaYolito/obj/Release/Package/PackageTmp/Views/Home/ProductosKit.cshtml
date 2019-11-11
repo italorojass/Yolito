@@ -1,0 +1,46 @@
+﻿@model IEnumerable<PaginaDefinitivaYolito.Models.ProductosKit>
+@{
+    double? valorCaja;
+
+}
+@if (ViewBag.error != null)
+{
+    <div class="alert alert-danger">
+        @ViewBag.error
+    </div>
+}
+else
+{
+    if (Model.Count() != 0)
+    {
+        
+        foreach (var item in Model)
+        {
+            <div class="col-md-4">
+                <div class="mybox2">
+                    <b> @item.ItemName @item.brandInternet</b>
+                </div>
+                <div>
+                    @if (item.Factor != 0)
+                    {
+                        valorCaja = item.Factor * item.Price;
+                        <h4> $ @string.Format(new System.Globalization.CultureInfo("es-CL"), "{0:#,##}", Math.Floor(Convert.ToDecimal(valorCaja))) Caja </h4>
+                        <h4> $ @string.Format(new System.Globalization.CultureInfo("es-CL"), "{0:#,##}", Math.Floor(Convert.ToDecimal(item.Price))) mt2</h4>
+                    }
+                    else
+                    {
+                        <h4> $ @string.Format(new System.Globalization.CultureInfo("es-CL"), "{0:#,##}", Math.Floor(Convert.ToDecimal(item.Price))) C/U</h4>
+                    }
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="col-md-4">
+                <div class="alert alert-danger">
+                    <p>Sin kit</p>
+                </div>
+            </div>
+    }
+}

@@ -1,0 +1,1059 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="PaginaWebModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AddressCounty">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="StateId" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="CountyId" Type="varchar" MaxLength="80" />
+          <Property Name="CountryRegionId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="RecId" Type="varchar(max)" />
+          <Property Name="DlvRoute" Type="varchar" MaxLength="80" />
+        </EntityType>
+        <EntityType Name="CabeceraCarro">
+          <Key>
+            <PropertyRef Name="NPedido" />
+          </Key>
+          <Property Name="NPedido" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RutCliente" Type="varchar" MaxLength="50" />
+          <Property Name="NombreCliente" Type="varchar" MaxLength="50" />
+          <Property Name="EstadoOc" Type="bit" />
+          <Property Name="ComunaDespacho" Type="varchar" MaxLength="50" />
+          <Property Name="CalleDespacho" Type="varchar" MaxLength="50" />
+          <Property Name="ObservacionDespacho" Type="varchar" MaxLength="50" />
+          <Property Name="CostoDespacho" Type="varchar" MaxLength="50" />
+          <Property Name="RutResponsable" Type="varchar" MaxLength="50" />
+          <Property Name="ResponsableDespacho" Type="varchar" MaxLength="50" />
+          <Property Name="FechaDespacho" Type="date" />
+          <Property Name="MontoPagado" Type="varchar" MaxLength="50" />
+          <Property Name="IDCliente" Type="int" />
+          <Property Name="ModoEntrega" Type="varchar" MaxLength="50" />
+          <Property Name="Local" Type="varchar" MaxLength="50" />
+          <Property Name="EmailCliente" Type="varchar" MaxLength="50" />
+          <Property Name="IPAdress" Type="varchar" MaxLength="50" />
+          <Property Name="tipoDocumento" Type="varchar" MaxLength="50" />
+          <Property Name="FechaCarro" Type="datetime" />
+        </EntityType>
+        <EntityType Name="CarroPagado">
+          <Key>
+            <PropertyRef Name="IdOrden" />
+          </Key>
+          <Property Name="IdOrden" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NPedido" Type="int" />
+          <Property Name="RutCliente" Type="varchar" MaxLength="50" />
+          <Property Name="NombreCliente" Type="varchar" MaxLength="50" />
+          <Property Name="CodigoCompraTBK" Type="varchar" MaxLength="50" />
+          <Property Name="NumTarjetaTBK" Type="varchar" MaxLength="50" />
+          <Property Name="NCuotasTBK" Type="varchar" MaxLength="50" />
+          <Property Name="FechaCompra" Type="varchar" MaxLength="50" />
+          <Property Name="Monto" Type="varchar" MaxLength="50" />
+          <Property Name="EstadoOc" Type="bit" />
+          <Property Name="TipoCuota" Type="varchar" MaxLength="50" />
+          <Property Name="EmailCliente" Type="varchar" MaxLength="50" />
+          <Property Name="tipoDocumento" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Clientes">
+          <Key>
+            <PropertyRef Name="IDCliente" />
+          </Key>
+          <Property Name="IDCliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RutCliente" Type="varchar" MaxLength="50" />
+          <Property Name="DigCliente" Type="varchar" MaxLength="1" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+          <Property Name="Apellido" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="TelFijo" Type="int" />
+          <Property Name="TelMovil" Type="int" />
+          <Property Name="Direccion" Type="varchar" MaxLength="50" />
+          <Property Name="Comuna" Type="varchar" MaxLength="50" />
+          <Property Name="Password" Type="varchar" MaxLength="50" />
+          <Property Name="ConfirmPassword" Type="varchar" MaxLength="50" />
+          <Property Name="NPedido" Type="int" />
+        </EntityType>
+        <EntityType Name="Cotizaciones">
+          <Key>
+            <PropertyRef Name="IdCotiza" />
+          </Key>
+          <Property Name="IdCotiza" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreCliente" Type="varchar" MaxLength="50" />
+          <Property Name="Apellido" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="TelefonoContacto" Type="varchar" MaxLength="50" />
+          <Property Name="Asunto" Type="varchar" MaxLength="50" />
+          <Property Name="BodyEmail" Type="varchar" MaxLength="100" />
+          <Property Name="FechaCotiza" Type="datetime" />
+        </EntityType>
+        <EntityType Name="DetalleCarro">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NPedido" Type="int" />
+          <Property Name="ItemBarCode" Type="nvarchar(max)" />
+          <Property Name="ItemName" Type="varchar(max)" />
+          <Property Name="Cantidad" Type="int" Nullable="false" />
+          <Property Name="Precio" Type="int" Nullable="false" />
+          <Property Name="Subtotal" Type="int" Nullable="false" />
+          <Property Name="Photo" Type="nvarchar(max)" />
+          <Property Name="RecRefId" Type="bigint" />
+        </EntityType>
+        <EntityType Name="FichaTecnica">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RefRecId" Type="bigint" Nullable="false" />
+          <Property Name="ItemNameAttibute" Type="varchar" MaxLength="100" />
+          <Property Name="ItemAttibute" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="MarcasAsoc">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreMarca" Type="varchar" MaxLength="50" />
+          <Property Name="FotoNormal" Type="varchar" MaxLength="100" />
+          <Property Name="FotoBN" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Nivel1">
+          <Key>
+            <PropertyRef Name="ICat1" />
+          </Key>
+          <Property Name="ICat1" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="NameAlias" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Nivel2">
+          <Key>
+            <PropertyRef Name="ICat2" />
+          </Key>
+          <Property Name="ICat2" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ICat1" Type="varchar" MaxLength="50" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="NameAlias" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Nivel3">
+          <Key>
+            <PropertyRef Name="ICat3" />
+          </Key>
+          <Property Name="ICat2" Type="varchar" MaxLength="50" />
+          <Property Name="ICat3" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="NameAlias" Type="varchar" MaxLength="50" />
+          <Property Name="Link" Type="varchar" MaxLength="50" />
+          <Property Name="Orden" Type="int" />
+        </EntityType>
+        <EntityType Name="Productos">
+          <Key>
+            <PropertyRef Name="IdProd" />
+          </Key>
+          <Property Name="IdProd" Type="int" Nullable="false" />
+          <Property Name="ItemId" Type="nvarchar(max)" />
+          <Property Name="ItemName" Type="varchar(max)" />
+          <Property Name="Clasif1" Type="varchar" MaxLength="50" />
+          <Property Name="Clasif2" Type="varchar" MaxLength="50" />
+          <Property Name="Clasif3" Type="varchar" MaxLength="50" />
+          <Property Name="ConfigId" Type="varchar" MaxLength="50" />
+          <Property Name="InventSizeId" Type="varchar" MaxLength="50" />
+          <Property Name="InventColorId" Type="varchar" MaxLength="50" />
+          <Property Name="ItemBarCode" Type="nvarchar(max)" />
+          <Property Name="Price" Type="int" Nullable="false" />
+          <Property Name="Photo" Type="nvarchar(max)" />
+          <Property Name="HighLights" Type="varchar" MaxLength="1" />
+          <Property Name="ICat3" Type="varchar" MaxLength="50" />
+          <Property Name="Stock" Type="varchar" MaxLength="50" />
+          <Property Name="brandInternet" Type="varchar(max)" />
+          <Property Name="RefRecId" Type="bigint" />
+          <Property Name="UnitWeb" Type="varchar" MaxLength="50" />
+          <Property Name="Factor" Type="float" />
+          <Property Name="Orden" Type="int" />
+          <Property Name="Banner" Type="int" />
+        </EntityType>
+        <EntityType Name="ProductosKit">
+          <Key>
+            <PropertyRef Name="IdProd" />
+          </Key>
+          <Property Name="IdProd" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ItemId" Type="nvarchar(max)" />
+          <Property Name="ItemName" Type="varchar(max)" />
+          <Property Name="Clasif1" Type="varchar" MaxLength="50" />
+          <Property Name="Clasif2" Type="varchar" MaxLength="50" />
+          <Property Name="Clasif3" Type="varchar" MaxLength="50" />
+          <Property Name="ConfigId" Type="varchar" MaxLength="50" />
+          <Property Name="InventSizeId" Type="varchar" MaxLength="50" />
+          <Property Name="InventColorId" Type="varchar" MaxLength="50" />
+          <Property Name="ItemBarCode" Type="nvarchar(max)" />
+          <Property Name="Price" Type="int" Nullable="false" />
+          <Property Name="Photo" Type="nvarchar(max)" />
+          <Property Name="HighLights" Type="varchar" MaxLength="1" />
+          <Property Name="ICat3" Type="varchar" MaxLength="50" />
+          <Property Name="Stock" Type="varchar" MaxLength="50" />
+          <Property Name="brandInternet" Type="varchar(max)" />
+          <Property Name="RefRecId" Type="bigint" />
+          <Property Name="UnitWeb" Type="varchar" MaxLength="50" />
+          <Property Name="Factor" Type="float" />
+          <Property Name="Orden" Type="int" />
+        </EntityType>
+        <EntityType Name="ProductosOferta">
+          <Key>
+            <PropertyRef Name="IdProd" />
+          </Key>
+          <Property Name="IdProd" Type="int" Nullable="false" />
+          <Property Name="ItemId" Type="nvarchar(max)" />
+          <Property Name="ItemName" Type="varchar(max)" />
+          <Property Name="Clasif1" Type="varchar" MaxLength="50" />
+          <Property Name="Clasif2" Type="varchar" MaxLength="50" />
+          <Property Name="Clasif3" Type="varchar" MaxLength="50" />
+          <Property Name="ConfigId" Type="varchar" MaxLength="50" />
+          <Property Name="InventSizeId" Type="varchar" MaxLength="50" />
+          <Property Name="InventColorId" Type="varchar" MaxLength="50" />
+          <Property Name="ItemBarCode" Type="nvarchar(max)" />
+          <Property Name="Price" Type="int" Nullable="false" />
+          <Property Name="Photo" Type="nvarchar(max)" />
+          <Property Name="HighLights" Type="varchar" MaxLength="1" />
+          <Property Name="ICat3" Type="varchar" MaxLength="50" />
+          <Property Name="Stock" Type="varchar" MaxLength="50" />
+          <Property Name="brandInternet" Type="varchar(max)" />
+          <Property Name="RefRecId" Type="bigint" />
+          <Property Name="UnitWeb" Type="varchar" MaxLength="50" />
+          <Property Name="Factor" Type="float" />
+          <Property Name="Orden" Type="int" />
+          <Property Name="Banner" Type="int" />
+        </EntityType>
+        <EntityType Name="ProductosRelacionados">
+          <Key>
+            <PropertyRef Name="IdProd" />
+          </Key>
+          <Property Name="IdProd" Type="int" Nullable="false" />
+          <Property Name="ItemId" Type="nvarchar(max)" />
+          <Property Name="ConfigId" Type="varchar" MaxLength="50" />
+          <Property Name="InventSizeId" Type="varchar" MaxLength="50" />
+          <Property Name="InventColorId" Type="varchar" MaxLength="50" />
+          <Property Name="RefRecId" Type="bigint" />
+        </EntityType>
+        <EntityType Name="Sinonimos">
+          <Key>
+            <PropertyRef Name="IdSin" />
+          </Key>
+          <Property Name="IdSin" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Palabra" Type="varchar" MaxLength="50" />
+          <Property Name="Sinonimo" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TablaBanner">
+          <Key>
+            <PropertyRef Name="ID_Banner" />
+          </Key>
+          <Property Name="ID_Banner" Type="int" Nullable="false" />
+          <Property Name="NombreBanner" Type="varchar" MaxLength="50" />
+          <Property Name="FotoBanner" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="temporal">
+          <Key>
+            <PropertyRef Name="IdProd" />
+          </Key>
+          <Property Name="IdProd" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ItemId" Type="nvarchar(max)" />
+          <Property Name="ItemName" Type="varchar(max)" />
+          <Property Name="Clasif1" Type="varchar" MaxLength="50" />
+          <Property Name="Clasif2" Type="varchar" MaxLength="50" />
+          <Property Name="Clasif3" Type="varchar" MaxLength="50" />
+          <Property Name="ConfigId" Type="varchar" MaxLength="50" />
+          <Property Name="InventSizeId" Type="varchar" MaxLength="50" />
+          <Property Name="InventColorId" Type="varchar" MaxLength="50" />
+          <Property Name="ItemBarCode" Type="nvarchar(max)" />
+          <Property Name="Price" Type="int" Nullable="false" />
+          <Property Name="Photo" Type="nvarchar(max)" />
+          <Property Name="HighLights" Type="varchar" MaxLength="1" />
+          <Property Name="ICat3" Type="varchar" MaxLength="50" />
+          <Property Name="Stock" Type="varchar" MaxLength="50" />
+          <Property Name="brandInternet" Type="varchar(max)" />
+          <Property Name="RefRecId" Type="bigint" />
+          <Property Name="UnitWeb" Type="varchar" MaxLength="50" />
+          <Property Name="Factor" Type="float" />
+          <Property Name="Orden" Type="int" />
+        </EntityType>
+        <EntityType Name="tempProdKit">
+          <Key>
+            <PropertyRef Name="IdProd" />
+          </Key>
+          <Property Name="IdProd" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ItemId" Type="nvarchar(max)" />
+          <Property Name="ConfigId" Type="varchar" MaxLength="50" />
+          <Property Name="InventSizeId" Type="varchar" MaxLength="50" />
+          <Property Name="InventColorId" Type="varchar" MaxLength="50" />
+          <Property Name="RefRecId" Type="bigint" />
+        </EntityType>
+        <Association Name="FK_Clientes_CabeceraCarro">
+          <End Role="CabeceraCarro" Type="Self.CabeceraCarro" Multiplicity="0..1" />
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CabeceraCarro">
+              <PropertyRef Name="NPedido" />
+            </Principal>
+            <Dependent Role="Clientes">
+              <PropertyRef Name="NPedido" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetalleCarro_CabeceraCarro">
+          <End Role="CabeceraCarro" Type="Self.CabeceraCarro" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DetalleCarro" Type="Self.DetalleCarro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CabeceraCarro">
+              <PropertyRef Name="NPedido" />
+            </Principal>
+            <Dependent Role="DetalleCarro">
+              <PropertyRef Name="NPedido" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PaginaWebModelStoreContainer">
+          <EntitySet Name="AddressCounty" EntityType="Self.AddressCounty" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CabeceraCarro" EntityType="Self.CabeceraCarro" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CarroPagado" EntityType="Self.CarroPagado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cotizaciones" EntityType="Self.Cotizaciones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DetalleCarro" EntityType="Self.DetalleCarro" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FichaTecnica" EntityType="Self.FichaTecnica" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MarcasAsoc" EntityType="Self.MarcasAsoc" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Nivel1" EntityType="Self.Nivel1" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Nivel2" EntityType="Self.Nivel2" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Nivel3" EntityType="Self.Nivel3" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Productos" EntityType="Self.Productos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductosKit" EntityType="Self.ProductosKit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductosOferta" EntityType="Self.ProductosOferta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductosRelacionados" EntityType="Self.ProductosRelacionados" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sinonimos" EntityType="Self.Sinonimos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TablaBanner" EntityType="Self.TablaBanner" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="temporal" EntityType="Self.temporal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tempProdKit" EntityType="Self.tempProdKit" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Clientes_CabeceraCarro" Association="Self.FK_Clientes_CabeceraCarro">
+            <End Role="CabeceraCarro" EntitySet="CabeceraCarro" />
+            <End Role="Clientes" EntitySet="Clientes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetalleCarro_CabeceraCarro" Association="Self.FK_DetalleCarro_CabeceraCarro">
+            <End Role="CabeceraCarro" EntitySet="CabeceraCarro" />
+            <End Role="DetalleCarro" EntitySet="DetalleCarro" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PaginaWebModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CarroPagado">
+          <Key>
+            <PropertyRef Name="IdOrden" />
+          </Key>
+          <Property Name="IdOrden" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NPedido" Type="Int32" />
+          <Property Name="RutCliente" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NombreCliente" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CodigoCompraTBK" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NumTarjetaTBK" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NCuotasTBK" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCompra" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Monto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EstadoOc" Type="Boolean" />
+          <Property Name="TipoCuota" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EmailCliente" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="tipoDocumento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Nivel1">
+          <Key>
+            <PropertyRef Name="ICat1" />
+          </Key>
+          <Property Name="ICat1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NameAlias" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Nivel2">
+          <Key>
+            <PropertyRef Name="ICat2" />
+          </Key>
+          <Property Name="ICat2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ICat1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NameAlias" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Nivel3">
+          <Key>
+            <PropertyRef Name="ICat3" />
+          </Key>
+          <Property Name="ICat2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ICat3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NameAlias" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Link" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Orden" Type="Int32" />
+        </EntityType>
+        <EntityContainer Name="PaginaWebEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CarroPagado" EntityType="Self.CarroPagado" />
+          <EntitySet Name="Nivel1" EntityType="Self.Nivel1" />
+          <EntitySet Name="Nivel2" EntityType="Self.Nivel2" />
+          <EntitySet Name="Nivel3" EntityType="Self.Nivel3" />
+          <EntitySet Name="sysdiagrams" EntityType="PaginaWebModel.sysdiagrams" />
+          <EntitySet Name="Clientes" EntityType="PaginaWebModel.Clientes" />
+          <EntitySet Name="AddressCounty" EntityType="PaginaWebModel.AddressCounty" />
+          <EntitySet Name="FichaTecnica" EntityType="PaginaWebModel.FichaTecnica" />
+          <EntitySet Name="MarcasAsoc" EntityType="PaginaWebModel.MarcasAsoc" />
+          <EntitySet Name="DetalleCarro" EntityType="PaginaWebModel.DetalleCarro" />
+          <EntitySet Name="ProductosRelacionados" EntityType="PaginaWebModel.ProductosRelacionados" />
+          <EntitySet Name="temporal" EntityType="PaginaWebModel.temporal" />
+          <EntitySet Name="Cotizaciones" EntityType="PaginaWebModel.Cotizaciones" />
+          <EntitySet Name="Sinonimos" EntityType="PaginaWebModel.Sinonimos" />
+          <EntitySet Name="ProductosKit" EntityType="PaginaWebModel.ProductosKit" />
+          <EntitySet Name="tempProdKit" EntityType="PaginaWebModel.tempProdKit" />
+          <EntitySet Name="Productos" EntityType="PaginaWebModel.Productos" />
+          <EntitySet Name="CabeceraCarro" EntityType="PaginaWebModel.CabeceraCarro" />
+          <AssociationSet Name="FK_Clientes_CabeceraCarro" Association="PaginaWebModel.FK_Clientes_CabeceraCarro">
+            <End Role="CabeceraCarro" EntitySet="CabeceraCarro" />
+            <End Role="Clientes" EntitySet="Clientes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetalleCarro_CabeceraCarro" Association="PaginaWebModel.FK_DetalleCarro_CabeceraCarro">
+            <End Role="CabeceraCarro" EntitySet="CabeceraCarro" />
+            <End Role="DetalleCarro" EntitySet="DetalleCarro" />
+          </AssociationSet>
+          <EntitySet Name="ProductosOferta" EntityType="PaginaWebModel.ProductosOferta" />
+          <EntitySet Name="TablaBanner" EntityType="PaginaWebModel.TablaBanner" />
+          </EntityContainer>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Clientes">
+          <Key>
+            <PropertyRef Name="IDCliente" />
+          </Key>
+          <Property Name="IDCliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RutCliente" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DigCliente" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TelFijo" Type="Int32" />
+          <Property Name="TelMovil" Type="Int32" />
+          <Property Name="Direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Comuna" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ConfirmPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NPedido" Type="Int32" />
+          <NavigationProperty Name="CabeceraCarro" Relationship="PaginaWebModel.FK_Clientes_CabeceraCarro" FromRole="Clientes" ToRole="CabeceraCarro" />
+        </EntityType>
+        <EntityType Name="AddressCounty">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="StateId" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="CountyId" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="CountryRegionId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RecId" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DlvRoute" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="FichaTecnica">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RefRecId" Type="Int64" Nullable="false" />
+          <Property Name="ItemNameAttibute" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ItemAttibute" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="MarcasAsoc">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreMarca" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FotoNormal" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FotoBN" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="DetalleCarro">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NPedido" Type="Int32" />
+          <Property Name="ItemBarCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ItemName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Cantidad" Type="Int32" Nullable="false" />
+          <Property Name="Precio" Type="Int32" Nullable="false" />
+          <Property Name="Subtotal" Type="Int32" Nullable="false" />
+          <Property Name="Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RecRefId" Type="Int64" />
+          <NavigationProperty Name="CabeceraCarro" Relationship="PaginaWebModel.FK_DetalleCarro_CabeceraCarro" FromRole="DetalleCarro" ToRole="CabeceraCarro" />
+        </EntityType>
+        <EntityType Name="ProductosRelacionados">
+          <Key>
+            <PropertyRef Name="IdProd" />
+          </Key>
+          <Property Name="IdProd" Type="Int32" Nullable="false" />
+          <Property Name="ItemId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ConfigId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="InventSizeId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="InventColorId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RefRecId" Type="Int64" />
+        </EntityType>
+        <EntityType Name="temporal">
+          <Key>
+            <PropertyRef Name="IdProd" />
+          </Key>
+          <Property Name="IdProd" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ItemId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ItemName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Clasif1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Clasif2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Clasif3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ConfigId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="InventSizeId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="InventColorId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ItemBarCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Int32" Nullable="false" />
+          <Property Name="Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="HighLights" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="ICat3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Stock" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="brandInternet" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="RefRecId" Type="Int64" />
+          <Property Name="UnitWeb" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Factor" Type="Double" />
+          <Property Name="Orden" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Cotizaciones">
+          <Key>
+            <PropertyRef Name="IdCotiza" />
+          </Key>
+          <Property Name="IdCotiza" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreCliente" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TelefonoContacto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Asunto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BodyEmail" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCotiza" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Sinonimos">
+          <Key>
+            <PropertyRef Name="IdSin" />
+          </Key>
+          <Property Name="IdSin" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Palabra" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Sinonimo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ProductosKit">
+          <Key>
+            <PropertyRef Name="IdProd" />
+          </Key>
+          <Property Name="IdProd" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ItemId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ItemName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Clasif1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Clasif2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Clasif3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ConfigId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="InventSizeId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="InventColorId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ItemBarCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Int32" Nullable="false" />
+          <Property Name="Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="HighLights" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="ICat3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Stock" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="brandInternet" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="RefRecId" Type="Int64" />
+          <Property Name="UnitWeb" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Factor" Type="Double" />
+          <Property Name="Orden" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tempProdKit">
+          <Key>
+            <PropertyRef Name="IdProd" />
+          </Key>
+          <Property Name="IdProd" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ItemId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ConfigId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="InventSizeId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="InventColorId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RefRecId" Type="Int64" />
+        </EntityType>
+        <EntityType Name="Productos">
+          <Key>
+            <PropertyRef Name="IdProd" />
+          </Key>
+          <Property Name="IdProd" Type="Int32" Nullable="false" />
+          <Property Name="ItemId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ItemName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Clasif1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Clasif2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Clasif3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ConfigId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="InventSizeId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="InventColorId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ItemBarCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Int32" Nullable="false" />
+          <Property Name="Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="HighLights" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="ICat3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Stock" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="brandInternet" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="RefRecId" Type="Int64" />
+          <Property Name="UnitWeb" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Factor" Type="Double" />
+          <Property Name="Orden" Type="Int32" />
+          <Property Name="Banner" Type="Int32" />
+        </EntityType>
+        <EntityType Name="CabeceraCarro">
+          <Key>
+            <PropertyRef Name="NPedido" />
+          </Key>
+          <Property Name="NPedido" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RutCliente" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NombreCliente" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EstadoOc" Type="Boolean" />
+          <Property Name="ComunaDespacho" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CalleDespacho" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ObservacionDespacho" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CostoDespacho" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RutResponsable" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ResponsableDespacho" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaDespacho" Type="DateTime" Precision="0" />
+          <Property Name="MontoPagado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IDCliente" Type="Int32" />
+          <Property Name="ModoEntrega" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Local" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EmailCliente" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IPAdress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="tipoDocumento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCarro" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Clientes" Relationship="PaginaWebModel.FK_Clientes_CabeceraCarro" FromRole="CabeceraCarro" ToRole="Clientes" />
+          <NavigationProperty Name="DetalleCarro" Relationship="PaginaWebModel.FK_DetalleCarro_CabeceraCarro" FromRole="CabeceraCarro" ToRole="DetalleCarro" />
+        </EntityType>
+        <Association Name="FK_Clientes_CabeceraCarro">
+          <End Type="PaginaWebModel.CabeceraCarro" Role="CabeceraCarro" Multiplicity="0..1" />
+          <End Type="PaginaWebModel.Clientes" Role="Clientes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CabeceraCarro">
+              <PropertyRef Name="NPedido" />
+            </Principal>
+            <Dependent Role="Clientes">
+              <PropertyRef Name="NPedido" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetalleCarro_CabeceraCarro">
+          <End Type="PaginaWebModel.CabeceraCarro" Role="CabeceraCarro" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="PaginaWebModel.DetalleCarro" Role="DetalleCarro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CabeceraCarro">
+              <PropertyRef Name="NPedido" />
+            </Principal>
+            <Dependent Role="DetalleCarro">
+              <PropertyRef Name="NPedido" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ProductosOferta">
+          <Key>
+            <PropertyRef Name="IdProd" />
+          </Key>
+          <Property Name="IdProd" Type="Int32" Nullable="false" />
+          <Property Name="ItemId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ItemName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Clasif1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Clasif2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Clasif3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ConfigId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="InventSizeId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="InventColorId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ItemBarCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Int32" Nullable="false" />
+          <Property Name="Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="HighLights" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="ICat3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Stock" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="brandInternet" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="RefRecId" Type="Int64" />
+          <Property Name="UnitWeb" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Factor" Type="Double" />
+          <Property Name="Orden" Type="Int32" />
+          <Property Name="Banner" Type="Int32" />
+        </EntityType>
+        <EntityType Name="TablaBanner">
+          <Key>
+            <PropertyRef Name="ID_Banner" />
+          </Key>
+          <Property Name="ID_Banner" Type="Int32" Nullable="false" />
+          <Property Name="NombreBanner" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FotoBanner" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PaginaWebModelStoreContainer" CdmEntityContainer="PaginaWebEntities1">
+          <EntitySetMapping Name="CarroPagado">
+            <EntityTypeMapping TypeName="PaginaWebModel.CarroPagado">
+              <MappingFragment StoreEntitySet="CarroPagado">
+                <ScalarProperty Name="tipoDocumento" ColumnName="tipoDocumento" />
+                <ScalarProperty Name="EmailCliente" ColumnName="EmailCliente" />
+                <ScalarProperty Name="IdOrden" ColumnName="IdOrden" />
+                <ScalarProperty Name="NPedido" ColumnName="NPedido" />
+                <ScalarProperty Name="RutCliente" ColumnName="RutCliente" />
+                <ScalarProperty Name="NombreCliente" ColumnName="NombreCliente" />
+                <ScalarProperty Name="CodigoCompraTBK" ColumnName="CodigoCompraTBK" />
+                <ScalarProperty Name="NumTarjetaTBK" ColumnName="NumTarjetaTBK" />
+                <ScalarProperty Name="NCuotasTBK" ColumnName="NCuotasTBK" />
+                <ScalarProperty Name="FechaCompra" ColumnName="FechaCompra" />
+                <ScalarProperty Name="Monto" ColumnName="Monto" />
+                <ScalarProperty Name="EstadoOc" ColumnName="EstadoOc" />
+                <ScalarProperty Name="TipoCuota" ColumnName="TipoCuota" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Nivel1">
+            <EntityTypeMapping TypeName="PaginaWebModel.Nivel1">
+              <MappingFragment StoreEntitySet="Nivel1">
+                <ScalarProperty Name="ICat1" ColumnName="ICat1" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="NameAlias" ColumnName="NameAlias" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Nivel2">
+            <EntityTypeMapping TypeName="PaginaWebModel.Nivel2">
+              <MappingFragment StoreEntitySet="Nivel2">
+                <ScalarProperty Name="ICat2" ColumnName="ICat2" />
+                <ScalarProperty Name="ICat1" ColumnName="ICat1" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="NameAlias" ColumnName="NameAlias" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Nivel3">
+            <EntityTypeMapping TypeName="PaginaWebModel.Nivel3">
+              <MappingFragment StoreEntitySet="Nivel3">
+                <ScalarProperty Name="Orden" ColumnName="Orden" />
+                <ScalarProperty Name="ICat2" ColumnName="ICat2" />
+                <ScalarProperty Name="ICat3" ColumnName="ICat3" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="NameAlias" ColumnName="NameAlias" />
+                <ScalarProperty Name="Link" ColumnName="Link" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="PaginaWebModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clientes">
+            <EntityTypeMapping TypeName="PaginaWebModel.Clientes">
+              <MappingFragment StoreEntitySet="Clientes">
+                <ScalarProperty Name="NPedido" ColumnName="NPedido" />
+                <ScalarProperty Name="ConfirmPassword" ColumnName="ConfirmPassword" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Comuna" ColumnName="Comuna" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="TelMovil" ColumnName="TelMovil" />
+                <ScalarProperty Name="TelFijo" ColumnName="TelFijo" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="DigCliente" ColumnName="DigCliente" />
+                <ScalarProperty Name="RutCliente" ColumnName="RutCliente" />
+                <ScalarProperty Name="IDCliente" ColumnName="IDCliente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AddressCounty">
+            <EntityTypeMapping TypeName="PaginaWebModel.AddressCounty">
+              <MappingFragment StoreEntitySet="AddressCounty">
+                <ScalarProperty Name="DlvRoute" ColumnName="DlvRoute" />
+                <ScalarProperty Name="RecId" ColumnName="RecId" />
+                <ScalarProperty Name="CountryRegionId" ColumnName="CountryRegionId" />
+                <ScalarProperty Name="CountyId" ColumnName="CountyId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FichaTecnica">
+            <EntityTypeMapping TypeName="PaginaWebModel.FichaTecnica">
+              <MappingFragment StoreEntitySet="FichaTecnica">
+                <ScalarProperty Name="ItemAttibute" ColumnName="ItemAttibute" />
+                <ScalarProperty Name="ItemNameAttibute" ColumnName="ItemNameAttibute" />
+                <ScalarProperty Name="RefRecId" ColumnName="RefRecId" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MarcasAsoc">
+            <EntityTypeMapping TypeName="PaginaWebModel.MarcasAsoc">
+              <MappingFragment StoreEntitySet="MarcasAsoc">
+                <ScalarProperty Name="FotoBN" ColumnName="FotoBN" />
+                <ScalarProperty Name="FotoNormal" ColumnName="FotoNormal" />
+                <ScalarProperty Name="NombreMarca" ColumnName="NombreMarca" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DetalleCarro">
+            <EntityTypeMapping TypeName="PaginaWebModel.DetalleCarro">
+              <MappingFragment StoreEntitySet="DetalleCarro">
+                <ScalarProperty Name="RecRefId" ColumnName="RecRefId" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="Subtotal" ColumnName="Subtotal" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+                <ScalarProperty Name="ItemBarCode" ColumnName="ItemBarCode" />
+                <ScalarProperty Name="NPedido" ColumnName="NPedido" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductosRelacionados">
+            <EntityTypeMapping TypeName="PaginaWebModel.ProductosRelacionados">
+              <MappingFragment StoreEntitySet="ProductosRelacionados">
+                <ScalarProperty Name="RefRecId" ColumnName="RefRecId" />
+                <ScalarProperty Name="InventColorId" ColumnName="InventColorId" />
+                <ScalarProperty Name="InventSizeId" ColumnName="InventSizeId" />
+                <ScalarProperty Name="ConfigId" ColumnName="ConfigId" />
+                <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+                <ScalarProperty Name="IdProd" ColumnName="IdProd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="temporal">
+            <EntityTypeMapping TypeName="PaginaWebModel.temporal">
+              <MappingFragment StoreEntitySet="temporal">
+                <ScalarProperty Name="Orden" ColumnName="Orden" />
+                <ScalarProperty Name="Factor" ColumnName="Factor" />
+                <ScalarProperty Name="UnitWeb" ColumnName="UnitWeb" />
+                <ScalarProperty Name="RefRecId" ColumnName="RefRecId" />
+                <ScalarProperty Name="brandInternet" ColumnName="brandInternet" />
+                <ScalarProperty Name="Stock" ColumnName="Stock" />
+                <ScalarProperty Name="ICat3" ColumnName="ICat3" />
+                <ScalarProperty Name="HighLights" ColumnName="HighLights" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="ItemBarCode" ColumnName="ItemBarCode" />
+                <ScalarProperty Name="InventColorId" ColumnName="InventColorId" />
+                <ScalarProperty Name="InventSizeId" ColumnName="InventSizeId" />
+                <ScalarProperty Name="ConfigId" ColumnName="ConfigId" />
+                <ScalarProperty Name="Clasif3" ColumnName="Clasif3" />
+                <ScalarProperty Name="Clasif2" ColumnName="Clasif2" />
+                <ScalarProperty Name="Clasif1" ColumnName="Clasif1" />
+                <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+                <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+                <ScalarProperty Name="IdProd" ColumnName="IdProd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cotizaciones">
+            <EntityTypeMapping TypeName="PaginaWebModel.Cotizaciones">
+              <MappingFragment StoreEntitySet="Cotizaciones">
+                <ScalarProperty Name="FechaCotiza" ColumnName="FechaCotiza" />
+                <ScalarProperty Name="BodyEmail" ColumnName="BodyEmail" />
+                <ScalarProperty Name="Asunto" ColumnName="Asunto" />
+                <ScalarProperty Name="TelefonoContacto" ColumnName="TelefonoContacto" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="NombreCliente" ColumnName="NombreCliente" />
+                <ScalarProperty Name="IdCotiza" ColumnName="IdCotiza" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sinonimos">
+            <EntityTypeMapping TypeName="PaginaWebModel.Sinonimos">
+              <MappingFragment StoreEntitySet="Sinonimos">
+                <ScalarProperty Name="Sinonimo" ColumnName="Sinonimo" />
+                <ScalarProperty Name="Palabra" ColumnName="Palabra" />
+                <ScalarProperty Name="IdSin" ColumnName="IdSin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductosKit">
+            <EntityTypeMapping TypeName="PaginaWebModel.ProductosKit">
+              <MappingFragment StoreEntitySet="ProductosKit">
+                <ScalarProperty Name="Orden" ColumnName="Orden" />
+                <ScalarProperty Name="Factor" ColumnName="Factor" />
+                <ScalarProperty Name="UnitWeb" ColumnName="UnitWeb" />
+                <ScalarProperty Name="RefRecId" ColumnName="RefRecId" />
+                <ScalarProperty Name="brandInternet" ColumnName="brandInternet" />
+                <ScalarProperty Name="Stock" ColumnName="Stock" />
+                <ScalarProperty Name="ICat3" ColumnName="ICat3" />
+                <ScalarProperty Name="HighLights" ColumnName="HighLights" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="ItemBarCode" ColumnName="ItemBarCode" />
+                <ScalarProperty Name="InventColorId" ColumnName="InventColorId" />
+                <ScalarProperty Name="InventSizeId" ColumnName="InventSizeId" />
+                <ScalarProperty Name="ConfigId" ColumnName="ConfigId" />
+                <ScalarProperty Name="Clasif3" ColumnName="Clasif3" />
+                <ScalarProperty Name="Clasif2" ColumnName="Clasif2" />
+                <ScalarProperty Name="Clasif1" ColumnName="Clasif1" />
+                <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+                <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+                <ScalarProperty Name="IdProd" ColumnName="IdProd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tempProdKit">
+            <EntityTypeMapping TypeName="PaginaWebModel.tempProdKit">
+              <MappingFragment StoreEntitySet="tempProdKit">
+                <ScalarProperty Name="RefRecId" ColumnName="RefRecId" />
+                <ScalarProperty Name="InventColorId" ColumnName="InventColorId" />
+                <ScalarProperty Name="InventSizeId" ColumnName="InventSizeId" />
+                <ScalarProperty Name="ConfigId" ColumnName="ConfigId" />
+                <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+                <ScalarProperty Name="IdProd" ColumnName="IdProd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Productos">
+            <EntityTypeMapping TypeName="PaginaWebModel.Productos">
+              <MappingFragment StoreEntitySet="Productos">
+                <ScalarProperty Name="Banner" ColumnName="Banner" />
+                <ScalarProperty Name="Orden" ColumnName="Orden" />
+                <ScalarProperty Name="Factor" ColumnName="Factor" />
+                <ScalarProperty Name="UnitWeb" ColumnName="UnitWeb" />
+                <ScalarProperty Name="RefRecId" ColumnName="RefRecId" />
+                <ScalarProperty Name="brandInternet" ColumnName="brandInternet" />
+                <ScalarProperty Name="Stock" ColumnName="Stock" />
+                <ScalarProperty Name="ICat3" ColumnName="ICat3" />
+                <ScalarProperty Name="HighLights" ColumnName="HighLights" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="ItemBarCode" ColumnName="ItemBarCode" />
+                <ScalarProperty Name="InventColorId" ColumnName="InventColorId" />
+                <ScalarProperty Name="InventSizeId" ColumnName="InventSizeId" />
+                <ScalarProperty Name="ConfigId" ColumnName="ConfigId" />
+                <ScalarProperty Name="Clasif3" ColumnName="Clasif3" />
+                <ScalarProperty Name="Clasif2" ColumnName="Clasif2" />
+                <ScalarProperty Name="Clasif1" ColumnName="Clasif1" />
+                <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+                <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+                <ScalarProperty Name="IdProd" ColumnName="IdProd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CabeceraCarro">
+            <EntityTypeMapping TypeName="PaginaWebModel.CabeceraCarro">
+              <MappingFragment StoreEntitySet="CabeceraCarro">
+                <ScalarProperty Name="FechaCarro" ColumnName="FechaCarro" />
+                <ScalarProperty Name="tipoDocumento" ColumnName="tipoDocumento" />
+                <ScalarProperty Name="IPAdress" ColumnName="IPAdress" />
+                <ScalarProperty Name="EmailCliente" ColumnName="EmailCliente" />
+                <ScalarProperty Name="Local" ColumnName="Local" />
+                <ScalarProperty Name="ModoEntrega" ColumnName="ModoEntrega" />
+                <ScalarProperty Name="IDCliente" ColumnName="IDCliente" />
+                <ScalarProperty Name="MontoPagado" ColumnName="MontoPagado" />
+                <ScalarProperty Name="FechaDespacho" ColumnName="FechaDespacho" />
+                <ScalarProperty Name="ResponsableDespacho" ColumnName="ResponsableDespacho" />
+                <ScalarProperty Name="RutResponsable" ColumnName="RutResponsable" />
+                <ScalarProperty Name="CostoDespacho" ColumnName="CostoDespacho" />
+                <ScalarProperty Name="ObservacionDespacho" ColumnName="ObservacionDespacho" />
+                <ScalarProperty Name="CalleDespacho" ColumnName="CalleDespacho" />
+                <ScalarProperty Name="ComunaDespacho" ColumnName="ComunaDespacho" />
+                <ScalarProperty Name="EstadoOc" ColumnName="EstadoOc" />
+                <ScalarProperty Name="NombreCliente" ColumnName="NombreCliente" />
+                <ScalarProperty Name="RutCliente" ColumnName="RutCliente" />
+                <ScalarProperty Name="NPedido" ColumnName="NPedido" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductosOferta">
+            <EntityTypeMapping TypeName="PaginaWebModel.ProductosOferta">
+              <MappingFragment StoreEntitySet="ProductosOferta">
+                <ScalarProperty Name="Banner" ColumnName="Banner" />
+                <ScalarProperty Name="Orden" ColumnName="Orden" />
+                <ScalarProperty Name="Factor" ColumnName="Factor" />
+                <ScalarProperty Name="UnitWeb" ColumnName="UnitWeb" />
+                <ScalarProperty Name="RefRecId" ColumnName="RefRecId" />
+                <ScalarProperty Name="brandInternet" ColumnName="brandInternet" />
+                <ScalarProperty Name="Stock" ColumnName="Stock" />
+                <ScalarProperty Name="ICat3" ColumnName="ICat3" />
+                <ScalarProperty Name="HighLights" ColumnName="HighLights" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="ItemBarCode" ColumnName="ItemBarCode" />
+                <ScalarProperty Name="InventColorId" ColumnName="InventColorId" />
+                <ScalarProperty Name="InventSizeId" ColumnName="InventSizeId" />
+                <ScalarProperty Name="ConfigId" ColumnName="ConfigId" />
+                <ScalarProperty Name="Clasif3" ColumnName="Clasif3" />
+                <ScalarProperty Name="Clasif2" ColumnName="Clasif2" />
+                <ScalarProperty Name="Clasif1" ColumnName="Clasif1" />
+                <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+                <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+                <ScalarProperty Name="IdProd" ColumnName="IdProd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TablaBanner">
+            <EntityTypeMapping TypeName="PaginaWebModel.TablaBanner">
+              <MappingFragment StoreEntitySet="TablaBanner">
+                <ScalarProperty Name="FotoBanner" ColumnName="FotoBanner" />
+                <ScalarProperty Name="NombreBanner" ColumnName="NombreBanner" />
+                <ScalarProperty Name="ID_Banner" ColumnName="ID_Banner" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

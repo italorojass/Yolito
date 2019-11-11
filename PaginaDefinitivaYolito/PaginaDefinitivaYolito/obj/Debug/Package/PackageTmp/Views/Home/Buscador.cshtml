@@ -1,0 +1,173 @@
+﻿@model IEnumerable<PaginaDefinitivaYolito.Models.Productos>
+@*@model PagedList.IPagedList<PaginaDefinitivaYolito.Models.Productos>*@
+@using PaginaDefinitivaYolito.Models;
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = @ViewBag.b;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('#buscar').autocomplete({
+            source: '@Url.Action("Search","Home")'
+        });
+    })
+
+</script>
+<section>
+    <div class="container">
+        <div class="row">
+            @if(ViewBag.error != null){
+                <div class="container">
+                    <div class="col-md-4 col-lg-offset-4">
+                        <div class="alert alert-danger">
+                            @ViewBag.error
+                        </div>
+                    </div>
+                </div>
+            }
+            <div class="col-md-12 ">
+                <div class="col-md-4 pull-right buscador">
+                    @using (Html.BeginForm("Buscador", "Home", new { ReturnUrl = ViewBag.ReturnUrl, FormMethod.Post }))
+                    {
+                        <div class="input-group">
+
+                            <input type="text" class="form-control" name="buscar" id="buscar" placeholder="¿Que buscas?">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default " type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                            </span>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 divlines">
+                <div class="breadcrumbs">
+                    @Html.Raw(MvcBreadCrumbs.BreadCrumb.Display())
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                @using (Html.BeginForm("ViewByCategory", "Paging", FormMethod.Get))
+                {
+                    <div class="table">
+                        <table class="table-condensed">
+                            <tr>
+                                <td>Ordernar por</td>
+                                <td>
+                                    <select style="background:#fff">
+                                        <option>Precio de mayor a menor</option>
+                                        <option>Precio de menor a mayor</option>
+                                        <option>Marca</option>
+                                        <option>Tamaño</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <input type="submit" value="Filtrar" class="btn btn-default" />
+                                </td>
+                            </tr>
+                        </table>
+
+                    </div>
+
+                }
+
+            </div>
+            <div class="col-sm-4">
+
+            </div>
+            @*<div class="col-sm-4">
+                <div class="pull-right">
+                    <div class="table">
+                        <table class="table-responsive">
+                            <tr>
+                                <td align="right">
+                                    Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+                                    de @Model.PageCount
+                                </td>
+                            </tr>
+                            <tr>
+
+                                <td>
+                                    @Html.PagedListPager(Model, page => Url.Action("Categoria2", new { page }))
+                                </td>
+
+                            </tr>
+
+                        </table>
+
+                    </div>
+
+
+                </div>
+
+            </div>*@
+
+        </div>
+
+        <div class="row">
+            <div class="container">
+                <div class="col-md-12">
+                    <h3 class="fontUpper">@ViewBag.b</h3>
+                </div>
+            </div>
+
+            @foreach (var item in Model)
+            {
+                <div class="col-md-3">
+                   
+                    <div class="col-sm-12 boxcarro">
+                        <div class="mybox1">
+                            @if (item.Photo != "")
+                            {
+                                <a href="@Url.Action("FichaTecnica", "Home", new { id = item.ItemBarCode, nombre = item.ItemName, ftec = item.RefRecId })">
+                                    <img src="@Url.Content("~/Content/Productos/" + item.Photo)" alt="prod" class="img-responsive " style="width:100%; height:200px;">
+                                </a>
+                            }
+                            else
+                            {
+                                <a href="@Url.Action("FichaTecnica", "Home", new { id = item.ItemBarCode, nombre = item.ItemName, ftec = item.RefRecId })">
+                                    <img src="~/Content/Imagenes/Sitio/MARCA-DE-AGUA-YOLITO.jpg" alt="prod" class="img-responsive " style="width:100%; height:200px;">
+                                </a>
+                            }
+                        </div>
+                        <div class="mybox2" style="margin-bottom: 25px;">
+                            <b> @item.ItemName @item.brandInternet</b>
+                        </div>
+                        @*<div class="mybox2">
+                            <p>Tamaño: @item.InventSizeId</p>
+                        </div>*@
+                        <div>
+                            <h4> $ @string.Format(new System.Globalization.CultureInfo("es-CL"), "{0:#,##}", Math.Floor(Convert.ToDecimal(item.Price))) </h4>
+                        </div>
+                        @*<div class="rating-area">
+                            <ul class="ratings">
+                                <li>
+                                    <i class="fa fa-star color"></i>
+                                    <i class="fa fa-star color"></i>
+                                    <i class="fa fa-star color"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </li>
+                            </ul>
+                        </div>*@
+                        <div>
+                            <a href="@Url.Action("ElCarro", "Compra", new { id = item.ItemBarCode,nombre = item.ItemName, canti = 1 })" class="btn btn-default add-to-cart btn-block" id="agregacarro">Agregar al carro <i class="fa fa-shopping-cart"></i></a>
+                        </div>
+                    </div>
+                </div>
+            }
+
+
+        </div>
+
+
+    </div>
+
+
+</section>
+<br />

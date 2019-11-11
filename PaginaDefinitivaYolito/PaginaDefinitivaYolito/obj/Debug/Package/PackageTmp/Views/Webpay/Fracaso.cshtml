@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "Fracaso";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<link href="~/Content/main.css" rel="stylesheet">
+
+<div class="container">
+    <div class="bg">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="title text-center">Transacción Rechazada: @ViewBag.OrdenFracasada</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="single-blog-post ">
+                    <p>Las Posibles causas son:</p>
+                    <ul>
+                        <li>Error en el ingreso de los datos de su tarjeta de crédito o débito (fecha y/o código de seguridad.</li>
+                        <li>Su tarjeta de crédito o débito no cuenta con cupo necesario para cancelar la compra.</li>
+                        <li>Tarjeta aún no habilitada en el sistema financiero.</li>
+                    </ul>
+                    <a class="btn btn-default update" href="@Url.Action("Pago_Webpay", "Webpay")">Volver a pagar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<br />

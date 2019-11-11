@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PaginaWebModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CabeceraCarro">
+    <Key>
+      <PropertyRef Name="NPedido" />
+    </Key>
+    <Property Name="NPedido" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RutCliente" Type="varchar" MaxLength="50" />
+    <Property Name="NombreCliente" Type="varchar" MaxLength="50" />
+    <Property Name="EstadoOc" Type="bit" />
+    <Property Name="ComunaDespacho" Type="varchar" MaxLength="50" />
+    <Property Name="CalleDespacho" Type="varchar" MaxLength="50" />
+    <Property Name="ObservacionDespacho" Type="varchar" MaxLength="50" />
+    <Property Name="CostoDespacho" Type="varchar" MaxLength="50" />
+    <Property Name="ResponsableDespacho" Type="varchar" MaxLength="50" />
+    <Property Name="FechaDespacho" Type="date" />
+  </EntityType>
+  <EntityType Name="CarroPagado">
+    <Key>
+      <PropertyRef Name="IdOrden" />
+    </Key>
+    <Property Name="IdOrden" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NPedido" Type="int" />
+    <Property Name="RutCliente" Type="varchar" MaxLength="50" />
+    <Property Name="NombreCliente" Type="varchar" MaxLength="50" />
+    <Property Name="CodigoCompraTBK" Type="varchar" MaxLength="50" />
+    <Property Name="NumTarjetaTBK" Type="varchar" MaxLength="50" />
+    <Property Name="NCuotasTBK" Type="varchar" MaxLength="50" />
+    <Property Name="FechaCompra" Type="varchar" MaxLength="50" />
+    <Property Name="Monto" Type="varchar" MaxLength="50" />
+    <Property Name="EstadoOc" Type="bit" />
+    <Property Name="TipoCuota" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Clientes">
+    <Key>
+      <PropertyRef Name="RutCliente" />
+    </Key>
+    <Property Name="IdCliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RutCliente" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="DigCliente" Type="varchar" MaxLength="1" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" />
+    <Property Name="Apellido" Type="varchar" MaxLength="50" />
+    <Property Name="Email" Type="varchar" MaxLength="50" />
+    <Property Name="TelFijo" Type="int" />
+    <Property Name="TelMovil" Type="int" />
+    <Property Name="Direccion" Type="varchar" MaxLength="50" />
+    <Property Name="Comuna" Type="varchar" MaxLength="50" />
+    <Property Name="Password" Type="varchar" MaxLength="50" />
+    <Property Name="ConfirmPassword" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="DetalleCarro">
+    <Key>
+      <PropertyRef Name="IdPed" />
+    </Key>
+    <Property Name="IdPed" Type="int" Nullable="false" />
+    <Property Name="NPedido" Type="int" />
+    <Property Name="ItemBarCode" Type="nvarchar(max)" />
+    <Property Name="ItemName" Type="varchar" MaxLength="50" />
+    <Property Name="Cantidad" Type="int" />
+    <Property Name="Precio" Type="varchar" MaxLength="50" />
+    <Property Name="Subtotal" Type="int" />
+    <Property Name="Photo" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Nivel1">
+    <Key>
+      <PropertyRef Name="ICat1" />
+    </Key>
+    <Property Name="ICat1" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+    <Property Name="NameAlias" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Nivel2">
+    <Key>
+      <PropertyRef Name="ICat2" />
+    </Key>
+    <Property Name="ICat2" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ICat1" Type="varchar" MaxLength="50" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+    <Property Name="NameAlias" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Nivel3">
+    <Key>
+      <PropertyRef Name="ICat3" />
+    </Key>
+    <Property Name="ICat2" Type="varchar" MaxLength="50" />
+    <Property Name="ICat3" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+    <Property Name="NameAlias" Type="varchar" MaxLength="50" />
+    <Property Name="Link" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Productos">
+    <Key>
+      <PropertyRef Name="IdProd" />
+    </Key>
+    <Property Name="IdProd" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ItemId" Type="nvarchar(max)" />
+    <Property Name="ItemName" Type="varchar" MaxLength="50" />
+    <Property Name="Clasif1" Type="varchar" MaxLength="50" />
+    <Property Name="Clasif2" Type="varchar" MaxLength="50" />
+    <Property Name="Clasif3" Type="varchar" MaxLength="50" />
+    <Property Name="ConfigId" Type="varchar" MaxLength="50" />
+    <Property Name="InventSizeId" Type="varchar" MaxLength="50" />
+    <Property Name="InventColorId" Type="varchar" MaxLength="50" />
+    <Property Name="ItemBarCode" Type="nvarchar(max)" />
+    <Property Name="Price" Type="varchar" MaxLength="50" />
+    <Property Name="Photo" Type="nvarchar(max)" />
+    <Property Name="HighLights" Type="varchar" MaxLength="1" />
+    <Property Name="ICat3" Type="varchar" MaxLength="50" />
+    <Property Name="Stock" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_CabeceraCarro_Clientes">
+    <End Role="Clientes" Type="Self.Clientes" Multiplicity="0..1" />
+    <End Role="CabeceraCarro" Type="Self.CabeceraCarro" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clientes">
+        <PropertyRef Name="RutCliente" />
+      </Principal>
+      <Dependent Role="CabeceraCarro">
+        <PropertyRef Name="RutCliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetalleCarro_CabeceraCarro">
+    <End Role="CabeceraCarro" Type="Self.CabeceraCarro" Multiplicity="0..1" />
+    <End Role="DetalleCarro" Type="Self.DetalleCarro" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CabeceraCarro">
+        <PropertyRef Name="NPedido" />
+      </Principal>
+      <Dependent Role="DetalleCarro">
+        <PropertyRef Name="NPedido" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Nivel2_Nivel1">
+    <End Role="Nivel1" Type="Self.Nivel1" Multiplicity="0..1" />
+    <End Role="Nivel2" Type="Self.Nivel2" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Nivel1">
+        <PropertyRef Name="ICat1" />
+      </Principal>
+      <Dependent Role="Nivel2">
+        <PropertyRef Name="ICat1" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Nivel3_Nivel2">
+    <End Role="Nivel2" Type="Self.Nivel2" Multiplicity="0..1" />
+    <End Role="Nivel3" Type="Self.Nivel3" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Nivel2">
+        <PropertyRef Name="ICat2" />
+      </Principal>
+      <Dependent Role="Nivel3">
+        <PropertyRef Name="ICat2" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="PaginaWebModelStoreContainer">
+    <EntitySet Name="CabeceraCarro" EntityType="Self.CabeceraCarro" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CarroPagado" EntityType="Self.CarroPagado" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DetalleCarro" EntityType="Self.DetalleCarro" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Nivel1" EntityType="Self.Nivel1" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Nivel2" EntityType="Self.Nivel2" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Nivel3" EntityType="Self.Nivel3" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Productos" EntityType="Self.Productos" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_CabeceraCarro_Clientes" Association="Self.FK_CabeceraCarro_Clientes">
+      <End Role="Clientes" EntitySet="Clientes" />
+      <End Role="CabeceraCarro" EntitySet="CabeceraCarro" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetalleCarro_CabeceraCarro" Association="Self.FK_DetalleCarro_CabeceraCarro">
+      <End Role="CabeceraCarro" EntitySet="CabeceraCarro" />
+      <End Role="DetalleCarro" EntitySet="DetalleCarro" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Nivel2_Nivel1" Association="Self.FK_Nivel2_Nivel1">
+      <End Role="Nivel1" EntitySet="Nivel1" />
+      <End Role="Nivel2" EntitySet="Nivel2" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Nivel3_Nivel2" Association="Self.FK_Nivel3_Nivel2">
+      <End Role="Nivel2" EntitySet="Nivel2" />
+      <End Role="Nivel3" EntitySet="Nivel3" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

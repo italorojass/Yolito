@@ -1,0 +1,139 @@
+﻿@model PaginaDefinitivaYolito.Models.DatosPersonalesModel
+
+@{
+    ViewBag.Title = "Registrate";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#news_date").datepicker({ dateFormat: 'dd/mm/yy' });
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        if ('@ViewBag.Message' == 'Registrado') {
+            alert('Registrado con exito!.');
+        }
+    });
+</script>
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 pull-right buscador">
+                @using (Html.BeginForm("Buscador", "Home", new { ReturnUrl = ViewBag.ReturnUrl, FormMethod.Post }))
+                {
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="buscar" id="buscar" placeholder="¿Que buscas?">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default " type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                        </span>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 signup-form">
+                <div class="alert alert-info">
+                    <h2 class="title2 text-center">¡Registrate para poder comprar en nuestra tienda Online!</h2>
+                </div>
+            </div>
+            <div class="col-md-12">
+                @if (ViewBag.existes == "Ya existes en nuestra base de datos")
+                {
+                    <div class="alert alert-danger">
+                        @ViewBag.existes
+                    </div>
+                }
+                @if (ViewBag.Message == "Registrado")
+                {
+                    <div class="alert alert-success">@ViewBag.Message</div>
+                }
+            </div>
+
+            <div class="col-md-4 col-md-offset-6" >
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+            </div>
+            <div class="col-md-12">
+                <div class="signup-form">
+                    <h2 class="title2">Datos personales:</h2>
+                </div>
+            </div>
+@using (Ajax.BeginForm("Registration", "Usuarios", new AjaxOptions()
+                            {
+                                InsertionMode = InsertionMode.Replace,
+                                UpdateTargetId = "rresult"
+                            }, FormMethod.Post))
+{
+    <div class="col-md-6">
+        <div class="signup-form">
+            <label>Rut</label>
+            @Html.TextBoxFor(model => model.RutCliente, new { @class = "form-control", @placeholder = "Ejemplo: 11222333-6" })
+            <div class="alert-danger">
+                @Html.ValidationMessageFor(model => model.RutCliente)
+            </div>
+            
+            <label>Nombre</label>
+            @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", @placeholder = "Ejemplo: Jose" })
+            <div class="alert-danger">
+@Html.ValidationMessageFor(model => model.Nombre)
+            </div>
+            
+            <label>Apellido</label>
+            @Html.TextBoxFor(model => model.Apellido, new { @class = "form-control", @placeholder = "Ejemplo: Yolito " })
+            <div class="alert-danger">
+@Html.ValidationMessageFor(model => model.Apellido)
+            </div>
+            
+            <label>Email</label>
+            @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @placeholder = "Ejemplo@correo.cl" })
+            <div class="alert-danger">
+@Html.ValidationMessageFor(model => model.Email)
+            </div>
+            
+            <label>Dirección</label>
+            @Html.TextBoxFor(model => model.Direccion, new { @class = "form-control", @placeholder = "Ejemplo: Av Las Condes 1280 dpto 201" })
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="signup-form">
+            <label>Comuna</label>
+            @Html.TextBoxFor(model => model.Comuna, new { @class = "form-control", @placeholder = "Ejemplo: Las Condes" })
+            @Html.ValidationMessageFor(model => model.Comuna)
+            <label>Telefono de contacto 1</label>
+            @Html.TextBoxFor(model => model.TelFijo, new { @class = "form-control", @placeholder = "Ejemplo: 227500600" })
+            @Html.ValidationMessageFor(model => model.TelFijo)
+            <label>Telefono de contacto 2</label>
+            @Html.TextBoxFor(model => model.TelMovil, new { @class = "form-control", @placeholder = "Ejemplo: 954127325" })
+            @Html.ValidationMessageFor(model => model.TelMovil)
+            <label>Contraseña</label>
+            @Html.PasswordFor(model => model.Password, new { @class = "form-control", @placeholder = "*******" })
+            @Html.ValidationMessageFor(model => model.Password)
+            <label>Confirma tu contraseña</label>
+            @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control", @placeholder = "*******" })
+            @Html.ValidationMessageFor(model => model.ConfirmPassword)
+        </div>
+        </div>
+        
+    
+    <div class="col-md-12">
+        <br />
+        <div class="login-form">
+            <button type="submit" class="btn btn-primary btn-block" ><i class="fa fa-user-plus" aria-hidden="true" style="margin-right:15px;"></i>Registrarme</button>
+        </div>
+        
+    </div>
+    
+    
+}
+            </div>
+            
+        </div>
+    
+</section>
+<br />

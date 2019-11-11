@@ -1,0 +1,83 @@
+﻿@model PaginaDefinitivaYolito.Models.ResetPassword
+
+@{
+    ViewBag.Title = "ReinicioContrasena";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 ">
+                <div class="breadcrumbs">
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="@Url.Action("Home", "Home")">Home</a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("LogIn","Usuarios")">Inicia con tu cuenta</a>
+                        </li>
+                        <li class="active">
+                            Olvidé mi contraseña
+                        </li>
+                    </ol>
+
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-12">
+                <div class="divlines"></div>
+                <h2 class="title2" style="margin-top:10px;">Recupera tu contraseña</h2>
+            </div>
+            
+        </div>
+        <div class="row">
+            <div class="col-md-8" >
+                <p style="color: #000;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    margin-top: 20px;">
+                    Por motivos de seguridad, su clave olvidada debe ser reemplazada por una nueva (no recuperada), 
+                    para ésto, ingrese al link que le enviaremos a traves del correo ingresado.
+                </p>
+                
+            </div>
+            <div class="col-md-4 " >
+                @using (Html.BeginForm("ReinicioContrasena", "Usuarios", new { ReturnUrl = ViewBag.ReturnUrl, FormMethod.Post }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <label>Rut:</label>
+                    <div class="input-group">
+
+                        <span class="input-group-addon"><i class="fa fa-user fa-fw" aria-hidden="true"></i></span>
+                        @Html.TextBoxFor(model => model.rut, new { @class = "form-control largo", @placeholder = "Rut con guión", @oninput = "checkRut(this)" })
+                    </div>
+                    <label>Email:</label>
+                    <div class="input-group">
+
+                        <span class="input-group-addon"><i class="fa fa-envelope fa-fw" aria-hidden="true"></i></span>
+                        <input type="email" name="email" id="emailUser" class="form-control largo" placeholder="Email " required />
+
+                    </div>
+
+
+                    <div style="margin-top:15px;">
+                        <button type="submit" class="btn btn-primary btn-block"><i class="fa fa-paper-plane fa-fw" aria-hidden="true" style="margin-right:15px;"></i>Enviar</button> <br />
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+</section>
+<br />   
+@if (ViewBag.OkReset != null)
+{
+    <script>
+        alert("Email enviado, favor revise su casilla de correo");
+    </script>
+}
+

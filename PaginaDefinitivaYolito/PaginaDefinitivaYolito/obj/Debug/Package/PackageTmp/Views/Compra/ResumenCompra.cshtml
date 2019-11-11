@@ -1,0 +1,86 @@
+﻿@model IEnumerable<PaginaDefinitivaYolito.Models.DetalleCarro>
+@{
+    ViewBag.Title = "ResumenCompra";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int price = 0;
+    int total = 0;
+    string npedido = Session["cart"].ToString();
+    int np = Convert.ToInt32(npedido);
+}
+
+@if (ViewBag.error != null)
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-4 col-xs-offset-4" >
+                <div class="alert alert-danger">
+                   <h4 class="fontUpper text-center">@ViewBag.error</h4> 
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+
+}
+else
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 ">
+                <div class="alert alert-success">
+                    <h2 class="fontUpper text-center">Resumen de tu compra</h2>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="table">
+                    <table class="table">
+                        <tr>
+                            <td colspan="2" align="center">Productos</td>
+                            <td>Cantidad</td>
+                            <td>Precio</td>
+                        </tr>
+                        @foreach (var item in Model)
+                        {
+                            if (item.NPedido == np)
+                            {
+                                string precio = string.Format("{0:#,##}", item.Precio);
+                                price = Convert.ToInt32(Double.Parse(precio) * item.Cantidad);
+                                double subtotal1 = Double.Parse(precio) * item.Cantidad;
+
+                                <tr>
+                                    <td> <img src="~/Content/productos/@item.Photo" style="max-width: 100%; max-height: 80px;" alt=""></td>
+                                    <td align="center"> @item.ItemName</td>
+                                    <td align="center"> @item.Cantidad</td>
+                                    <td align="center">$@string.Format("{0:#,##}", item.Precio) </td>
+                                </tr>
+                                total += Convert.ToInt32(subtotal1);
+                            }
+
+                        }
+                        <tr>
+                            <td align="right" colspan="4"><strong>Total</strong></td>
+                        </tr>
+                        <tr>
+                            
+                            
+                            <td align="right" colspan="4"><b>$@ViewBag.MontoTotal.ToString("#,##")</b></td>
+                        </tr>
+
+                    </table>
+
+                </div>
+            </div>
+
+
+
+        </div>
+
+    </div>
+    
+}
+
+

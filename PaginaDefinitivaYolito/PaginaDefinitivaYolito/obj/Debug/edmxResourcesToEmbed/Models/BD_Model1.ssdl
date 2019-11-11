@@ -1,0 +1,291 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="pruebaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'prueba.dbo.ADDRESSCOUNTRYREGION' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="ADDRESSCOUNTRYREGION">
+    <Key>
+      <PropertyRef Name="COUNTRYREGIONID" />
+      <PropertyRef Name="TYPE" />
+      <PropertyRef Name="ISOCODE" />
+      <PropertyRef Name="ADDRFORMAT" />
+      <PropertyRef Name="NAME" />
+      <PropertyRef Name="GIROACCOUNTVALIDATIONMETHOD" />
+      <PropertyRef Name="BANKACCOUNTNUMVALIDATION" />
+      <PropertyRef Name="CURRENCYCODE" />
+      <PropertyRef Name="TAXVATNUMFORMATCHECK" />
+      <PropertyRef Name="TIMEZONE" />
+      <PropertyRef Name="ADDRESSUSEZIPPLUS4" />
+      <PropertyRef Name="DATAAREAID" />
+      <PropertyRef Name="RECVERSION" />
+      <PropertyRef Name="RECID" />
+      <PropertyRef Name="EEACOUNTRY" />
+      <PropertyRef Name="VALIDATEVERIFIERDIGIT" />
+    </Key>
+    <Property Name="COUNTRYREGIONID" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="TYPE" Type="int" Nullable="false" />
+    <Property Name="ISOCODE" Type="nvarchar" MaxLength="2" Nullable="false" />
+    <Property Name="ADDRFORMAT" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="NAME" Type="nvarchar" MaxLength="120" Nullable="false" />
+    <Property Name="GIROACCOUNTVALIDATIONMETHOD" Type="int" Nullable="false" />
+    <Property Name="BANKACCOUNTNUMVALIDATION" Type="int" Nullable="false" />
+    <Property Name="CURRENCYCODE" Type="nvarchar" MaxLength="3" Nullable="false" />
+    <Property Name="TAXVATNUMFORMATCHECK" Type="int" Nullable="false" />
+    <Property Name="TIMEZONE" Type="int" Nullable="false" />
+    <Property Name="ADDRESSUSEZIPPLUS4" Type="int" Nullable="false" />
+    <Property Name="DATAAREAID" Type="nvarchar" MaxLength="4" Nullable="false" />
+    <Property Name="RECVERSION" Type="int" Nullable="false" />
+    <Property Name="RECID" Type="bigint" Nullable="false" />
+    <Property Name="EEACOUNTRY" Type="int" Nullable="false" />
+    <Property Name="VALIDATEVERIFIERDIGIT" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'prueba.dbo.ADDRESSCOUNTY' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="ADDRESSCOUNTY">
+    <Key>
+      <PropertyRef Name="COUNTRYREGIONID" />
+      <PropertyRef Name="COUNTYID" />
+      <PropertyRef Name="STATEID" />
+      <PropertyRef Name="NAME" />
+      <PropertyRef Name="DATAAREAID" />
+      <PropertyRef Name="RECVERSION" />
+      <PropertyRef Name="RECID" />
+      <PropertyRef Name="DLVROUTE" />
+    </Key>
+    <Property Name="COUNTRYREGIONID" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="COUNTYID" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="STATEID" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="NAME" Type="nvarchar" MaxLength="120" Nullable="false" />
+    <Property Name="DATAAREAID" Type="nvarchar" MaxLength="4" Nullable="false" />
+    <Property Name="RECVERSION" Type="int" Nullable="false" />
+    <Property Name="RECID" Type="bigint" Nullable="false" />
+    <Property Name="DLVROUTE" Type="nvarchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ADDRESSSTATE">
+    <Key>
+      <PropertyRef Name="STATEID" />
+    </Key>
+    <Property Name="NAME" Type="nvarchar" MaxLength="120" Nullable="false" />
+    <Property Name="STATEID" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="COUNTRYREGIONID" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="TIMEZONE" Type="int" Nullable="false" />
+    <Property Name="DATAAREAID" Type="nvarchar" MaxLength="4" Nullable="false" />
+    <Property Name="RECVERSION" Type="int" Nullable="false" />
+    <Property Name="RECID" Type="bigint" Nullable="false" />
+    <Property Name="DLVROUTE" Type="nvarchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CabeceraPedido">
+    <Key>
+      <PropertyRef Name="npedido" />
+    </Key>
+    <Property Name="npedido" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="rut" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="nombre" Type="varchar" MaxLength="50" />
+    <Property Name="monto" Type="varchar" MaxLength="50" />
+    <Property Name="estado_oc" Type="bit" />
+  </EntityType>
+  <EntityType Name="Categoria1Set">
+    <Key>
+      <PropertyRef Name="Clasif1" />
+    </Key>
+    <Property Name="Clasif1" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Categoria2Set">
+    <Key>
+      <PropertyRef Name="Clasif2" />
+    </Key>
+    <Property Name="Clasif1" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Clasif2" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Categoria3Set">
+    <Key>
+      <PropertyRef Name="Clasif3" />
+    </Key>
+    <Property Name="Clasif2" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Clasif3" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CorreosVentasWeb">
+    <Key>
+      <PropertyRef Name="id_correo" />
+    </Key>
+    <Property Name="id_correo" Type="int" Nullable="false" />
+    <Property Name="correo" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="DetallePedido">
+    <Key>
+      <PropertyRef Name="nproducto" />
+    </Key>
+    <Property Name="nproducto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="npedido" Type="int" Nullable="false" />
+    <Property Name="itembarcode" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="itemname" Type="varchar" MaxLength="100" />
+    <Property Name="cantidad" Type="int" Nullable="false" />
+    <Property Name="precio" Type="nvarchar" MaxLength="100" />
+    <Property Name="subtotal" Type="int" Nullable="false" />
+    <Property Name="photo" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Ordenes_pagadas">
+    <Key>
+      <PropertyRef Name="IdOrden" />
+    </Key>
+    <Property Name="IdOrden" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="npedido" Type="int" Nullable="false" />
+    <Property Name="rut" Type="varchar" MaxLength="50" />
+    <Property Name="nombre_usuario" Type="varchar" MaxLength="50" />
+    <Property Name="codigo_compra" Type="varchar" MaxLength="50" />
+    <Property Name="num_tarjeta" Type="varchar" MaxLength="50" />
+    <Property Name="numero_cuotas" Type="varchar" MaxLength="50" />
+    <Property Name="fecha_compra" Type="varchar" MaxLength="50" />
+    <Property Name="monto" Type="varchar" MaxLength="50" />
+    <Property Name="estado_oc" Type="bit" />
+    <Property Name="tipo_cuota" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="ProductosSet">
+    <Key>
+      <PropertyRef Name="IDPr" />
+    </Key>
+    <Property Name="ItemId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ItemName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Clasif1" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Clasif2" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IDPr" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Clasif3" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ConfigId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="InventSizeId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="InventColorId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ItemBarCode" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Price" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Photo" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Usuarios">
+    <Key>
+      <PropertyRef Name="rut" />
+    </Key>
+    <Property Name="rut" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="UserId" Type="nchar" MaxLength="10" />
+    <Property Name="dig" Type="char" MaxLength="1" />
+    <Property Name="nombre" Type="varchar" MaxLength="50" />
+    <Property Name="fecnac" Type="date" />
+    <Property Name="nacionalidad" Type="varchar" MaxLength="50" />
+    <Property Name="email" Type="varchar" MaxLength="50" />
+    <Property Name="telfijo" Type="varchar" MaxLength="50" />
+    <Property Name="telmovil" Type="varchar" MaxLength="50" />
+    <Property Name="direccion" Type="varchar" MaxLength="50" />
+    <Property Name="pais" Type="varchar" MaxLength="50" />
+    <Property Name="region" Type="varchar" MaxLength="50" />
+    <Property Name="comuna" Type="varchar" MaxLength="50" />
+    <Property Name="password" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_ADDRESSCOUNTY_ADDRESSSTATE">
+    <End Role="ADDRESSSTATE" Type="Self.ADDRESSSTATE" Multiplicity="1" />
+    <End Role="ADDRESSCOUNTY" Type="Self.ADDRESSCOUNTY" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ADDRESSSTATE">
+        <PropertyRef Name="STATEID" />
+      </Principal>
+      <Dependent Role="ADDRESSCOUNTY">
+        <PropertyRef Name="STATEID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CabeceraPedido_Usuarios">
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+    <End Role="CabeceraPedido" Type="Self.CabeceraPedido" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="rut" />
+      </Principal>
+      <Dependent Role="CabeceraPedido">
+        <PropertyRef Name="rut" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetallePedido_CabeceraPedido">
+    <End Role="CabeceraPedido" Type="Self.CabeceraPedido" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="DetallePedido" Type="Self.DetallePedido" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CabeceraPedido">
+        <PropertyRef Name="npedido" />
+      </Principal>
+      <Dependent Role="DetallePedido">
+        <PropertyRef Name="npedido" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ordenes_pagadas_Usuarios">
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
+    <End Role="Ordenes_pagadas" Type="Self.Ordenes_pagadas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="rut" />
+      </Principal>
+      <Dependent Role="Ordenes_pagadas">
+        <PropertyRef Name="rut" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="pruebaModelStoreContainer">
+    <EntitySet Name="ADDRESSSTATE" EntityType="Self.ADDRESSSTATE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CabeceraPedido" EntityType="Self.CabeceraPedido" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Categoria1Set" EntityType="Self.Categoria1Set" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Categoria2Set" EntityType="Self.Categoria2Set" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Categoria3Set" EntityType="Self.Categoria3Set" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CorreosVentasWeb" EntityType="Self.CorreosVentasWeb" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DetallePedido" EntityType="Self.DetallePedido" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Ordenes_pagadas" EntityType="Self.Ordenes_pagadas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProductosSet" EntityType="Self.ProductosSet" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ADDRESSCOUNTRYREGION" EntityType="Self.ADDRESSCOUNTRYREGION" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ADDRESSCOUNTRYREGION].[COUNTRYREGIONID] AS [COUNTRYREGIONID], 
+    [ADDRESSCOUNTRYREGION].[TYPE] AS [TYPE], 
+    [ADDRESSCOUNTRYREGION].[ISOCODE] AS [ISOCODE], 
+    [ADDRESSCOUNTRYREGION].[ADDRFORMAT] AS [ADDRFORMAT], 
+    [ADDRESSCOUNTRYREGION].[NAME] AS [NAME], 
+    [ADDRESSCOUNTRYREGION].[GIROACCOUNTVALIDATIONMETHOD] AS [GIROACCOUNTVALIDATIONMETHOD], 
+    [ADDRESSCOUNTRYREGION].[BANKACCOUNTNUMVALIDATION] AS [BANKACCOUNTNUMVALIDATION], 
+    [ADDRESSCOUNTRYREGION].[CURRENCYCODE] AS [CURRENCYCODE], 
+    [ADDRESSCOUNTRYREGION].[TAXVATNUMFORMATCHECK] AS [TAXVATNUMFORMATCHECK], 
+    [ADDRESSCOUNTRYREGION].[TIMEZONE] AS [TIMEZONE], 
+    [ADDRESSCOUNTRYREGION].[ADDRESSUSEZIPPLUS4] AS [ADDRESSUSEZIPPLUS4], 
+    [ADDRESSCOUNTRYREGION].[DATAAREAID] AS [DATAAREAID], 
+    [ADDRESSCOUNTRYREGION].[RECVERSION] AS [RECVERSION], 
+    [ADDRESSCOUNTRYREGION].[RECID] AS [RECID], 
+    [ADDRESSCOUNTRYREGION].[EEACOUNTRY] AS [EEACOUNTRY], 
+    [ADDRESSCOUNTRYREGION].[VALIDATEVERIFIERDIGIT] AS [VALIDATEVERIFIERDIGIT]
+    FROM [dbo].[ADDRESSCOUNTRYREGION] AS [ADDRESSCOUNTRYREGION]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="ADDRESSCOUNTY" EntityType="Self.ADDRESSCOUNTY" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ADDRESSCOUNTY].[COUNTRYREGIONID] AS [COUNTRYREGIONID], 
+    [ADDRESSCOUNTY].[COUNTYID] AS [COUNTYID], 
+    [ADDRESSCOUNTY].[STATEID] AS [STATEID], 
+    [ADDRESSCOUNTY].[NAME] AS [NAME], 
+    [ADDRESSCOUNTY].[DATAAREAID] AS [DATAAREAID], 
+    [ADDRESSCOUNTY].[RECVERSION] AS [RECVERSION], 
+    [ADDRESSCOUNTY].[RECID] AS [RECID], 
+    [ADDRESSCOUNTY].[DLVROUTE] AS [DLVROUTE]
+    FROM [dbo].[ADDRESSCOUNTY] AS [ADDRESSCOUNTY]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_ADDRESSCOUNTY_ADDRESSSTATE" Association="Self.FK_ADDRESSCOUNTY_ADDRESSSTATE">
+      <End Role="ADDRESSSTATE" EntitySet="ADDRESSSTATE" />
+      <End Role="ADDRESSCOUNTY" EntitySet="ADDRESSCOUNTY" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CabeceraPedido_Usuarios" Association="Self.FK_CabeceraPedido_Usuarios">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="CabeceraPedido" EntitySet="CabeceraPedido" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetallePedido_CabeceraPedido" Association="Self.FK_DetallePedido_CabeceraPedido">
+      <End Role="CabeceraPedido" EntitySet="CabeceraPedido" />
+      <End Role="DetallePedido" EntitySet="DetallePedido" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ordenes_pagadas_Usuarios" Association="Self.FK_Ordenes_pagadas_Usuarios">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="Ordenes_pagadas" EntitySet="Ordenes_pagadas" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

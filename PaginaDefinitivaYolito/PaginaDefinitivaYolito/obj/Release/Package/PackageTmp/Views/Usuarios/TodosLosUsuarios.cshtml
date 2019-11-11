@@ -1,0 +1,18 @@
+﻿@model IEnumerable<PaginaDefinitivaYolito.Models.UsuariosAX>
+
+@{
+    ViewBag.Title = "TodosLosUsuarios";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>TodosLosUsuarios</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+@foreach (var item in Model)
+{
+    <div>@item.ACCOUNTNUM</div>
+    <div>@item.NAME</div>
+    <div>@item.EMAIL</div>
+}

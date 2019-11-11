@@ -1,0 +1,205 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="pruebaModelStoreContainer" CdmEntityContainer="pruebaEntities2">
+    <EntitySetMapping Name="Categoria1Set">
+      <EntityTypeMapping TypeName="pruebaModel.Categoria1Set">
+        <MappingFragment StoreEntitySet="Categoria1Set">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Clasif1" ColumnName="Clasif1" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Categoria2Set">
+      <EntityTypeMapping TypeName="pruebaModel.Categoria2Set">
+        <MappingFragment StoreEntitySet="Categoria2Set">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Clasif2" ColumnName="Clasif2" />
+          <ScalarProperty Name="Clasif1" ColumnName="Clasif1" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Categoria3Set">
+      <EntityTypeMapping TypeName="pruebaModel.Categoria3Set">
+        <MappingFragment StoreEntitySet="Categoria3Set">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Clasif3" ColumnName="Clasif3" />
+          <ScalarProperty Name="Clasif2" ColumnName="Clasif2" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DetallePedido">
+      <EntityTypeMapping TypeName="pruebaModel.DetallePedido">
+        <MappingFragment StoreEntitySet="DetallePedido">
+          <ScalarProperty Name="photo" ColumnName="photo" />
+          <ScalarProperty Name="subtotal" ColumnName="subtotal" />
+          <ScalarProperty Name="precio" ColumnName="precio" />
+          <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+          <ScalarProperty Name="itemname" ColumnName="itemname" />
+          <ScalarProperty Name="itembarcode" ColumnName="itembarcode" />
+          <ScalarProperty Name="npedido" ColumnName="npedido" />
+          <ScalarProperty Name="nproducto" ColumnName="nproducto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ordenes_pagadas">
+      <EntityTypeMapping TypeName="pruebaModel.Ordenes_pagadas">
+        <MappingFragment StoreEntitySet="Ordenes_pagadas">
+          <ScalarProperty Name="tipo_cuota" ColumnName="tipo_cuota" />
+          <ScalarProperty Name="estado_oc" ColumnName="estado_oc" />
+          <ScalarProperty Name="monto" ColumnName="monto" />
+          <ScalarProperty Name="fecha_compra" ColumnName="fecha_compra" />
+          <ScalarProperty Name="numero_cuotas" ColumnName="numero_cuotas" />
+          <ScalarProperty Name="num_tarjeta" ColumnName="num_tarjeta" />
+          <ScalarProperty Name="codigo_compra" ColumnName="codigo_compra" />
+          <ScalarProperty Name="nombre_usuario" ColumnName="nombre_usuario" />
+          <ScalarProperty Name="rut" ColumnName="rut" />
+          <ScalarProperty Name="npedido" ColumnName="npedido" />
+          <ScalarProperty Name="IdOrden" ColumnName="IdOrden" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductosSet">
+      <EntityTypeMapping TypeName="pruebaModel.ProductosSet">
+        <MappingFragment StoreEntitySet="ProductosSet">
+          <ScalarProperty Name="ICat3" ColumnName="ICat3" />
+          <ScalarProperty Name="Highlights" ColumnName="Highlights" />
+          <ScalarProperty Name="Photo" ColumnName="Photo" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="ItemBarCode" ColumnName="ItemBarCode" />
+          <ScalarProperty Name="InventColorId" ColumnName="InventColorId" />
+          <ScalarProperty Name="InventSizeId" ColumnName="InventSizeId" />
+          <ScalarProperty Name="ConfigId" ColumnName="ConfigId" />
+          <ScalarProperty Name="Clasif3" ColumnName="Clasif3" />
+          <ScalarProperty Name="IDPr" ColumnName="IDPr" />
+          <ScalarProperty Name="Clasif2" ColumnName="Clasif2" />
+          <ScalarProperty Name="Clasif1" ColumnName="Clasif1" />
+          <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+          <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ADDRESSSTATE">
+      <EntityTypeMapping TypeName="pruebaModel.ADDRESSSTATE">
+        <MappingFragment StoreEntitySet="ADDRESSSTATE">
+          <ScalarProperty Name="DLVROUTE" ColumnName="DLVROUTE" />
+          <ScalarProperty Name="RECID" ColumnName="RECID" />
+          <ScalarProperty Name="RECVERSION" ColumnName="RECVERSION" />
+          <ScalarProperty Name="DATAAREAID" ColumnName="DATAAREAID" />
+          <ScalarProperty Name="TIMEZONE" ColumnName="TIMEZONE" />
+          <ScalarProperty Name="COUNTRYREGIONID" ColumnName="COUNTRYREGIONID" />
+          <ScalarProperty Name="STATEID" ColumnName="STATEID" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ADDRESSCOUNTRYREGION">
+      <EntityTypeMapping TypeName="pruebaModel.ADDRESSCOUNTRYREGION">
+        <MappingFragment StoreEntitySet="ADDRESSCOUNTRYREGION">
+          <ScalarProperty Name="VALIDATEVERIFIERDIGIT" ColumnName="VALIDATEVERIFIERDIGIT" />
+          <ScalarProperty Name="EEACOUNTRY" ColumnName="EEACOUNTRY" />
+          <ScalarProperty Name="RECID" ColumnName="RECID" />
+          <ScalarProperty Name="RECVERSION" ColumnName="RECVERSION" />
+          <ScalarProperty Name="DATAAREAID" ColumnName="DATAAREAID" />
+          <ScalarProperty Name="ADDRESSUSEZIPPLUS4" ColumnName="ADDRESSUSEZIPPLUS4" />
+          <ScalarProperty Name="TIMEZONE" ColumnName="TIMEZONE" />
+          <ScalarProperty Name="TAXVATNUMFORMATCHECK" ColumnName="TAXVATNUMFORMATCHECK" />
+          <ScalarProperty Name="CURRENCYCODE" ColumnName="CURRENCYCODE" />
+          <ScalarProperty Name="BANKACCOUNTNUMVALIDATION" ColumnName="BANKACCOUNTNUMVALIDATION" />
+          <ScalarProperty Name="GIROACCOUNTVALIDATIONMETHOD" ColumnName="GIROACCOUNTVALIDATIONMETHOD" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="ADDRFORMAT" ColumnName="ADDRFORMAT" />
+          <ScalarProperty Name="ISOCODE" ColumnName="ISOCODE" />
+          <ScalarProperty Name="TYPE" ColumnName="TYPE" />
+          <ScalarProperty Name="COUNTRYREGIONID" ColumnName="COUNTRYREGIONID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ADDRESSCOUNTY">
+      <EntityTypeMapping TypeName="pruebaModel.ADDRESSCOUNTY">
+        <MappingFragment StoreEntitySet="ADDRESSCOUNTY">
+          <ScalarProperty Name="DLVROUTE" ColumnName="DLVROUTE" />
+          <ScalarProperty Name="RECID" ColumnName="RECID" />
+          <ScalarProperty Name="RECVERSION" ColumnName="RECVERSION" />
+          <ScalarProperty Name="DATAAREAID" ColumnName="DATAAREAID" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="STATEID" ColumnName="STATEID" />
+          <ScalarProperty Name="COUNTYID" ColumnName="COUNTYID" />
+          <ScalarProperty Name="COUNTRYREGIONID" ColumnName="COUNTRYREGIONID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CorreosVentasWeb">
+      <EntityTypeMapping TypeName="pruebaModel.CorreosVentasWeb">
+        <MappingFragment StoreEntitySet="CorreosVentasWeb">
+          <ScalarProperty Name="correo" ColumnName="correo" />
+          <ScalarProperty Name="id_correo" ColumnName="id_correo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CabeceraPedido">
+      <EntityTypeMapping TypeName="pruebaModel.CabeceraPedido">
+        <MappingFragment StoreEntitySet="CabeceraPedido">
+          <ScalarProperty Name="FechaDespacho" ColumnName="FechaDespacho" />
+          <ScalarProperty Name="userid" ColumnName="userid" />
+          <ScalarProperty Name="ResponsableDesp" ColumnName="ResponsableDesp" />
+          <ScalarProperty Name="costoDespacho" ColumnName="costoDespacho" />
+          <ScalarProperty Name="ObservacionDesp" ColumnName="ObservacionDesp" />
+          <ScalarProperty Name="calleDespacho" ColumnName="calleDespacho" />
+          <ScalarProperty Name="comunaDespacho" ColumnName="comunaDespacho" />
+          <ScalarProperty Name="estado_oc" ColumnName="estado_oc" />
+          <ScalarProperty Name="monto_pagado" ColumnName="monto_pagado" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="rut" ColumnName="rut" />
+          <ScalarProperty Name="npedido" ColumnName="npedido" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Usuarios">
+      <EntityTypeMapping TypeName="pruebaModel.Usuarios">
+        <MappingFragment StoreEntitySet="Usuarios">
+          <ScalarProperty Name="userid" ColumnName="userid" />
+          <ScalarProperty Name="confirmapassword" ColumnName="confirmapassword" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="comuna" ColumnName="comuna" />
+          <ScalarProperty Name="direccion" ColumnName="direccion" />
+          <ScalarProperty Name="telmovil" ColumnName="telmovil" />
+          <ScalarProperty Name="telfijo" ColumnName="telfijo" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="dig" ColumnName="dig" />
+          <ScalarProperty Name="rut" ColumnName="rut" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Nivel1">
+      <EntityTypeMapping TypeName="pruebaModel.Nivel1">
+        <MappingFragment StoreEntitySet="Nivel1">
+          <ScalarProperty Name="NameAlias" ColumnName="NameAlias" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Icat1" ColumnName="Icat1" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Nivel2">
+      <EntityTypeMapping TypeName="pruebaModel.Nivel2">
+        <MappingFragment StoreEntitySet="Nivel2">
+          <ScalarProperty Name="NameAlias" ColumnName="NameAlias" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Icat1" ColumnName="Icat1" />
+          <ScalarProperty Name="Icat2" ColumnName="Icat2" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Nivel3">
+      <EntityTypeMapping TypeName="pruebaModel.Nivel3">
+        <MappingFragment StoreEntitySet="Nivel3">
+          <ScalarProperty Name="Link" ColumnName="Link" />
+          <ScalarProperty Name="NameAlias" ColumnName="NameAlias" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Icat3" ColumnName="Icat3" />
+          <ScalarProperty Name="Icat2" ColumnName="Icat2" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

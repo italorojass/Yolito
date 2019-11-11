@@ -1,0 +1,17 @@
+﻿@model IEnumerable<PaginaDefinitivaYolito.Models.Ordenes_pagadas>
+
+@{
+    ViewBag.Title = "EnviarMailPago";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <h2 class="title2 text-center">Email Enviado de manera <span>Exitosa</span></h2>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <h2 class="text-center"><a href="@Url.Action("Productos", "Home")" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Deseo volver comprar</a></h2>
+    </div>
+</div>

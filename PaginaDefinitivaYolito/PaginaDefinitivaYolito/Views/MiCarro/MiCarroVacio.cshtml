@@ -1,0 +1,33 @@
+﻿@model IEnumerable<PaginaDefinitivaYolito.Models.DetalleCarro>
+
+@{
+    ViewBag.Title = "MiCarroVacio";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.scrollUp.min.js"></script>
+<script src="js/price-range.js"></script>
+<script src="js/jquery.prettyPhoto.js"></script>
+<script src="js/main.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="row">
+        <div class="col-sm-12">
+            <h2 class="title2 text-center">No tienes un carro con productos</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <h2 class="text-center"><a href="@Url.Action("Productos", "Home")" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Deseo comprar</a></h2>
+        </div>
+    </div>
+}
+else
+{
+    <h2 class="title2 text-center">Debes iniciar sesion para ver tu carro</h2>
+    <h2 class="text-center"><a href="@Url.Action("LogIn", "Usuarios")" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Deseo comprar</a></h2>
+}
+

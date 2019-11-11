@@ -1,0 +1,88 @@
+﻿
+@model IEnumerable<PaginaDefinitivaYolito.Models.Nivel1>
+@using PagedList.Mvc;
+@using PaginaDefinitivaYolito.Models;
+@{
+    ViewBag.Title = "Productos";
+    Layout = "";
+    
+}
+@foreach (var item in Model)
+{
+
+    <div class="col-md-4 col-xs-6">
+
+        @if (item.Name == "Baño y Cocina")
+        {
+            <a href="@Url.Action("Categoria1", "Home", new { id = item.ICat1, Nombre = item.Name})">
+                <img src="~/Content/Categorias/COCINAS Y BAÑOS.jpg" alt="Niveles1" class="img-responsive ">
+            </a>
+        }
+        @if (item.Name == "Cocina")
+        {
+            <a href="@Url.Action("Categoria1", "Home", new { id = item.ICat1, Nombre = item.Name})">
+                <img src="~/Content/Categorias/COCINA.jpg" alt="Niveles1" class="img-responsive">
+            </a>
+        }
+        @if (item.Name == "Construcción")
+        {
+            <a href="@Url.Action("Categoria1", "Home", new { id = item.ICat1, Nombre = item.Name})">
+                <img src="~/Content/Categorias/brick-construccion-casas-2.jpg" alt="Niveles1" class="img-responsive">
+            </a>
+        }
+       
+        @if (item.Name == "Calefacción y Ventilación")
+        {
+            <a href="@Url.Action("Categoria1", "Home", new { id = item.ICat1, Nombre = item.Name})">
+                <img src="~/Content/Categorias/CALEFACCION Y VENTILACCION.jpg" alt="Niveles1" class="img-responsive">
+            </a>
+        }
+        @if (item.Name == "Ferretería")
+        {
+            <a href="@Url.Action("Categoria1", "Home", new { id = item.ICat1, Nombre = item.Name})">
+                <img src="~/Content/Categorias/FERRETERIA.jpg" alt="Niveles1" class="img-responsive ">
+            </a>
+        }
+        @if (item.Name == "Herramientas")
+        {
+            <a href="@Url.Action("Categoria1", "Home", new { id = item.ICat1, Nombre = item.Name})">
+                <img src="~/Content/Categorias/HERRAMIENTAS.jpg" alt="Niveles1" class="img-responsive ">
+            </a>
+        }
+        @if (item.Name == "Iluminación y Electricidad")
+        {
+            <a href="@Url.Action("Categoria1", "Home", new { id = item.ICat1, Nombre = item.Name})">
+                <img src="~/Content/Categorias/ILUMINACION.jpg" alt="Niveles1" class="img-responsive ">
+            </a>
+        }
+        @if (item.Name == "Jardín y Piscina")
+        {
+            <a href="@Url.Action("Categoria1", "Home", new { id = item.ICat1, Nombre = item.Name})">
+                <img src="~/Content/Categorias/PISCINAS Y JARDIN.jpg" alt="Niveles1" class="img-responsive ">
+            </a>
+
+        }
+        @if (item.Name == "Pinturas, Adhesivos y Accesorios")
+        {
+            <a href="@Url.Action("Categoria1", "Home", new { id = item.ICat1, Nombre = item.Name})">
+                <img src="~/Content/Categorias/PINTURAS.jpg" alt="Niveles1" class="img-responsive ">
+            </a>
+        }
+        @if (item.Name == "Cerámicas, Pisos, Puertas y Ventanas")
+        {
+            <a href="@Url.Action("Categoria1", "Home", new { id = item.ICat1, Nombre = item.Name})">
+                <img src="~/Content/Categorias/pisos.jpg" alt="Niveles1" class="img-responsive">
+            </a>
+        }
+        
+        <h4>
+            
+            <span class="glyphicons glyphicons-vector-path-square"></span>
+            <a href="@Url.Action("Categoria1", "Home", new { id = item.ICat1, Nombre = item.Name})" style="color:#5f605a">
+                <span class="fa fa-square faprod" aria-hidden="true"></span>
+                @item.Name
+            </a>
+        </h4>
+        
+    </div>
+}

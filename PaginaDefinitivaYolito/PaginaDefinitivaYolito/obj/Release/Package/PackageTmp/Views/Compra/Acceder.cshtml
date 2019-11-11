@@ -1,0 +1,84 @@
+﻿@model PaginaDefinitivaYolito.Models.UserModel
+@{ 
+    Layout = "~/Views/Shared/_Layout.cshtml";
+   
+}
+
+
+<section>
+    <!--form-->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 ">
+                <div class="col-md-4 pull-right buscador">
+                    <form action="/Home/Buscador/" method="post" id="formBusqueda">
+                        <div class="input-group">
+
+                            <input type="text" class="form-control" name="buscar" id="buscar" placeholder="¿Qué buscas?">
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary " type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                            </span>
+                        </div>
+
+                    </form>
+                    <p id="empty-message" style="color:#ff0000;">
+
+                    </p>
+                </div>
+            </div>
+            
+
+            <div class="col-md-4 col-md-offset-4">
+                @if (ViewBag.badpw == "Contraseña Incorrecta")
+                {
+                    <div class="alert alert-danger">
+                        @ViewBag.badpw
+                    </div>
+                }
+                @if (ViewBag.message2 == "No existen coincidencias.")
+                {
+                    <div class="alert alert-danger">
+                        @ViewBag.message2
+                    </div>
+                }
+                <div class="login-form ">
+                    @if (ViewBag.message2 == "Noexiste")
+                    {
+                        <div class="alert alert-danger">No existes como usuario</div>
+                    }
+                    <!--login form-->
+                    <h2 class="title2 text-center ">Inicia con tu cuenta</h2>
+                    @using (Html.BeginForm("LogIn", "Usuarios", new { ReturnUrl = ViewBag.ReturnUrl, FormMethod.Post }))
+                    {
+                        <div class="alert-danger">
+                            @Html.ValidationSummary(true, "Ocurrio un error al iniciar sesión")
+                        </div>
+    <label>Rut:</label>
+                        <div class="input-group">
+                            
+                            <span class="input-group-addon"><i class="fa fa-user fa-fw" aria-hidden="true"></i></span>
+                            @Html.TextBoxFor(u => u.rut, new { @class = "form-control largo ", @placeholder = "Rut con guión y digito verificador" })
+                        </div>
+    <label>Contraseña: </label>
+                        <div class="input-group">
+                            
+                            <span class="input-group-addon"><i class="fa fa-unlock-alt fa-fw" aria-hidden="true"></i></span>
+                            @Html.PasswordFor(u => u.password, new { @class = "form-control largo", @placeholder = "Contraseña" })
+
+                        </div>
+                        <div class="alert-danger">
+                            @Html.ValidationMessageFor(u => u.password)
+                        </div>
+
+
+                        <button type="submit" class="btn btn-default btn-block"><i class="fa fa-sign-in" aria-hidden="true" style="margin-right:15px;"></i>Iniciar sesión</button> <br />
+                        <a href="@Url.Action("ReinicioContrasena", "Usuarios")" class="btn btn-link btn-block">Olvidé mi contraseña</a>
+                        <p>No poseo una cuenta, deseo <a href="@Url.Action("Registration", "Usuarios")" class="btn btn-link ">Registrarme</a></p>
+                    }
+                </div><!--/login form-->
+            </div>
+           
+        </div>
+    </div>
+</section><!--/form-->
+<br />

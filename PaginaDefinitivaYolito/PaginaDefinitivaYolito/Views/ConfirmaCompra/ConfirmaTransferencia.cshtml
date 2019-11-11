@@ -1,0 +1,59 @@
+﻿@{
+    ViewBag.Title = "ConfirmaTransferencia";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    Session.Clear();
+}
+<section id="do_action">
+    <div class="container">
+        <p>@ViewBag.kk</p>
+        @if (TempData["ErrorCreateSalesLine"] != null)
+        {
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="alert alert-danger">
+                        @TempData["ErrorCreateSalesLine"]
+                    </div>
+                </div>
+            </div>
+        }
+        @if (ViewBag.error != null)
+        {
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="alert alert-danger">
+                        @ViewBag.error
+                    </div>
+                </div>
+            </div>
+        }
+        @if (ViewBag.errorC != null)
+        {
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="alert alert-danger">
+                        @ViewBag.errorC
+                    </div>
+                </div>
+            </div>
+        }
+        @if (ViewBag.ExitoT != null)
+        {
+            
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="alert alert-success">
+                        
+                        <h2 class="title2 text-center">El pedido Web_@ViewBag.npedido está pendiente a confirmación.</h2>
+                        <h2 class="title text-center"> Una vez confirmada su transferencia, nuestro vendedor se contactara con Ud. para finalizar el proceso de compra.</h2>
+                        <h2 class="text-center" style="color:#ff6a00;">¡Gracias por comprar en nuestra ferreteria!</h2>
+                        <h2 class="text-center"><a href="@Url.Action("Home", "Home")" class="btn btn-primary update">Volver al inicio</a></h2>
+                    </div>
+                </div>
+            </div>
+        }
+       
+        
+    </div>
+    </section>
+
+        

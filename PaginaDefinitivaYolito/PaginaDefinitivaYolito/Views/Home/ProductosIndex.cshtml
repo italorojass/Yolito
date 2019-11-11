@@ -1,0 +1,62 @@
+﻿@model IEnumerable<PaginaDefinitivaYolito.Models.Productos>
+@*@model IEnumerable<PaginaDefinitivaYolito.Models.ProductosModel>*@
+
+@using PaginaDefinitivaYolito.Models;
+@{
+    ViewBag.Title = "Productos";
+    Layout = "";
+   
+}
+
+
+<link href="~/Content/MenuCategorias.css" rel="stylesheet">
+
+<section id="cart_items">
+    <div class="container">
+        <div class="row">
+            <!--parte de los productos-->
+            <div class="col-md-12">
+                <div class="features_items" id="busca">
+                    <!--features_items-->
+
+                    <h2 class="text-center category-tab fontCat">Productos Destacados</h2>
+                    @foreach (var item in Model)
+                    {
+                        if (item.HighLights == "1")
+                        {
+                            <div class="col-lg-3 col-sm-6 col-xs-6 col-xxs-12 mybox3">
+                                <div class="mybox1">
+                                    <img src="~/Content/Productos/@item.Photo" alt="Not Found" class="img-responsive img-rounded imgProductos" style="width:100%; height:200px;">
+                                </div>
+                                <div>
+                                    <h4 class="mybox2"> @item.ItemName</h4>
+                                </div>
+                                <div>
+                                    <h5>SKU : @item.ItemBarCode</h5>
+                                </div>
+                                <div>
+                                    <h5>@item.ConfigId</h5>
+                                </div>
+                                <div>
+                                    <h5>@item.InventColorId</h5>
+                                </div>
+                                <div>
+                                    <h5 class="mybox2">Tamaño: @item.InventSizeId</h5>
+                                </div>
+                                <div>
+                                    <h3 class="text-center"> $ @string.Format(new System.Globalization.CultureInfo("es-CL"), "{0:#,##}", Math.Floor(Convert.ToDecimal(item.Price))) C/U</h3>
+                                </div>
+                                <div>
+                                    <a href="MiCarro/MiCarro/@item.ItemBarCode?nombre=@item.ItemName" class="btn btn-default add-to-cart btn-block">Comprar<i class="fa fa-shopping-cart"></i></a>
+                                </div>
+                            </div>
+                        }
+                   
+                    }
+                   
+                </div><!--features_items-->
+            </div>
+        </div>
+    </div>
+</section>
+

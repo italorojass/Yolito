@@ -1,0 +1,295 @@
+﻿
+@model PagedList.IPagedList<PaginaDefinitivaYolito.Models.Productos>
+@using PaginaDefinitivaYolito.Models;
+@using PagedList.Mvc;   
+@{
+    ViewBag.Title = ViewBag.name;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var nivel3 = (List<Nivel3>)ViewBag.nivel3;
+    int count = 0;
+    double? valorCaja;
+    
+}
+
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 ">
+                <div class="col-md-4 pull-right buscador">
+                    <form action="/Home/Buscador/" method="get" id="formBusqueda">
+                        <div class="input-group">
+
+                            <input type="text" class="form-control" name="buscar" id="buscar" placeholder="¿Qué buscas?">
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary " type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                            </span>
+                        </div>
+
+                    </form>
+                    <p id="empty-message" style="color:#ff0000;">
+
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 ">
+                <div class="breadcrumbs">
+                    <ol class="breadcrumb">
+                        <li >
+                            @Html.ActionLink("Home", "Home", "Home")
+                        </li>
+                        
+                        @if (ViewBag.NameCat1 != null)
+                        {
+                            
+                            <li>
+                                
+                                <a href="@Url.Action("Categoria1", "Home", new { id = ViewBag.IdCat1, Nombre = ViewBag.NameCat1 })">@ViewBag.NameCat1</a>
+                            </li>
+                        }
+                        
+                        @if (ViewBag.Cat2 != null)
+                        {
+                            
+                            <li class="active">
+                                @ViewBag.name
+                            </li>
+                        }
+                        
+                    </ol>
+                    
+                </div>
+
+            </div>
+            
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="divlines">
+
+                </div>
+            </div>
+        </div>
+        <div class="row ">
+            <div class="col-md-4 " >
+                <div class="table">
+                    <table class="table-condensed">
+                        <tr>
+                            <td>@ViewBag.NameCat1:</td>
+                            <td>
+                                <select style="background:#fff" onchange="location = this.value;">
+                                    <option selected>--Seleccionar-- </option>
+                                    @foreach (var n3 in nivel3)
+                                    {
+                                        <option value="@Url.Action("Categoria3", new { id = ViewBag.IdCat1, N2 = ViewBag.Cat2, N3 = n3.ICat3, Name1 = ViewBag.NameCat1, Name2 = ViewBag.name, Name3 = n3.Name })">@n3.Name </option>
+                                        
+                                    }
+                                </select>
+                            </td>
+
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="col-md-4 " >
+                <div class="table">
+                    <table class="table-condensed">
+                        <tr>
+                            <td colspan="2">Ordenar por:</td>
+                            <td>
+                                <select style="background:#fff" onchange="location = this.value;">
+                                    <option value="@Url.Action("Categoria2", "Home", new { id = ViewBag.IdCat1, N2 = ViewBag.Cat2,
+                                                                                           Name1 = ViewBag.NameCat1,
+                                                                                           Name2 = ViewBag.name,
+                                                                                           FiltroActual = "Default"
+                                              })">@ViewBag.CurrentSort</option>
+                                    <option value="@Url.Action("Categoria2", "Home", new { id = ViewBag.IdCat1, N2 = ViewBag.Cat2,
+                                                                                           Name1 = ViewBag.NameCat1,
+                                                                                           Name2 = ViewBag.name,
+                                                                                           FiltroActual = "Menor"
+                                              })">Precio de menor a mayor</option>
+                                    <option value="@Url.Action("Categoria2", "Home", new { id = ViewBag.IdCat1, N2 = ViewBag.Cat2,
+                                                                                           Name1 = ViewBag.NameCat1,
+                                                                                           Name2 = ViewBag.name,
+                                                                                           FiltroActual = "Mayor"
+                                              })">Precio de mayor a menor</option>
+                                    <option value="@Url.Action("Categoria2", "Home", new { id = ViewBag.IdCat1, N2 = ViewBag.Cat2,
+                                                                                           Name1 = ViewBag.NameCat1,
+                                                                                           Name2 = ViewBag.name,
+                                                                                           FiltroActual = "Marca"
+                                              })">Marca</option>
+
+                                </select>
+                            </td>
+
+                        </tr>
+                    </table>
+
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6 col-xs-10 pull-right" >
+                <div class="pull-right">
+                    <div class="table">
+                        <table class="table-responsive">
+                            <tr>
+                                <td align="right">
+                                    Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+                                    de @Model.PageCount
+                                </td>
+                            </tr>
+                            <tr>
+
+                                <td>
+                                    @Html.PagedListPager(Model, page => Url.Action("Categoria2", new { N2 = ViewBag.Cat2, page, Name2 = ViewBag.name, Name1 = ViewBag.NameCat1, FiltroActual = ViewBag.CurrentSort }),
+                                    PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(PagedListRenderOptions.OnlyShowFivePagesAtATime, new AjaxOptions()
+                                    {
+                                        HttpMethod = "GET",
+                                        InsertionMode = InsertionMode.Replace,
+                                        UpdateTargetId = "div2"
+                                    }))
+                                </td>
+
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="col-sm-12 ">
+                <div class="divlines">
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="container">
+                <div class="col-md-12">
+                    <h2 class="title2">@ViewBag.name</h2>
+                </div>
+            </div>
+            @if (ViewBag.error != null)
+            {
+                <div class="col-md-12">
+                    <div class="alert alert-danger">
+                        @ViewBag.error
+                    </div>
+                </div>
+            }
+                @foreach (var item in Model)
+                {
+                    int ct = count++;
+                    <div class="col-md-3 ">
+                        <div class="col-sm-12 boxcarro">
+                            <div class="mybox1">
+                                <a href="@Url.Action("FichaTecnica", "Home", new { id = item.ItemBarCode, nombre = item.ItemName, ftec = item.RefRecId })">
+                                    <img src="@Url.Content("~/Content/Productos/" + item.Photo)" alt="prod" class="img-responsive " onerror="imgError(this);" style="width:100%; height:200px;">
+
+                                </a>
+                            </div>
+                            <div class="mybox2" style="margin-bottom:50px;">
+                                <b>@item.ItemName @item.brandInternet</b>
+                            </div>
+                            <p>Precio internet:</p>
+                            <div>
+                                @if (item.Factor != 0)
+                                {
+                                    valorCaja = item.Factor * item.Price;
+                                    <h4> $ @string.Format(new System.Globalization.CultureInfo("es-CL"), "{0:#,##}", Math.Floor(Convert.ToDecimal(valorCaja))) Caja </h4>
+                                    <h4> $ @string.Format(new System.Globalization.CultureInfo("es-CL"), "{0:#,##}", Math.Floor(Convert.ToDecimal(item.Price))) mt2</h4>
+                                }
+                                else
+                                {
+                                    <h4> $ @string.Format(new System.Globalization.CultureInfo("es-CL"), "{0:#,##}", Math.Floor(Convert.ToDecimal(item.Price))) </h4>
+                                }
+
+
+                            </div>
+                          @if (ViewBag.Kit != null)
+                          {
+                            <input type="hidden" name="kit" value="1" id="kit" />
+                          }
+                            <div class="LinkAddtocart">
+                                <a class="btn btn-default add-to-cart btn-block" onclick="AddToCart('@item.ItemBarCode','@item.ItemName')">
+                                    Agregar al carro <i class="fa fa-shopping-cart"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <a href="@Url.Action("FichaTecnica", "Home", new { id = item.ItemBarCode, nombre = item.ItemName })">
+                            
+                        </a>
+                    </div>
+                }
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 ">
+                        <div class="divlines">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-xs-12">
+                <div class="pull-right" style="padding-top:10px;">
+                    <div class="pull-right">
+                        Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+                        de @Model.PageCount
+                    </div>
+                   @Html.PagedListPager(Model, page => Url.Action("Categoria2", new { N2 = ViewBag.Cat2, page, Name2 = ViewBag.name, Name1 = ViewBag.NameCat1, FiltroActual = ViewBag.CurrentSort }),
+                                    PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(PagedListRenderOptions.OnlyShowFivePagesAtATime, new AjaxOptions()
+                                    {
+                                        HttpMethod = "GET",
+                                        InsertionMode = InsertionMode.Replace,
+                                        UpdateTargetId = "div2"
+                                    }))
+
+                </div>
+            </div>
+            </div>
+        <div class="row" style="padding-top:15px;">
+            <div class="col-md-12 ">
+                <div class="divlines">
+                </div>
+            </div>
+        </div>
+       
+    </div>
+    
+</section>
+<br />
+
+<script>
+    function AddToCart(id, name) {
+
+        $.ajax({
+            url: "/Compra/ElCarro",
+            type: 'GET',
+            data: {
+                id: id,
+                nombre: name,
+                canti: 1,
+                kit: $('#kit').val()
+            },
+            async: false,
+            success: function (data) {
+                alert(data);
+                location.reload();
+                //$('#getcount').load(document.URL + ' #getcount').addClass('badge');
+
+            },
+
+        });
+    }
+</script>
+<script>
+    function imgError(image) {
+        image.onerror = "";
+        image.src = '@Url.Content("~/Content/Imagenes/Sitio/MARCA-DE-AGUA-YOLITO.jpg")';
+        return true;
+    }
+</script>

@@ -1,0 +1,91 @@
+﻿@model IEnumerable<PaginaDefinitivaYolito.Models.DetalleCarro>
+           @{
+               int ncarro = 0;
+               int total = 0;
+               int result = 0;
+               
+           }
+<div class="container">
+    <div class="col-md-4 pull-right buscador">
+        <form action="/Home/Buscador/" method="get" id="formBusqueda">
+            <div class="input-group">
+
+                <input type="text" class="form-control" name="buscar" id="buscar" placeholder="¿Qué buscas?">
+                <span class="input-group-btn">
+                    <button class="btn btn-primary " type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                </span>
+            </div>
+
+        </form>
+    </div>
+    @if (Session["cart"] != null)
+    {
+        <div class="row">
+            <div class="col-xs-12">
+                <h3 class="fontUpper">Detalle carro de compras</h3>
+            </div><!--/register-req-->
+        </div>
+        <div class="row">
+            <div class="col-xs-12 table ">
+                <table class="table">
+                    <tr>
+                        <td colspan="2" align="center"><strong>Producto</strong></td>
+                        <td align="center"><strong>Cantidad</strong>  </td>
+                        <td align="center"><strong>Precio</strong>  </td>
+                    </tr>
+                    @foreach (var item in Model)
+                    {
+                        string precio = string.Format("{0:#,##}", item.Precio);
+
+                        double subtotal1 = Double.Parse(precio) * item.Cantidad;
+                        ncarro = item.NPedido.Value;
+
+                        <tr>
+                            <td> <img src="~/Content/productos/@item.Photo" style="max-width: 100%; max-height: 80px;" alt=""></td>
+                            <td align="center"> @item.ItemName</td>
+                            <td align="center"> @item.Cantidad</td>
+                            <td align="center">$@string.Format("{0:#,##}", item.Precio) </td>
+                        </tr>
+                        total += Convert.ToInt32(subtotal1);
+                        result = total;
+
+                    }
+
+                    <tr>
+                        <td colspan="2" align="right"><strong></strong> </td>
+                        <td align="center"><strong></strong></td>
+                        <td align="center" ><strong>Total</strong></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="right"><p> </p></td>
+                        <td align="center"><p></p></td>
+                        <td align="center"><b>$@result.ToString("#,##")</b></td>
+                        
+                    </tr>
+                </table>
+
+            </div>
+            <div class="col-xs-4">
+                <a href="@Url.Action("CarroDeCompras","Compra")" class="btn btn-warning ">Volver al carro </a>
+            </div>
+            <div class="col-xs-8">
+                <div class="pull-right">
+                    <a href="@Url.Action("sendCotizacion", "Cotizaciones")" class="btn btn-primary ">Enviar como cotización </a>
+                </div>
+                
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="alert alert-danger">
+                    Carro de compras expiró
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+<br />

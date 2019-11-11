@@ -1,0 +1,56 @@
+﻿<ul class="bxslider">
+    <li>
+        <a href="@Url.Action("Registration", "Usuarios" )">
+            <img src="~/Content/Imagenes/Banners/BANNER MES DEL MAESTRO 2017.jpg" style="width:100%;"/>
+        </a>
+    </li>
+    <li>
+        <a href="@Url.Action("OfertasBanner", "Home", new { id = 1, Nombre = "Mes del Maestro" })">
+            <img src="~/Content/Imagenes/Banners/BANNER OFERTAS MES DEL MAESTRO 2017.jpg" style="width:100%;" />
+        </a>
+    </li>
+    <li>
+        <a href="@Url.Action("OfertasBanner", "Home", new { id = 2, Nombre = "Mes del Maestro" })">
+            <img src="~/Content/Imagenes/Banners/BANNER OFERTAS MES DEL MAESTRO 2017. IMPER  1 OK.jpg" style="width:100%;" />
+        </a>
+    </li>
+    <li>
+        <a href="@Url.Action("OfertasBanner", "Home", new { id = 3, Nombre = "Mes del Maestro" })">
+            <img src="~/Content/Imagenes/Banners/BANNER OFERTAS MES DEL MAESTRO 2017. IMPER 2 OK.jpg" style="width:100%;" />
+        </a>
+    </li>
+    <li>
+        <a href="@Url.Action("OfertasBanner", "Home", new { id = 4, Nombre = "Mes del Maestro" })">
+            <img src="~/Content/Imagenes/Banners/BANNER OFERTAS MES DEL MAESTRO 2017 3M.jpg" style="width:100%;" />
+        </a>
+    </li>
+    
+    @*<li>
+        <a href="@Url.Action("OfertasBanner", "Home", new { id= 5 ,Nombre = "Mes del maestro"})">
+            <img src="~/Content/Imagenes/Banners/BANNER OFERTAS MES DEL MAESTRO 2017 TEKA.jpg" style="width:100%;" />
+        </a>
+    </li>*@
+    <li>
+        <a href="@Url.Action("OfertasBanner", "Home", new { id = 6, Nombre = "Baño y Cocina" })">
+            <img src="~/Content/Imagenes/Banners/BANNER OFERTAS MES DEL MAESTRO 2017 TEKA 2.jpg" style="width:100%;" />
+        </a>
+    </li>
+    <li>
+        <a href="@Url.Action("OfertasBanner", "Home", new { id= 7 ,Nombre = "Cerámicas"})">
+            <img src="~/Content/Imagenes/Banners/BANNER CERAMICA OK.jpg" style="width:100%;" />
+        </a>
+    </li>
+    
+</ul>
+<script src="~/Scripts/jquery.bxslider.min.js"></script>
+<link href="~/Content/jquery.bxslider.css" rel="stylesheet" />
+<script>
+    $(document).ready(function () {
+        $('.bxslider').bxSlider({
+            mode: 'fade',
+            auto: true,
+            autoControls: true,
+            pause: 5000
+        });
+    });
+</script>

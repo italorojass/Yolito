@@ -1,0 +1,88 @@
+﻿
+@model IEnumerable<PaginaDefinitivaYolito.Models.Nivel1>
+@using PagedList.Mvc;
+@using PaginaDefinitivaYolito.Models;
+@{
+    ViewBag.Title = "Productos";
+    Layout = "";
+    
+}
+@foreach (var item in Model)
+{
+
+    <div class="col-md-4 col-xs-6">
+
+        @if (item.Name == "Baño y Cocina")
+        {
+            <a href="~/Home/Categoria1/@item.ICat1?Nombre=@item.Name">
+                <img src="~/Content/Categorias/COCINAS Y BAÑOS.jpg" alt="Niveles1" class="img-responsive ">
+            </a>
+        }
+        @if (item.Name == "Cocina")
+        {
+            <a href="~/Home/Categoria1/@item.ICat1?Nombre=@item.Name">
+                <img src="~/Content/Categorias/COCINA.jpg" alt="Niveles1" class="img-responsive">
+            </a>
+        }
+        @if (item.Name == "Construcción")
+        {
+            <a href="~/Home/Categoria1/@item.ICat1?Nombre=@item.Name">
+                <img src="~/Content/Categorias/brick-construccion-casas-2.jpg" alt="Niveles1" class="img-responsive">
+            </a>
+        }
+       
+        @if (item.Name == "Calefacción y Ventilación")
+        {
+            <a href="~/Home/Categoria1/@item.ICat1?Nombre=@item.Name">
+                <img src="~/Content/Categorias/CALEFACCION Y VENTILACCION.jpg" alt="Niveles1" class="img-responsive">
+            </a>
+        }
+        @if (item.Name == "Ferretería")
+        {
+            <a href="~/Home/Categoria1/@item.ICat1?Nombre=@item.Name">
+                <img src="~/Content/Categorias/FERRETERIA.jpg" alt="Niveles1" class="img-responsive ">
+            </a>
+        }
+        @if (item.Name == "Herramientas")
+        {
+            <a href="~/Home/Categoria1/@item.ICat1?Nombre=@item.Name">
+                <img src="~/Content/Categorias/ferreteria-19.jpg" alt="Niveles1" class="img-responsive ">
+            </a>
+        }
+        @if (item.Name == "Iluminación")
+        {
+            <a href="~/Home/Categoria1/@item.ICat1?Nombre=@item.Name">
+                <img src="~/Content/Categorias/ILUMINACION.jpg" alt="Niveles1" class="img-responsive ">
+            </a>
+        }
+        @if (item.Name == "Jardín y Piscina")
+        {
+            <a href="~/Home/Categoria1/@item.ICat1?Nombre=@item.Name">
+                <img src="~/Content/Categorias/jardines-con-piscina.jpg" alt="Niveles1" class="img-responsive ">
+            </a>
+
+        }
+        @if (item.Name == "Pinturas y Accesorios")
+        {
+            <a href="~/Home/Categoria1/@item.ICat1?Nombre=@item.Name">
+                <img src="~/Content/Categorias/PINTURAS.jpg" alt="Niveles1" class="img-responsive ">
+            </a>
+        }
+        @if (item.Name == "Pisos, Puertas y Ventanas")
+        {
+            <a href="~/Home/Categoria1/@item.ICat1?Nombre=@item.Name">
+                <img src="~/Content/Categorias/pisos.jpg" alt="Niveles1" class="img-responsive">
+            </a>
+        }
+        
+        <h4>
+            
+            <span class="glyphicons glyphicons-vector-path-square"></span>
+            <a href="~/Home/Categoria1/@item.ICat1?Nombre=@item.Name" style="color:#5f605a">
+                <span class="fa fa-square faprod" aria-hidden="true"></span>
+                @item.Name
+            </a>
+        </h4>
+        
+    </div>
+}

@@ -1,0 +1,54 @@
+﻿@model PagedList.IPagedList<PaginaDefinitivaYolito.Models.ProductosSet>
+
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Grilla";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/Gridmvc.css" rel="stylesheet" />
+<script src="~/Scripts/gridmvc.min.js"></script>
+
+<div class="container">
+    <div class="bg">
+        <div class="row">
+            <div class="col-sm-12">
+                Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+                de @Model.PageCount
+                <h2 class="title text-center">Nuestros productos</h2>
+                @using (Html.BeginForm("MiCarro", "CarroDeCompras", null, FormMethod.Post))
+                {   
+                    foreach (var item in Model)
+                    {
+                        <div class="col-sm-4">
+                            <div class="product-image-wrapper">
+                                <div class="single-products">
+                                    <div class="productinfo text-center">
+                                        
+                                        <img src="~/Content/productos/@item.Photo" alt="" />
+                                            <h2>$ @string.Format(new System.Globalization.CultureInfo("es-CL"), "{0:#,##}", Math.Floor(Convert.ToDecimal(item.Price))) </h2>
+                                            <p>Código: @item.ItemBarCode</p>
+                                            <p>@item.ItemName</p>
+                                            <p>Marca: @item.ConfigId</p>
+                                            <p>Color: @item.InventColorId</p>
+                                            <p>Tamaño: @item.InventSizeId</p>
+                                            <a href="@Url.Action("MiCarro", "MiCarro", new { id = item.ItemBarCode })" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Agregar al carro</a>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    }
+                }
+                <div id='Paging' style="text-align: center">
+                    @Html.PagedListPager(Model, page => Url.Action("Grilla", new { page }))<br />
+                    Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+                    de @Model.PageCount
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<br />

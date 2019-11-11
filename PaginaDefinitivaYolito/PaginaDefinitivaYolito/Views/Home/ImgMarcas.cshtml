@@ -1,0 +1,41 @@
+﻿@model IEnumerable<PaginaDefinitivaYolito.Models.MarcasAsoc>
+
+@{
+    ViewBag.Title = "ImgMarcas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+    <div class="container">
+        <div class="col-xs-4 col-xs-offset-4">
+            @using (Html.BeginForm("AddImagen", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <label>Nombre marca:</label><input type="text" name="nombremarca" /><br />
+                <label>Foto color:</label><br /><input type="file" name="file" />
+                <label>Foto blanco y negro:</label><br /><input type="file" name="fileBN" />
+                <br />
+                <input type="submit" class="btn btn-primary" value="Guardar">
+            }
+            
+        </div>
+
+        <div class="col-xs-12">
+            <h2>Marcas actuales</h2>
+
+            @foreach (var item in Model)
+            {
+                <div class="pull-left">
+                    <img src="@item.FotoBN" class="img-responsive" id="simagen"
+                         onmouseover="this.src='@item.FotoNormal'"
+                         onmouseout="this.src = '@item.FotoBN'" />
+                </div>
+            }
+
+        </div>
+        
+    </div>
+
+</div><br />
+
+

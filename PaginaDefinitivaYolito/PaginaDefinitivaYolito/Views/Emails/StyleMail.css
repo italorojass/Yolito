@@ -1,0 +1,67 @@
+﻿/* yahoo, hotmail */
+        .ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass font, .ExternalClass td, .ExternalClass div {
+            line-height: 100%;
+        }
+
+        .yshortcuts a {
+            border-bottom: none !important;
+        }
+
+        .vb-outer {
+            min-width: 0 !important;
+        }
+
+        .RMsgBdy, .ExternalClass {
+            width: 100%;
+            background-color: #3f3f3f;
+            background-color: #3f3f3f;
+        }
+
+        /* outlook */
+        table {
+            mso-table-rspace: 0pt;
+            mso-table-lspace: 0pt;
+        }
+
+        #outlook a {
+            padding: 0;
+        }
+
+        img {
+            outline: none;
+            text-decoration: none;
+            border: none;
+            -ms-interpolation-mode: bicubic;
+        }
+
+        a img {
+            border: none;
+        }
+
+        @media screen and (max-device-width: 600px), screen and (max-width: 600px) {
+            table.vb-container, table.vb-row {
+                width: 95% !important;
+            }
+
+            .mobile-hide {
+                display: none !important;
+            }
+
+            .mobile-textcenter {
+                text-align: center !important;
+            }
+
+            .mobile-full {
+                float: none !important;
+                width: 100% !important;
+                max-width: none !important;
+                padding-right: 0 !important;
+                padding-left: 0 !important;
+            }
+
+            img.mobile-full {
+                width: 100% !important;
+                max-width: none !important;
+                height: auto !important;
+            }
+        }

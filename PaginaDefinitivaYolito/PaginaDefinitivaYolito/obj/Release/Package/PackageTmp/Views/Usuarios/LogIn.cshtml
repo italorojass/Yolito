@@ -1,0 +1,122 @@
+﻿@model PaginaDefinitivaYolito.Models.UserModel
+@{
+    ViewBag.Title = "LogIn";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@if (TempData["logueado"] != null)
+{
+    <script>
+        $(document).ready(function () {
+            alert('Logueado con exito!.');
+        });
+    </script>
+}
+
+<section >
+    <!--form-->
+    <div class="container">
+     @if (ViewBag.error != null)
+     {
+        <div class="row">
+            <div class="col-md-4 col-lg-offset-4">
+                <div class="alert alert-danger">
+                    @ViewBag.error
+                </div>
+            </div>
+        </div>
+     }
+        <div class="row">
+
+            <div class="col-md-4 pull-right buscador">
+                @using (Html.BeginForm("Buscador", "Home", new { ReturnUrl = ViewBag.ReturnUrl, FormMethod.Get }))
+                {
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="buscar" id="buscar" placeholder="¿Que buscas?">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default " type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                        </span>
+                    </div>
+                }
+                <p id="empty-message" style="color:#ff0000;">
+
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8 ">
+                <div class="breadcrumbs">
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="@Url.Action("Home", "Home")">Home</a>
+                        </li>
+                        
+                        <li class="active">
+                            Inicia con tu cuenta
+                        </li>
+                    </ol>
+
+                </div>
+                
+            </div>
+            <div class="col-md-12">
+                <div class="divlines"></div>
+
+            </div>
+            <div class="col-md-4 col-md-offset-4" style="margin-top:10px;">
+                <!--login form-->
+                <h2 class="title2 text-center ">Inicia con tu cuenta</h2>
+
+                <form action="/Usuarios/LogIn" method="post" id="loginForm">
+                    <label>Rut:</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-user fa-fw" aria-hidden="true"></i></span>
+                        @Html.TextBoxFor(u => u.rut, new { @class = "form-control largo ", @placeholder = "Rut con guión y digito verificador", @oninput = "checkRut(this)" })
+                    </div>
+                    <label>Contraseña:</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-unlock-alt fa-fw" aria-hidden="true"></i></span>
+                        @Html.PasswordFor(u => u.password, new { @class = "form-control largo", @placeholder = "Contraseña" })
+                    </div>
+                    @Html.ValidationMessageFor(u => u.password)
+                    @if (ViewBag.badpw != null)
+                    {
+                        <div class="alert alert-danger">
+                            <i class="fa fa-times" aria-hidden="true"></i> @ViewBag.badpw
+                        </div>
+
+                    }
+                    <div style="margin-top:15px;">
+                        <button type="submit" class="btn btn-primary btn-block"><i class="fa fa-sign-in" aria-hidden="true" style="margin-right:15px;"></i>Iniciar sesión</button> <br />
+                    </div>
+                </form>
+                <a href="@Url.Action("ReinicioContrasena", "Usuarios")" class="btn btn-link btn-block">Olvidé mi contraseña</a>
+                <p>No poseo una cuenta, deseo <a href="@Url.Action("Registration", "Usuarios")" class="btn btn-link ">Registrarme</a></p>
+
+                <div id=created></div>
+
+                <h2 class="text-center"><a href="@Url.Action("Home", "Home")" class="btn btn-default update">Volver al inicio</a></h2>
+            </div><!--/login form-->
+            </div>
+
+             </div>   
+            
+    
+</section><!--/form-->
+<br />
+<script type="text/javascript">
+    $('#create').submit(function () { // catch the form's submit event
+        $.ajax({ // create an AJAX call...
+            url: "/Usuarios/LogIn",
+            type: 'POST',
+            contentType: "application/json; charset=utf-8",
+            dataType: 'json',
+            
+            async: false,
+            success: function (response) { // on success..
+                $('#created').html(response); // update the DIV
+                alert("pase");
+            }
+        });
+        return false; // cancel original event to prevent form submitting
+    });
+</script>

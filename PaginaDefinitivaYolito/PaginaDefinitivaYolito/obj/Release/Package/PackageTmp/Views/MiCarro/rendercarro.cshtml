@@ -1,0 +1,109 @@
+﻿@model IEnumerable<PaginaDefinitivaYolito.Models.DetalleCarro>
+@using System.Linq
+<script>
+    $(document).ready(function () {
+        $("#quantity").change(function () {
+            $("#btn").click();
+        });
+    });
+    $(document).ready(function () {
+        $('#buscar').autocomplete({
+            source: '@Url.Action("Search","Home")'
+        });
+    })
+
+</script>
+
+@if (User.Identity.IsAuthenticated)
+{
+    int total = 0;
+    int price = 0;
+    int ncarro = 0;
+    int cantid = 0;
+
+    <section id="cart_items">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel-group">
+                    <div class="panel panel-info">
+                        <div class="panel-heading"><h4 class="fontUpper">Detalle de tu orden</h4></div>
+
+                    </div>
+                    <div class="panel panel-body">
+                        <h5>Productos</h5>
+                        <hr />
+                        <table class="table">
+                            @foreach (var item in Model)
+                            {
+                                cantid++;
+                                if (item.NPedido == item.CabeceraCarro.NPedido && Convert.ToString(item.CabeceraCarro.RutCliente) == Session["RutUsuario"])
+                                {
+                                    if (item.CabeceraCarro.EstadoOc != true)
+                                    {
+                                        string precio = string.Format("{0:#,##}", item.Precio);
+                                        price = Convert.ToInt32(Double.Parse(precio));
+                                        double subtotal1 = Double.Parse(precio) * item.Cantidad;
+                                        ncarro = item.NPedido;
+                                        total += Convert.ToInt32(subtotal1);
+                                        <tr>
+
+                                            <td>
+                                                <a href="@Url.Action("FichaTecnica", "Home", new { id = item.ItemBarCode, nombre = item.ItemName })"><h5>@item.ItemName</h5></a>
+
+                                                @*<p>SKU: @item.ItemBarCode</p>*@
+                                            </td>
+
+                                            <td class="cart_quantity" align="center">
+                                                <label class="form-control">@item.Cantidad</label>
+
+                                            </td>
+                                            <td class="cart_price" align="center">
+                                                <p>$@string.Format("{0:#,##}", price)</p>
+                                            </td>
+                                            <td class="cart_total" align="center">
+                                                <p class="cart_total_price">$@string.Format("{0:#,##}", item.Subtotal)</p>
+                                            </td>
+                                            <td class="cart_total" align="center">
+                                                <a class="cart_quantity_delete btn-danger" href="@Url.Action("DeleteItem", "MiCarro", new { id = item.ItemBarCode })"><i class="fa fa-times"></i></a>
+                                            </td>
+                                        </tr>
+                                        
+                                    }
+
+                                }
+                            }
+                            <tr>
+                                <td colspan="3" style="background-color:#c0c0c0"></td>
+                                <td style="background-color:#c0c0c0" align="center">
+                                    <b class="fontUpper">TOTAL:</b>
+                                </td>
+                                <td align="center" style="background-color:#c0c0c0">
+                                    <b style="color:#000;">$@total.ToString("#,##")</b>
+                                </td>
+                                <td style="background-color:#c0c0c0"></td>
+                            </tr>
+                        </table>
+                        
+                    </div>
+
+                </div>
+                @*<div class="col-sm-4">
+                    <div class="alert alert-info">
+                        <strong>Importante:</strong> Si pagas con transferencia electrónica, tu orden cuenta como pagada una vez que se valide el o los comprobantes de pago. Se te avisará mediante correo electrónico una vez hecha la verificación.
+                    </div>
+                </div>*@
+                
+            </div>
+
+        </div>
+</section>
+
+}
+else
+{
+    <div class="alert alert-danger">
+        <strong>Debes iniciar sesion para ver tu carro!</strong>
+    </div>
+    
+    <h2 class="text-center"><a href="@Url.Action("LogIn", "Usuarios")" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Iniciar Sesión</a></h2>
+}

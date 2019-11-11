@@ -1,0 +1,150 @@
+﻿
+@{
+    ViewBag.Title = "Exito";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    
+    if (Session["cart"] != null)
+    {
+        Session["cart"] = null;
+    }
+}
+
+
+<div class="container">
+    <div class="bg">
+        @if (ViewBag.errorPago != null)
+        {
+            <div class="row">
+                <div class="col-md-4 col-md-offset-4">
+                    <div class="alert alert-danger">
+                        @ViewBag.errorPago
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="row">
+                <div class="col-md-4 col-md-offset-4">
+                    <div class="alert alert-success">
+                        <h2 class="fontUpper text-center">
+                            Comprobante de pago <i class="fa fa-check" aria-hidden="true"></i>
+                            @*@ViewBag.pase*@
+                        </h2>
+                    </div>
+
+                </div>
+            </div>
+
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <div class="table-responsive">
+                <table class="table-hover">
+                    <tr>
+                        <th>Últimos 4 dígitos de la tarjeta:</th>
+                        <td align="right">@ViewBag.numTarjeta</td>
+                    </tr>
+                    <tr>
+                        <th>Fecha de pago:</th>
+                        <td align="right">@ViewBag.fecha</td>
+                    </tr>
+                    <tr>
+                        <th>Hora de pago:</th>
+                        <td align="right">@ViewBag.HoraTrx</td>
+                    </tr>
+                    <tr>
+                        <th>Tipo Pago:</th>
+                        <td align="right">@ViewBag.tipotranx</td>
+                    </tr>
+                    <tr>
+                        <th>Numero Orden de compra:</th>
+                        <td align="right">@ViewBag.oc</td>
+                    </tr>
+                    <tr>
+                        <th>Nombre del comercio:</th>
+                        <td align="right">CENTRO FERRETERO YOLITO BALART</td>
+                    </tr>
+                    <tr>
+                        <th>URL del comercio:</th>
+                        <td align="right">www.yolito.cl</td>
+                    </tr>
+                    <tr>
+                        <th>Monto:</th>
+                        <td align="right">$ @ViewBag.monto</td>
+                    </tr>
+                    <tr>
+                        <th>Moneda de pago:</th>
+                        <td align="right">PESOS CHILENOS.</td>
+                    </tr>
+                    <tr>
+                        <th>Usuario comprador:</th>
+                        <td align="right"> @ViewBag.user</td>
+                    </tr>
+                    <tr>
+                        <th>Código de Autorización:</th>
+                        <td align="right">@ViewBag.codigo</td>
+                    </tr>
+                    <tr>
+                        <th>Numero de cuotas:</th>
+                        <td align="right">@ViewBag.cuotas</td>
+                    </tr>
+                    <tr>
+                        <th>Tipo Cuota:</th>
+                        @{
+            if (ViewBag.tipocuota == "VD")
+            {
+                <td align="right">DEBITO</td>
+            }
+            else if (ViewBag.tipocuota == "VN")
+            {
+                <td align="right">SIN CUOTAS</td>
+            }
+            else if (ViewBag.tipocuota == "VC")
+            {
+                <td align="right">CUOTAS NORMALES</td>
+            }
+            else if (ViewBag.tipocuota == "SI")
+            {
+                <td align="right">SIN INTERÉS</td>
+            }
+            else if (ViewBag.tipocuota == "CI")
+            {
+                <td align="right">CUOTAS COMERCIO</td>
+            }
+            else
+            {
+                <td align="right">NO INFORMADO</td>
+            }
+
+                        }
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <br />
+                            <a class="btn btn-primary  btn-block" href="@Url.Action("ResumenCompra", "Compra", new { id = @ViewBag.oc, rutusuario = ViewBag.user })"><b>Finalizar</b></a>
+                        </td>
+                    </tr>
+
+                </table>
+
+            </div>
+        </div>
+
+    </div>
+        }
+        
+        
+        <div class="row">
+            @if (ViewBag.error != null)
+            {
+                <div class="col-md-4 col-md-offset-4">
+                    <div class="alert alert-danger">
+                        @ViewBag.error
+                    </div>
+                </div>
+            }
+        </div>
+
+    </div>
+</div>
+<br />

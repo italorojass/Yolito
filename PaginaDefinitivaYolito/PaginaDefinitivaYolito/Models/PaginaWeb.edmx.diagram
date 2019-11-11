@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e48d5184e82647de952cfe8fc4573517" Name="Diagram1">
+        <EntityTypeShape EntityType="PaginaWebModel.CarroPagado" Width="1.5" PointX="7.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PaginaWebModel.Nivel1" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PaginaWebModel.Nivel2" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PaginaWebModel.Nivel3" Width="1.5" PointX="5.25" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PaginaWebModel.sysdiagrams" Width="1.5" PointX="12" PointY="0.75" />
+        <EntityTypeShape EntityType="PaginaWebModel.Clientes" Width="1.5" PointX="15.25" PointY="8.125" />
+        <EntityTypeShape EntityType="PaginaWebModel.AddressCounty" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="PaginaWebModel.FichaTecnica" Width="1.5" PointX="3.375" PointY="3.75" />
+        <EntityTypeShape EntityType="PaginaWebModel.MarcasAsoc" Width="1.5" PointX="3.375" PointY="6.75" />
+        <EntityTypeShape EntityType="PaginaWebModel.DetalleCarro" Width="1.5" PointX="15.625" PointY="3.75" />
+        <EntityTypeShape EntityType="PaginaWebModel.ProductosRelacionados" Width="1.5" PointX="7.375" PointY="0.75" />
+        <EntityTypeShape EntityType="PaginaWebModel.temporal" Width="1.5" PointX="5.375" PointY="8.75" />
+        <EntityTypeShape EntityType="PaginaWebModel.Cotizaciones" Width="1.5" PointX="9.375" PointY="8.75" />
+        <EntityTypeShape EntityType="PaginaWebModel.Sinonimos" Width="1.5" PointX="11.375" PointY="9.75" />
+        <EntityTypeShape EntityType="PaginaWebModel.ProductosKit" Width="1.5" PointX="0.75" PointY="12.75" />
+        <EntityTypeShape EntityType="PaginaWebModel.tempProdKit" Width="1.5" PointX="2.75" PointY="12.75" />
+        <EntityTypeShape EntityType="PaginaWebModel.Productos" Width="1.5" PointX="0.75" PointY="6.75" />
+        <EntityTypeShape EntityType="PaginaWebModel.CabeceraCarro" Width="1.5" PointX="13" PointY="12.25" />
+        <AssociationConnector Association="PaginaWebModel.FK_Clientes_CabeceraCarro" />
+        <AssociationConnector Association="PaginaWebModel.FK_DetalleCarro_CabeceraCarro" />
+        <EntityTypeShape EntityType="PaginaWebModel.ProductosOferta" Width="1.5" PointX="11.375" PointY="3.75" />
+        <EntityTypeShape EntityType="PaginaWebModel.TablaBanner" Width="1.5" PointX="7.375" PointY="12.75" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

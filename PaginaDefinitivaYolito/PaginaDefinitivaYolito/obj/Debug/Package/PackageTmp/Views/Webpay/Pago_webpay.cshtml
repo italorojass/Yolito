@@ -1,0 +1,66 @@
+﻿@model IEnumerable<PaginaDefinitivaYolito.Models.DetallePedido>
+@{
+    ViewBag.Title = "Pago_webpay";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int total = 0;
+    int orden = 0;
+}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<link href="~/Content/main.css" rel="stylesheet">
+
+<div id="contact-page" class="container">
+    <div class="bg">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="title text-center">Pago</h2>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <form method="post" action="~/cgi-bin/tbk_bp_pago.cgi">
+                        <center>
+                            <table border=0>
+                                <tr>
+                                    <td align="center"><font face=arial size=3 color=white>TIPO DE TRANSACCION</font><br> <input type="text" name="TBK_TIPO_TRANSACCION" value="TR_NORMAL" readonly>  <br></td>
+                                    @foreach (var item in Model)
+                                    {
+                                        if (item.npedido == item.CabeceraPedido.npedido && Convert.ToString(item.CabeceraPedido.rut) == User.Identity.Name
+                                            && item.CabeceraPedido.estado_oc == false)
+                                        {
+                                            orden = item.npedido;
+                                            total += item.subtotal;
+                                        }
+                                    }
+
+                                    <td align="center"><font face=arial size=3 color=white>MONTO DE TRANSACCION  </font><br> <input type="TEXT" name="TBK_MONTO" value="@total.ToString("#,##")00" readonly>      <br></td>
+                                </tr>
+                                <tr>
+                                    <td align="center"><font face=arial size=3 color=white>ORDEN DE COMPRA</font><br> <input type="TEXT" name="TBK_ORDEN_COMPRA" value="@orden" readonly> <br></td>
+                                    <td align="center"><font face=arial size=3 color=white>ID DE SESION  </font><br> <input type="TEXT" name="TBK_ID_SESION" value="@User.Identity.Name" readonly>  <br></td>
+                                </tr>
+                                <tr>
+                                    <td align="center"><font face=arial size=3 color=white>URL PAGINA DE EXITO   </font><br> <input type="hidden" name="TBK_URL_EXITO" size=40 value="http://190.98.201.83/WebPay/Exito" readonly><br></td>
+                                    <td align="center"><font face=arial size=3 color=white>URL PAGINA DE FRACASO </font><br> <input type="hidden" name="TBK_URL_FRACASO" size=40 value="http://190.98.201.83/WebPay/Fracaso" readonly><br></td>
+                                </tr>
+                            </table>
+
+                            <table border=0>
+                                <tr>
+                                    <td align="center">
+                                        @*<input type="submit" class="btn btn-success" value="Pagar" size=40>*@
+                                        <button type="submit" class="btn btn-success btn-group-lg">Pagar</button>
+                                    </td>
+                                    <td>@Html.ActionLink("Volver al carro", "Productos", "Home", null, new { @class = "btn btn-danger" })</td>
+                                </tr>
+                            </table>
+
+                        </center>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<br />

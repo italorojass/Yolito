@@ -1,0 +1,169 @@
+﻿@{
+    ViewBag.Title = "Politicas de Despacho";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section id="cart_items">
+    <div  class="container">
+        <div class="row">
+            <div class="col-md-12 ">
+                <div class="col-md-4 pull-right buscador">
+                    <form action="/Home/Buscador/" method="get" id="formBusqueda">
+                        <div class="input-group">
+
+                            <input type="text" class="form-control" name="buscar" id="buscar" placeholder="¿Qué buscas?">
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary " type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                            </span>
+                        </div>
+
+                    </form>
+                    <p id="empty-message" style="color:#ff0000;">
+
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 ">
+                <div class="breadcrumbs">
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="@Url.Action("Home", "Home")">Home</a>
+                        </li>
+                        <li class="active">
+                            Políticas de despacho
+                        </li>
+                    </ol>
+                    @*@Html.Raw(MvcBreadCrumbs.BreadCrumb.Display())*@
+                    @*Estas en: @Html.MvcSiteMap().SiteMapPath()*@
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="divlines"></div>
+            </div>
+
+        </div>
+        <div class="bg">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h2 class="title2 text-center" >Tarifas de despacho</h2>
+                </div>
+            </div>
+            <br />
+            <div class="col-md-12">
+                <div class="table-responsive cart_info">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr class="cart_menu">
+                                <td class="image">Tramo</td>
+                                <td class="description">Volumen</td>
+                                <td class="price">Kilos</td>
+                                <td class="quantity">Valor con IVA</td>
+                                
+                                <td></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Hasta 0,096 m3</td>
+                                <td>Hasta 24 Kilos</td>
+                                <td>$2.990</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Entre 0,097 m3 y 2,16 m3</td>
+                                <td>Entre 24,1 Kilos y 250 Kilos</td>
+                                <td>$8.990</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Más de 2,16 m3</td>
+                                <td>Más de 250 Kilos</td>
+                                <td>$15.990</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <hr />
+                <h2 class="title2 text-center" >Políticas de despacho</h2>
+                <div>
+                    1. Toda venta cursada a través de www.yolito.cl será despachada en 3 días
+
+                    hábiles, de lunes a viernes de 9:00 a 18:00 horas., dicho plazo comienza una
+
+                    vez el cliente haya recibido email de confirmación de venta.
+                </div>
+                <div>
+                    2. El despacho está considerado sólo para comunas dentro del radio urbano de la
+
+                    ciudad de Santiago, es decir, comunas como Isla de Maipo, Talagante, Buin,
+
+                    etc. no están incluidas, en este caso debe consultar a ventasinternet@yolito.cl.
+                </div>
+                <div>
+                    3. El personal de despacho, sólo está autorizado para el traslado de los productos
+
+                    al cliente, cualquier otro requerimiento como armado o instalación de productos
+
+                    es por cuenta del cliente.
+                </div>
+                <div>
+                    4. Es obligación del cliente revisar, en forma previa a firmar la guía de despacho,
+
+                    el estado del producto y que éste corresponda a lo comprado.
+                </div>
+                <div>
+                    5. Si el cliente al momento del despacho no está conforme con el estado del
+
+                    producto o éste no corresponde a lo comprado, deberá rechazar en ese
+
+                    momento la entrega indicando en la guía de despacho el motivo de su rechazo,
+
+                    nombre, fecha y Rut.
+                </div>
+                <div>
+                    6. Toda recepción debe ser acredita en la guía de despacho respectiva con
+
+                    nombre, fecha y Rut de una persona mayor de edad.
+                </div>
+                <div>
+                    7. La tarifa de conducción está calculada para ventas de hasta 250 kilos o 1,8 M3
+
+                    máximo, otras condiciones deben ser consultadas a ventasinternet@yolito.cl.
+                </div>
+                <div>
+                    8. En caso de despacho a edificios en construcción, la descarga de materiales
+
+                    será realizada sólo hasta el segundo piso, sólo si existen las condiciones de
+
+                    seguridad adecuadas, en el caso que la suma del peso de los productos sea
+
+                    mayor a 250 los productos serán entregados en el primer piso.
+                </div>
+                <div>
+                    9. El cliente debe contar con las condiciones necesarias para realizar una entrega
+
+                    en forma segura, garantizando la integridad física de él mismo y del personal
+
+                    de despacho; por ejemplo, montacargas, estacionamiento habilitado para
+
+                    descarga, vías de acceso expeditas, etc.
+                </div>
+                <div>
+                    10. Si los datos de despacho indicados por el cliente son erróneos, se programará
+
+                    un nuevo despacho a la dirección correcta, previo pago de otra conducción.
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+</section>
+<br />

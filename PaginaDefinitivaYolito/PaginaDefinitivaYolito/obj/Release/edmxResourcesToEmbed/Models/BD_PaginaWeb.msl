@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="PaginaWebModelStoreContainer" CdmEntityContainer="PaginaWebEntities">
+    <EntitySetMapping Name="CabeceraCarro">
+      <EntityTypeMapping TypeName="PaginaWebModel.CabeceraCarro">
+        <MappingFragment StoreEntitySet="CabeceraCarro">
+          <ScalarProperty Name="NPedido" ColumnName="NPedido" />
+          <ScalarProperty Name="RutCliente" ColumnName="RutCliente" />
+          <ScalarProperty Name="NombreCliente" ColumnName="NombreCliente" />
+          <ScalarProperty Name="EstadoOc" ColumnName="EstadoOc" />
+          <ScalarProperty Name="ComunaDespacho" ColumnName="ComunaDespacho" />
+          <ScalarProperty Name="CalleDespacho" ColumnName="CalleDespacho" />
+          <ScalarProperty Name="ObservacionDespacho" ColumnName="ObservacionDespacho" />
+          <ScalarProperty Name="CostoDespacho" ColumnName="CostoDespacho" />
+          <ScalarProperty Name="ResponsableDespacho" ColumnName="ResponsableDespacho" />
+          <ScalarProperty Name="FechaDespacho" ColumnName="FechaDespacho" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CarroPagado">
+      <EntityTypeMapping TypeName="PaginaWebModel.CarroPagado">
+        <MappingFragment StoreEntitySet="CarroPagado">
+          <ScalarProperty Name="IdOrden" ColumnName="IdOrden" />
+          <ScalarProperty Name="NPedido" ColumnName="NPedido" />
+          <ScalarProperty Name="RutCliente" ColumnName="RutCliente" />
+          <ScalarProperty Name="NombreCliente" ColumnName="NombreCliente" />
+          <ScalarProperty Name="CodigoCompraTBK" ColumnName="CodigoCompraTBK" />
+          <ScalarProperty Name="NumTarjetaTBK" ColumnName="NumTarjetaTBK" />
+          <ScalarProperty Name="NCuotasTBK" ColumnName="NCuotasTBK" />
+          <ScalarProperty Name="FechaCompra" ColumnName="FechaCompra" />
+          <ScalarProperty Name="Monto" ColumnName="Monto" />
+          <ScalarProperty Name="EstadoOc" ColumnName="EstadoOc" />
+          <ScalarProperty Name="TipoCuota" ColumnName="TipoCuota" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Clientes">
+      <EntityTypeMapping TypeName="PaginaWebModel.Clientes">
+        <MappingFragment StoreEntitySet="Clientes">
+          <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+          <ScalarProperty Name="RutCliente" ColumnName="RutCliente" />
+          <ScalarProperty Name="DigCliente" ColumnName="DigCliente" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="TelFijo" ColumnName="TelFijo" />
+          <ScalarProperty Name="TelMovil" ColumnName="TelMovil" />
+          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+          <ScalarProperty Name="Comuna" ColumnName="Comuna" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="ConfirmPassword" ColumnName="ConfirmPassword" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DetalleCarro">
+      <EntityTypeMapping TypeName="PaginaWebModel.DetalleCarro">
+        <MappingFragment StoreEntitySet="DetalleCarro">
+          <ScalarProperty Name="IdPed" ColumnName="IdPed" />
+          <ScalarProperty Name="NPedido" ColumnName="NPedido" />
+          <ScalarProperty Name="ItemBarCode" ColumnName="ItemBarCode" />
+          <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+          <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+          <ScalarProperty Name="Precio" ColumnName="Precio" />
+          <ScalarProperty Name="Subtotal" ColumnName="Subtotal" />
+          <ScalarProperty Name="Photo" ColumnName="Photo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Nivel1">
+      <EntityTypeMapping TypeName="PaginaWebModel.Nivel1">
+        <MappingFragment StoreEntitySet="Nivel1">
+          <ScalarProperty Name="ICat1" ColumnName="ICat1" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="NameAlias" ColumnName="NameAlias" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Nivel2">
+      <EntityTypeMapping TypeName="PaginaWebModel.Nivel2">
+        <MappingFragment StoreEntitySet="Nivel2">
+          <ScalarProperty Name="ICat2" ColumnName="ICat2" />
+          <ScalarProperty Name="ICat1" ColumnName="ICat1" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="NameAlias" ColumnName="NameAlias" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Nivel3">
+      <EntityTypeMapping TypeName="PaginaWebModel.Nivel3">
+        <MappingFragment StoreEntitySet="Nivel3">
+          <ScalarProperty Name="ICat2" ColumnName="ICat2" />
+          <ScalarProperty Name="ICat3" ColumnName="ICat3" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="NameAlias" ColumnName="NameAlias" />
+          <ScalarProperty Name="Link" ColumnName="Link" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Productos">
+      <EntityTypeMapping TypeName="PaginaWebModel.Productos">
+        <MappingFragment StoreEntitySet="Productos">
+          <ScalarProperty Name="Stock" ColumnName="Stock" />
+          <ScalarProperty Name="IdProd" ColumnName="IdProd" />
+          <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+          <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+          <ScalarProperty Name="Clasif1" ColumnName="Clasif1" />
+          <ScalarProperty Name="Clasif2" ColumnName="Clasif2" />
+          <ScalarProperty Name="Clasif3" ColumnName="Clasif3" />
+          <ScalarProperty Name="ConfigId" ColumnName="ConfigId" />
+          <ScalarProperty Name="InventSizeId" ColumnName="InventSizeId" />
+          <ScalarProperty Name="InventColorId" ColumnName="InventColorId" />
+          <ScalarProperty Name="ItemBarCode" ColumnName="ItemBarCode" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Photo" ColumnName="Photo" />
+          <ScalarProperty Name="HighLights" ColumnName="HighLights" />
+          <ScalarProperty Name="ICat3" ColumnName="ICat3" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

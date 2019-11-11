@@ -1,0 +1,67 @@
+﻿@{
+    ViewBag.Title = "Politicas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 ">
+            <div class="col-md-4 pull-right buscador">
+                <form action="/Home/Buscador/" method="get" id="formBusqueda">
+                    <div class="input-group">
+
+                        <input type="text" class="form-control" name="buscar" id="buscar" placeholder="¿Qué buscas?">
+                        <span class="input-group-btn">
+                            <button class="btn btn-primary " type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                        </span>
+                    </div>
+
+                </form>
+                <p id="empty-message" style="color:#ff0000;">
+
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 ">
+            <div class="breadcrumbs">
+                <ol class="breadcrumb">
+                    <li>
+                        <a href="@Url.Action("Home", "Home")">Home</a>
+                    </li>
+                    <li class="active">
+                        Políticas de devolución
+                    </li>
+                </ol>
+                @*@Html.Raw(MvcBreadCrumbs.BreadCrumb.Display())*@
+                @*Estas en: @Html.MvcSiteMap().SiteMapPath()*@
+
+            </div>
+            <div class="divlines">
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<div style="color:#084B8A;text-align:justify; margin:auto; padding:0; max-width:80%;width:100%; text-decoration:none; display:block; font-family: Arial; font-size: small;">
+    <h2 class="fontUpper text-center" style="color:#000">Políticas de devolución</h2>
+    <br />
+    <h5 style="color:#084B8A;">Si usted desea cambiar o devolver un producto adquirido a través de www.yolito.cl, tiene estas alternativas de servicio:</h5>
+   
+    <h6 style="color:#084B8A;">1 - Puede dirigirse a cualquier tienda YOLITO con el documento de venta original.</h6>
+    <h6 style="color:#084B8A;">2 - Puede solicitar el retiro y/o cambio al fono <i class="fa fa-phone"></i> <a href="tel:+56227500600">22 750 0600</a> Casa Matriz.</h6>
+    <h6 style="color:#084B8A;">3 - La devolución o cambio de un producto se debe hacer dentro de los 10 días desde que se efectuó la compra.</h6>
+    <h6 style="color:#084B8A;">4 - El producto debe encontrase en perfectas condiciones, sin uso, con el empaque original (incluyendo manuales, etiquetas y accesorios).</h6>
+    <h6 style="color:#084B8A;">5 - Pinturas preparadas (tintometría) o  productos dimensionados no están sujeto a cambio ni devolución.</h6>
+    <br />
+    <h4 style="color:#084B8A;">El costo de retiro del producto será asumido por www.yolito.cl siempre que :</h4>
+    
+    <h6 style="color:#084B8A;">1 - El producto no corresponda con la boleta.</h6>
+    <h6 style="color:#084B8A;">2 - El producto se haya entregado dañado.</h6>
+    <h6 style="color:#084B8A;">3 - Yolito.cl no haya cumplido con el compromiso de entrega.</h6>
+    <h6 style="color:#084B8A;">4 - El producto será retirado en un plazo máximo de (72 horas habiles), siempre y cuando se cumplan las condiciones antes mencionadas.</h6>
+    
+</div>
+<br />

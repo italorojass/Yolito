@@ -1,0 +1,80 @@
+﻿@model IEnumerable<PaginaDefinitivaYolito.Models.MarcasAsoc>
+@{
+    Layout = null;
+    
+}
+<link href="~/Content/owl-carousel/assets/js/google-code-prettify/prettify.css" rel="stylesheet" />
+<link href="~/Content/owl-carousel/owl.carousel.css" rel="stylesheet" />
+<link href="~/Content/owl-carousel/owl.theme.css" rel="stylesheet" />
+<link href="~/Content/owl-carousel/assets/css/custom.css" rel="stylesheet" />
+<link href="~/Content/owl-carousel/owl.transitions.css" rel="stylesheet" />
+<link href="~/Content/marcas/slidermarca.css" rel="stylesheet" />
+<style>
+    #owl-demo1 .owl-item div {
+        padding: 1px;
+    }
+
+    #owl-demo1 .owl-item img {
+        display: block;
+        width: 100%;
+        height: auto;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+    }
+</style>
+
+<div id="owl-demo1" class="owl-carousel owl-theme" >
+    @foreach (var item in Model)
+    {
+        <div class="item">
+            
+            <a href="@Url.Action("ProductosMarca", "Home", new { nombremarca = item.NombreMarca})" id="lnk">
+                <img src="@item.FotoBN" class="img-responsive"
+                     onmouseover="this.src='@item.FotoNormal'"
+                     onmouseout="this.src = '@item.FotoBN'" />
+            </a>
+        </div>
+    }
+
+   
+
+</div>
+
+@*<div class="customNavigation">
+    <a class="btn prev">Previous</a>
+    <a class="btn next">Next</a>
+    <a class="btn play">Autoplay</a>
+    <a class="btn stop">Stop</a>
+</div>*@
+
+<script>
+    $(document).ready(function () {
+
+        var owl = $("#owl-demo1");
+
+        owl.owlCarousel({
+            items: 7, //10 items above 1000px browser width
+            itemsDesktop: [900, 4], //5 items between 1000px and 901px
+            autoPlay: 2000,
+            itemsDesktopSmall: [900, 3], // betweem 900px and 601px
+            itemsTablet: [600, 2], //2 items between 600 and 0
+            itemsMobile: false // itemsMobile disabled - inherit from itemsTablet option
+        });
+
+        // Custom Navigation Events
+        //$(".next").click(function () {
+        //    owl.trigger('owl.next');
+        //})
+        //$(".prev").click(function () {
+        //    owl.trigger('owl.prev');
+        //})
+        //$(".play").click(function () {
+        //    owl.trigger('owl.play', 1000); 
+        //})
+        //$(".stop").click(function () {
+        //    owl.trigger('owl.stop');
+        //})
+
+    });
+</script>

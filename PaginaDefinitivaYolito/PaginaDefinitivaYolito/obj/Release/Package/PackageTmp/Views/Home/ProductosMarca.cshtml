@@ -1,0 +1,149 @@
+﻿@model PagedList.IPagedList<PaginaDefinitivaYolito.Models.Productos>
+@using PagedList.Mvc;
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 ">
+            <div class="col-md-4 pull-right buscador">
+                <form method="get" action="/Home/Buscador/">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="buscar" id="buscar" placeholder="¿Que buscas?">
+                        <span class="input-group-btn">
+                            <button class="btn btn-primary " type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                        </span>
+                    </div>
+                </form>
+                
+                <p id="empty-message" style="color:#ff0000;">
+
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 ">
+            <div class="divlines">
+                <div class="breadcrumbs">
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="@Url.Action("Home", "Home")">Home</a>
+                        </li>
+                        <li class="active">
+                            @ViewBag.name
+                        </li>
+                    </ol>
+                    
+                </div>
+            </div>
+            <div class="col-sm-3 ">
+                <div class="table">
+                    <table class="table-condensed">
+                        <tr>
+                            <td colspan="2">Ordenar por:</td>
+                            <td>
+                                <select style="background:#fff" onchange="location = this.value;">
+                                    <option value="@Url.Action("ProductosMarca", "Home", new { nombremarca = ViewBag.name, FiltroActual = "Default" })">@ViewBag.CurrentSort</option>
+                                    <option value="@Url.Action("ProductosMarca", "Home", new { nombremarca = ViewBag.name, FiltroActual = "Menor" })">Precio de menor a mayor</option>
+                                    <option value="@Url.Action("ProductosMarca", "Home", new { nombremarca = ViewBag.name, FiltroActual = "Mayor" })">Precio de mayor a menor</option>
+                                    
+                                </select>
+                            </td>
+
+                        </tr>
+                    </table>
+
+                </div>
+            </div>
+            <div class="pull-right">
+                <div>
+                    Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+                    de @Model.PageCount
+                    @Html.PagedListPager(Model, page => Url.Action("ProductosMarca", new { page, nombremarca = ViewBag.name, FiltroActual = ViewBag.CurrentSort }), PagedListRenderOptions.OnlyShowFivePagesAtATime)
+                </div>
+
+            </div>
+
+        </div>
+        <div class="col-sm-12 ">
+            <div class="divlines">
+
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="col-md-12">
+            <h2 class="title2">@ViewBag.name</h2>
+        </div>
+    </div>
+
+    <div class="col-lg-12">
+        @if (ViewBag.erro != null)
+        {
+            <div class="alert alert-danger">
+                @ViewBag.erro
+            </div>
+
+        }
+       
+    </div>
+    @foreach (var item in Model)
+    {
+
+        <div class="col-md-3 " id="results" >
+            <div class="col-xs-12 boxcarro" >
+                <div class="mybox1">
+                    <a href="@Url.Action("FichaTecnica", "Home", new { id = item.ItemBarCode, nombre = item.ItemName, ftec = item.RefRecId })">
+                        <img src="@Url.Content("~/Content/Productos/" + item.Photo)" alt="prod" class="img-responsive " onerror="imgError(this);" style="width:100%; height:200px;">
+                    </a>
+                </div>
+
+                <div class="mybox2" style="margin-bottom:50px;">
+                    <b> @item.ItemName @item.brandInternet</b>
+                </div>
+
+                <p>Precio internet:</p>
+                <div>
+                    <h4> $ @string.Format(new System.Globalization.CultureInfo("es-CL"), "{0:#,##}", Math.Floor(Convert.ToDecimal(item.Price))) </h4>
+                </div>
+
+                <div class="LinkAddtocart">
+                    <a class="btn btn-default add-to-cart btn-block"
+                       onclick="AddToCart('@item.ItemBarCode','@item.ItemName')">
+                        Agregar al carro
+                        <i class="fa fa-shopping-cart"></i>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    }
+
+
+
+
+</div>
+<br />
+<script>
+    function AddToCart(id, name) {
+        $.ajax({
+            url: "/Compra/ElCarro",
+            type: 'GET',
+            data: {
+                id: id,
+                nombre: name,
+                canti: 1,
+                kit: $('#kit').val()
+            },
+            async: false,
+            success: function (data) {
+                alert(data);
+                location.reload();
+                //$('#getcount').load(document.URL + ' #getcount').addClass('badge');
+
+            },
+
+        });
+    }
+</script>

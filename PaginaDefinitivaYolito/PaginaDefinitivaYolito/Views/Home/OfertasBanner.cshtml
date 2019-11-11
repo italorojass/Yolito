@@ -1,0 +1,136 @@
+﻿@model IEnumerable<PaginaDefinitivaYolito.Models.ProductosOferta>
+@{
+    ViewBag.Title = "OfertasBanner";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    double? valorCaja = 0;
+}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 ">
+            <div class="col-md-4 pull-right buscador">
+                <form action="/Home/Buscador/" method="get" id="formBusqueda">
+                    <div class="input-group">
+
+                        <input type="text" class="form-control" name="buscar" id="buscar" placeholder="¿Qué buscas?">
+                        <span class="input-group-btn">
+                            <button class="btn btn-primary " type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                        </span>
+                    </div>
+
+                </form>
+                <p id="empty-message" style="color:#ff0000;">
+
+                </p>
+            </div>
+        </div>
+    </div>
+    @*Breadcrums*@
+    <div class="row">
+        <div class="col-md-12 ">
+            <div class="breadcrumbs">
+                <ol class="breadcrumb">
+                    <li>
+                        <a href="@Url.Action("Home", "Home")">Home</a>
+                    </li>
+                    <li class="active">
+                        Ofertas @ViewBag.NombreBanner
+                    </li>
+
+                </ol>
+
+            </div>
+
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 ">
+            <div class="divlines">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            @if (ViewBag.error != null)
+            {
+                <div class="alert alert-danger">
+                    @ViewBag.error
+                </div>
+            }
+        </div>
+
+        @foreach (var item in Model)
+        {
+            
+            <div class="col-md-3 " id="results">
+                <div class="col-xs-12 boxcarro">
+                    <div class="mybox1">
+                        <a href="@Url.Action("FichaTecnica", "Home", new { id = item.ItemBarCode, nombre = item.ItemName, ftec = item.RefRecId })">
+                            <img src="@Url.Content("~/Content/Productos/" + item.Photo)" alt="prod" class="img-responsive " onerror="imgError(this);" style="width:100%; height:200px;">
+                        </a>
+                    </div>
+
+                    <div class="mybox2" style="margin-bottom:50px;">
+                        <b> @item.ItemName @item.brandInternet</b>
+                    </div>
+                    <p>Precio internet:</p>
+                    <div>
+                        @if (item.Factor != 0)
+                        {
+                            valorCaja = item.Factor * item.Price;
+                            <h4> $ @string.Format(new System.Globalization.CultureInfo("es-CL"), "{0:#,##}", Math.Floor(Convert.ToDecimal(valorCaja))) Caja </h4>
+                            <h4> $ @string.Format(new System.Globalization.CultureInfo("es-CL"), "{0:#,##}", Math.Floor(Convert.ToDecimal(item.Price))) mt2</h4>
+                        }
+                        else
+                        {
+                            <h4> $ @string.Format(new System.Globalization.CultureInfo("es-CL"), "{0:#,##}", Math.Floor(Convert.ToDecimal(item.Price))) C/U</h4>
+                        }
+
+
+                    </div>
+
+                    <div class="LinkAddtocart">
+                        <a onclick="AddToCart('@item.ItemBarCode','@item.ItemName')"
+                           class="btn btn-default add-to-cart btn-block" id="agregacarro">
+                            Agregar al carro<i class="fa fa-shopping-cart">
+                            </i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        }
+
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 ">
+            <div class="divlines">
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<script>
+    function AddToCart(id, name) {
+        $.ajax({
+            url: "/Compra/ElCarro",
+            type: 'GET',
+            data: {
+                id: id,
+                nombre: name,
+                canti: 1,
+                kit: $('#kit').val()
+            },
+            async: false,
+            success: function (data) {
+                alert(data);
+                location.reload();
+                //$('#getcount').load(document.URL + ' #getcount');
+
+            },
+
+        });
+    }
+</script>

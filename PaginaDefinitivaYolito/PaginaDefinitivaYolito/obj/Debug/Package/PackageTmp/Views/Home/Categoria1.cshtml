@@ -1,0 +1,268 @@
+﻿@*@model IEnumerable<PaginaDefinitivaYolito.Models.Productos>*@
+
+@model PagedList.IPagedList<PaginaDefinitivaYolito.Models.Productos>
+@using PagedList.Mvc;
+@using PaginaDefinitivaYolito.Models;
+
+@{
+    ViewBag.Title = ViewBag.name;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int count = 0;
+    var Categoria2 = (List<Nivel2>)ViewBag.nivel2;
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#buscar').autocomplete({
+            source: '@Url.Action("Search","Home")'
+        });
+    })
+    
+</script>
+<section>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 ">
+                <div class="col-md-4 pull-right buscador">
+                    @using (Html.BeginForm("Buscador", "Home", new { ReturnUrl = ViewBag.ReturnUrl, FormMethod.Post }))
+                    {
+                        <div class="input-group">
+
+                            <input type="text" class="form-control" name="buscar" id="buscar" placeholder="¿Que buscas?">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default " type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                            </span>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 ">
+                <div class="divlines">
+                    <div class="breadcrumbs">
+                        @Html.Raw(MvcBreadCrumbs.BreadCrumb.Display())
+                    </div>
+                </div>
+                
+
+            </div>
+        </div>
+        <div class="row ">
+            <div class="col-sm-3 ">
+                <div class="table">
+                    <table class="table-condensed">
+                        <tr></tr>
+                        <tr>
+                            <td>Buscar:</td>
+                            <td>
+                                <select style="background:#fff" onchange="location = this.value;">
+                                    <option>--Seleccionar--</option>
+                                    @foreach (var n2 in Categoria2)
+                                    {
+                                        <option value="~/Home/Categoria2/@n2.ICat2?Nombre=@n2.Name">
+                                            @n2.Name
+                                        </option>
+                                    }
+                                </select>
+                            </td>
+
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="col-sm-3 ">
+                @using (Html.BeginForm("ViewByCategory", "Paging", FormMethod.Get))
+                {
+                    <div class="table">
+                        <table class="table-condensed">
+                            <tr>
+                                <td colspan="2">Ordenar por:</td>
+                                <td>
+                                    <select style="background:#fff">
+                                        <option>--Seleccionar--</option>
+                                        <option value="1">Precio de menor a mayor</option>
+                                        <option value="2">Precio de mayor a menor</option>
+                                        <option value="3">Marca</option>
+                                        
+                                    </select>
+                                </td>
+
+                            </tr>
+                        </table>
+
+                    </div>
+
+                }
+
+            </div>
+            <div class="col-sm-6 ">
+                <div class="pull-right">
+                    <div class="table">
+                        <table class="table-responsive">
+                            <tr>
+                                <td align="right">
+                                    Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+                                    de @Model.PageCount
+                                </td>
+                            </tr>
+                            <tr>
+
+                                <td>
+                                    @Html.PagedListPager(Model, page => Url.Action("Categoria1", new { page, nombre = ViewBag.name, sortOrder = ViewBag.CurrentSort }),
+                                    PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(PagedListRenderOptions.OnlyShowFivePagesAtATime, new AjaxOptions() 
+                                    { 
+                                        
+                                        HttpMethod = "GET", 
+                                        InsertionMode = InsertionMode.Replace,
+                                        UpdateTargetId = "div2" 
+                                    }))
+                                </td>
+
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-sm-12 ">
+                <div class="divlines">
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <!--parte de los productos-->
+            <div class="container">
+                <div class="col-md-12">
+                    <h3 class="fontUpper">@ViewBag.name</h3>
+                </div>
+            </div>
+            
+            <div class="col-md-12 ">
+                <div id="div2">
+
+                </div>
+                @*@{
+                    var grid = new WebGrid(
+                        canPage: true,
+                        rowsPerPage: Model.PageSize,
+                        canSort: true,
+                        ajaxUpdateContainerId: "grid");
+
+                    grid.Bind(Model, rowCount: Model.TotalItemCount, autoSortAndPage: true);
+                    grid.Pager(WebGridPagerModes.All);
+                    
+                    @grid.GetHtml(htmlAttributes: new { id= "grid"},
+                    fillEmptyRows:false,
+                    tableStyle:"table",
+                    mode: WebGridPagerModes.All,
+                    columns: 
+                    grid.Columns(
+                    grid.Column("Photo","foto producto", format:@<text>
+                        <img src="~/Content/Productos/@item.Photo" alt="Not Found" class="img-responsive imgProductos" style="width:120px; height:120px;">
+                </text>)
+                    )
+                    ) 
+                    
+                }*@
+
+
+                @foreach (var item in Model)
+                {
+                    int ct = count++;
+                    <div class="col-md-3 " id="results">
+                            <div class="col-xs-12 boxcarro">
+                                <div class="mybox1">
+                                    <a href="@Url.Action("FichaTecnica", "Home", new { id = item.ItemBarCode, nombre = item.ItemName, ftec = item.RefRecId })">
+                                        <img src="@Url.Content("~/Content/Productos/" + item.Photo)" alt="prod" class="img-responsive " onerror="imgError(this);" style="width:100%; height:200px;">
+                                       
+                                        
+                                    </a>
+                                    
+                                </div>
+                                
+                                <div class="mybox2" style="margin-bottom:50px;">
+                                    <b> @item.ItemName @item.brandInternet</b>
+                                </div>
+                            
+
+                                <div>
+                                    <h4> $ @string.Format(new System.Globalization.CultureInfo("es-CL"), "{0:#,##}", Math.Floor(Convert.ToDecimal(item.Price))) </h4>
+                                </div>
+                                @*<div class="rating-area">
+                                    <ul class="ratings">
+                                        <li>
+                                            <i class="fa fa-star color"></i>
+                                            <i class="fa fa-star color"></i>
+                                            <i class="fa fa-star color"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </li>
+                                    </ul>
+                                </div>*@
+                                <div id="botoncarro_@ct">
+                                    <a href="@Url.Action("ElCarro", "Compra", new { id = item.ItemBarCode, nombre = item.ItemName, canti = 1 })" class="btn btn-default add-to-cart btn-block" id="agregacarro">Agregar al carro <i class="fa fa-shopping-cart"></i></a>
+                                </div>
+                            </div>
+
+                    </div>
+                }
+                
+
+                <div class="col-xs-12 ">
+                    <div class="pull-right">
+                        <div class="table">
+                            <table class="table-responsive">
+                                <tr>
+                                    <td align="right">
+                                        Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+                                        de @Model.PageCount
+                                    </td>
+                                </tr>
+                                <tr>
+
+                                    <td>
+                                        @Html.PagedListPager(Model, page => Url.Action("Categoria1", new { page, nombre = ViewBag.name, sortOrder = ViewBag.CurrentSort }), PagedListRenderOptions.OnlyShowFivePagesAtATime)
+                                    </td>
+
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+        </div>
+      
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 ">
+                    <div class="divlines">
+
+                    </div>
+                    <h3 class="fontUpper">Los más vendidos</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 ">
+                    <div class="divlines">
+
+                    </div>
+                    <h3 class="fontUpper">También te puede interesar</h3>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</section>
+<br />
+
+<script>
+    function imgError(image) {
+        image.onerror = "";
+        image.src = '@Url.Content("~/Content/Imagenes/Sitio/MARCA-DE-AGUA-YOLITO.jpg")';
+        return true;
+    }
+</script>

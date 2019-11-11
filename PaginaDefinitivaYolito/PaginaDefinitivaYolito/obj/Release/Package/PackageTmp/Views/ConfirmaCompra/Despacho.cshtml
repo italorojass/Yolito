@@ -1,0 +1,252 @@
+﻿
+@{
+    ViewBag.Title = "Despacho";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script>
+    $(document).ready(function () {
+        $('#formReceptor').hide();
+        $('#formDespacho').hide();
+        
+        $('#Radio').change(function () {
+            $('#formDespacho').show();
+            $('#formReceptor').hide();
+        });
+
+        $('#Radio1').change(function () {
+            $('#formReceptor').show();
+            $('#formDespacho').hide();
+        });
+        
+    });
+    
+</script>
+
+
+@if (Session["rutuser"] != null)
+{
+    <section id="do_action">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 pull-right buscador">
+                    <form action="/Home/Buscador/" method="get" id="formBusqueda">
+                        <div class="input-group">
+
+                            <input type="text" class="form-control" name="buscar" id="buscar" placeholder="¿Qué buscas?">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default " type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                            </span>
+                        </div>
+                        <p id="empty-message" style="color:#ff0000;">
+
+                        </p>
+                    </form>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8 ">
+                    <div class="breadcrumbs">
+                        <ol class="breadcrumb">
+                            <li>
+                                <a href="@Url.Action("Home", "Home")">Home</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("CarroDeCompras", "Compra")">Carro de compras</a>
+                            </li>
+                            <li class="active">
+                                Despacho
+                            </li>
+                        </ol>
+
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="divlines">
+                    </div>
+                </div>
+            </div>
+            <br />
+
+            <div class="row">
+                <div class="pull-left col-xs-6">
+                    <label class="radio-inline">
+                        <input type="radio" name="radiobt" id="Radio" value="D">Despacho a domicilio
+                    </label>
+                </div>
+                <div class="pull-left col-xs-6">
+                    <label class="radio-inline">
+                        <input type="radio" name="radiobt" id="Radio1" value="R">Retire en tienda
+                    </label>
+                </div>
+            </div>
+           
+            @using (Html.BeginForm("TipoPago", "ConfirmaCompra", FormMethod.Post, new { id = "formDespacho1", onsubmit = "return checkForm(this)" }))
+            {
+                <input type="hidden" name="radiobt" id="Radio" value="D">
+
+    <div id="formDespacho">
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Dirección de despacho <i class="fa fa-truck" aria-hidden="true"></i></h3>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <input type="hidden" name="ncarro" value="@ViewBag.ncarro" />
+            
+            <div class="col-xs-6">
+                <input type="text" class="form-control " id="Calle" name="Calle" placeholder="Dirección de despacho" required>
+                <input type="text" class="form-control" name="telcontacto" id="telfijo" placeholder="Teléfono de contacto" required/>
+            </div>
+
+            <div class="col-xs-6">
+                <select name="Comunas" required>
+                    <option value="">--Comunas donde despachamos--</option>
+                    @foreach (var cc in ViewBag.Comunas)
+                    {
+                        <option value="@cc.Name">@cc.Name</option>
+                    }
+
+                </select>
+                @*<a @*href="@Url.Action("CarroComoCotizacion", "Cotizaciones", new { id = ViewBag.ncarro })"href="#" class="btn btn-link">¿No encuentras tu comuna?</a>*@
+            </div>
+
+
+            <div class="col-xs-12">
+                <textarea class="form-control" rows="5" id="comment" name="Obs" placeholder="Observaciones"></textarea>
+            </div>
+
+            <div class="col-md-12 " style="padding-top:10px;">
+                <div class="col-md-4 col-md-offset-4">
+                    <div class="pull-left">
+                        @Html.RadioButton("tipoDocumento","BV",true)<span>Boleta</span>
+                        
+                    </div>
+                    <div class="pull-right">
+                        @Html.RadioButton("tipoDocumento", "FA")<span>Factura</span>
+                        
+                    </div>
+                </div>
+                <div class="pull-right">
+
+                    <input type="checkbox" value="Politicas" name="terms" required /><label style="padding-left:5px;">Acepto los <a href="#"><u>Términos y condiciones </u></a></label>
+                </div>
+
+            </div>
+
+            <div class="col-md-12 " @*style="border:1px solid;"*@>
+                <div class="pull-right">
+                    <a href="@Url.Action("CarroDeCompras","Compra")" class="btn btn-warning update"><i class="fa fa-chevron-left " aria-hidden="true"></i><span style="padding-left:10px">Volver al carro</span></a>
+                    <button class="btn btn-success update" type="submit">Siguiente <i class="fa fa-chevron-right fa-rotate-right" aria-hidden="true"></i></button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+            }
+
+            <div class="row">
+                <div id="formReceptor">
+                    <div class="col-md-12">
+                        <h3>Nombre contacto <i class="fa fa-id-card-o" aria-hidden="true"></i></h3>
+                    </div>
+                    @using (Html.BeginForm("TipoPagoRet", "ConfirmaCompra", new { id = "formReceptor", onsubmit = "return checkForm(this)" }))
+                    {
+                        <input type="hidden" name="ncarro" value="@ViewBag.ncarro" />
+    <input type="hidden" name="radiobt" id="Radio" value="R">
+                        <div class="col-md-4">
+                            <select name="Local" class="form-control" required>
+                                <option value="">Selecciona local de retiro</option>
+                                <option value="01">Las Condes</option>
+                                <option value="03">Quilicura</option>
+                                <option value="02">Colina</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" name="Responsable" id="receptordesp" placeholder="Nombre receptor despacho"required />
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" name="rut" id="rut" placeholder="Rut" required oninput="checkRut(this)" />
+                            
+                        </div>
+    
+                        <div class="col-md-12 " style="padding-top:10px;">
+                            <div class="col-md-4 col-md-offset-4">
+                                <div class="pull-left">
+                                    @Html.RadioButton("tipoDocumento", "BV", true)<span>Boleta</span>
+
+                                </div>
+                                <div class="pull-right">
+                                    @Html.RadioButton("tipoDocumento", "FA")<span>Factura</span>
+
+                                </div>
+                            </div>
+                            <div class="pull-right">
+                                
+                                <input type="checkbox" value="Politicas" name="terms" required/><label style="padding-left:5px;">Acepto los <a href="#" ><u>Términos y condiciones </u></a></label>
+                            </div>
+                            
+                        </div>
+                        <div class="col-md-12">
+                            <div class="pull-right">
+                                <a href="@Url.Action("CarroDeCompras","Compra")" class="btn btn-warning update"><i class="fa fa-chevron-left " aria-hidden="true"></i><span style="padding-left:10px">Volver al carro</span></a>
+                                <button class="btn btn-success update" type="submit">Siguiente <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                            </div>
+                        </div>
+                    }
+                </div>
+                
+            </div>
+            @if (TempData["error"] != null)
+            {
+                <div class="container">
+                    <div class="col-md-4 col-lg-offset-4">
+                        <div class="alert alert-danger">
+                            @TempData["error"]
+                        </div>
+                    </div>
+                </div>
+                
+                @*<div class="container">
+                    <div class="col-md-4 col-lg-offset-4">
+                        <a href="@Url.Action("CarroComoCotizacion", "Cotizaciones", new { id = ViewBag.ncarro })" class="btn btn-primary">¿Tus productos no tienen stock?</a>
+                    </div>
+                </div>*@
+                
+            }
+                
+            </div>
+       
+    </section><!--/#do_action-->
+}else
+{
+    <div class="container">
+        <div class="col-md-4 col-lg-offset-4">
+            <div class="alert alert-danger">
+                <p>Debes estar logueado.</p>
+            </div>
+
+            @Html.Action("Paso1", "Compra",FormMethod.Get);
+        </div>
+    </div>
+    
+}
+
+<script type="text/javascript">
+
+    function checkForm(form)
+    {
+        
+        if(!form.terms.checked) {
+            alert("Porfavor indica que tu aceptas los Terminos y Condiciones");
+            form.terms.focus();
+            return false;
+        }
+        return true;
+    }
+
+</script>

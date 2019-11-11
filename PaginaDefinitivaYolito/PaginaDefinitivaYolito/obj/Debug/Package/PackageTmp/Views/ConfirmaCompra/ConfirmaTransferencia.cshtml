@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "ConfirmaTransferencia";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section id="do_action">
+    <div class="container">
+        @if (ViewBag.error != null)
+        {
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="alert alert-danger">
+                        @ViewBag.error
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="alert alert-success">
+                        <h2 class="title2 text-center">Tu pago esta pendiente a procesar. Cuando se confirme tu transferencia nuestro vendedor se contactara con Ud. para afinar detalles.</h2>
+                        <h2 class="text-center" style="color:#ff6a00;">¡Gracias por comprar en nuestra ferreteria!</h2>
+                        <h2 class="text-center"><a href="@Url.Action("Home", "Home")" class="btn btn-primary add-to-cart"><i class="fa fa-shopping-cart"></i>Volver al inicio.</a></h2>
+                    </div>
+                </div>
+            </div>
+        }
+        
+    </div>
+    </section>
+
+        

@@ -1,0 +1,234 @@
+﻿@model IEnumerable<PaginaDefinitivaYolito.Models.DetalleCarro>
+@{
+    ViewBag.Title = "Forma de pago";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int orden = 0;
+    int total = 0;
+    int price = 0;
+    int ncarro = 0;
+
+    //int costoDespacho = 1;
+    int costoDespacho = ViewBag.despacho;
+    int result = 0;
+
+    string npedido = Session["cart"].ToString();
+    int np = Convert.ToInt32(npedido);
+  
+}
+
+
+<script>
+    $(document).ready(function () {
+        $("#divTransferencia").hide();
+        $("#divWebpay").hide();
+        
+        $("#trans").click(function () { //retiro en local
+            $("#divTransferencia").slideDown();
+            $("#webpay").prop("checked", "");
+            $("#divWebpay").hide();
+        });
+        $('#webpay').change(function () {
+            $("#divTransferencia").hide();
+            $("#divWebpay").slideDown();
+            $("#trans").prop("checked", "");
+        });
+        
+    });
+
+</script>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 ">
+            <div class="breadcrumbs">
+                @Html.Raw(MvcBreadCrumbs.BreadCrumb.Display())
+            </div>
+        </div>
+
+        <div class="col-md-4 pull-right buscador">
+            @using (Html.BeginForm("Buscador", "Home", new { ReturnUrl = ViewBag.ReturnUrl, FormMethod.Post }))
+            {
+                <div class="input-group">
+                    <input type="text" class="form-control" name="buscar" id="buscar" placeholder="¿Que buscas?">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default " type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                    </span>
+                </div>
+            }
+        </div>
+
+    </div>
+
+</div>
+<br />
+@if (Session["cart"] == null)
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <div class="alert alert-danger">
+                    <p>Tu carro expiró. </p>
+                    <a href="@Url.Action("Home", "Home")" class="btn btn-primary">Volver a la tienda</a>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    
+}
+else
+{
+    if (ViewBag.error != null)
+    {
+        <div class="container">
+            <div class="col-md-4 col-lg-offset-4">
+                <div class="alert alert-danger">
+                    @ViewBag.error
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+
+        <section>
+            <div class="container">
+                
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h3 class="fontUpper">Detalle de tu compra</h3>
+                    </div><!--/register-req-->
+                </div>
+
+                <div class="row">
+                    <div class="table ">
+                        <table class="table">
+                            <tr>
+                                <td colspan="2" align="center"><strong>Producto</strong></td>
+                                <td align="center"><strong>Cantidad</strong>  </td>
+                                <td align="center"><strong>Precio</strong>  </td>
+                            </tr>
+                            @foreach (var item in Model)
+                            {
+                                if (item.NPedido == np)
+                                {
+                                    string precio = string.Format("{0:#,##}", item.Precio);
+                                    price = Convert.ToInt32(Double.Parse(precio) * item.Cantidad);
+                                    double subtotal1 = Double.Parse(precio) * item.Cantidad;
+                                    ncarro = item.NPedido.Value;
+
+                                    <tr>
+                                        <td> <img src="~/Content/productos/@item.Photo" style="max-width: 100%; max-height: 80px;" alt=""></td>
+                                        <td align="center"> @item.ItemName</td>
+                                        <td align="center"> @item.Cantidad</td>
+                                        <td align="center">$@string.Format("{0:#,##}", price) </td>
+                                    </tr>
+                                    total += Convert.ToInt32(subtotal1);
+                                    result = total + costoDespacho;
+                                }
+
+                            }
+
+                            <tr>
+                                <td colspan="2" align="right"><strong>Despacho</strong> </td>
+                                <td align="center"><strong>Subtotal</strong></td>
+                                <td align="center"><strong>Total</strong></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" align="right"><p> $@ViewBag.despacho.ToString("#,##")</p></td>
+                                <td align="center"><p>$@total.ToString("#,##")</p></td>
+                                <td align="center"><b>$@result.ToString("#,##")</b></td>
+                            </tr>
+                        </table>
+
+                    </div>
+
+                </div>
+
+                <br />
+                <div class="shopper-informations">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <label>Transferencia</label><div><input type="checkbox" value="Transferencia" name="trans" id="trans" /></div>
+                        </div>
+                        <div class="col-xs-6">
+                            <label>Webpay</label><div><input type="checkbox" value="Webpay" name="webpay" id="webpay" /></div>
+                        </div>
+
+                        <br />
+                        <div class="col-sm-6">
+                            <div class="bill-to">
+                                <div class="register-req" id="divTransferencia">
+                                    <h4>Transfierenos a esta cuenta <i class="fa fa-money" aria-hidden="true"></i></h4>
+                                    <table class="table table-hover">
+                                        <tr>
+                                            <td>A nombre de:</td>
+                                            <td><span style="font-weight:bold">Yolito Balart Hnos.</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Rut:</td>
+                                            <td><span style="font-weight:bold">80.565.900-9</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Cuenta Corriente Banco Chile:</td>
+                                            <td><span style="font-weight:bold"><label>1730736101</label></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Correo:</td>
+                                            <td><span style="font-weight:bold">depositos@yolito.cl</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Asunto: Número pedido</td>
+                                            <td><span style="font-weight:bold;">Web_@ncarro </span></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2"><h4>*El numero del pedido es muy importante para nosotros, favor revisar antes de realizar su pago. De lo contrario, puede ser que su pedido no sea facturado.</h4></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" align="center"><a class="btn btn-success update btn-block" href="@Url.Action("ConfirmaTransferencia", "ConfirmaCompra", new { id = @ncarro })">Confirma que pagaste</a></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                
+
+                            </div>
+                        </div>
+                        <div class="register-req" id="divWebpay">
+                            <form method="post" action="~/cgi-bin/tbk_bp_pago.cgi">
+                                <div class="col-xs-4">
+                                    <img src="~/Content/Imagenes/Sitio/Webpay_VertTarj_VA_Transb chica.jpg" class="img-responsive" />
+
+                                    @foreach (var item in Model)
+                                    {
+                                        if (item.NPedido == np && Convert.ToString(item.CabeceraCarro.RutCliente) == User.Identity.Name
+                                            && item.CabeceraCarro.EstadoOc == false)
+                                        {
+                                            orden = np;
+                                            total += item.Subtotal;
+                                        }
+                                    }
+                                    <input type="hidden" name="TBK_TIPO_TRANSACCION" value="TR_NORMAL" readonly>
+                                    <input type="hidden" name="TBK_MONTO" value="@result.ToString("#,##")00" readonly>
+                                    <input type="hidden" name="TBK_ORDEN_COMPRA" value="@orden" readonly>
+                                    <input type="hidden" name="TBK_ID_SESION" value="@User.Identity.Name" readonly>
+                                    <input type="hidden" name="TBK_URL_EXITO" size=40 value="http://190.98.201.83/WebPay/Exito" readonly>
+                                    <input type="hidden" name="TBK_URL_FRACASO" size=40 value="http://190.98.201.83/WebPay/Fracaso" readonly>
+                                    <br />
+                                    <button type="submit" class="btn btn-success btn-group-lg btn-block">Pagar</button>
+                                </div>
+
+                            </form>
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+            </div>
+        </section>
+    }
+
+}
+<br />
+

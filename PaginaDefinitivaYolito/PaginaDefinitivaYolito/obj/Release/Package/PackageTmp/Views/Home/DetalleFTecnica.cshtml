@@ -1,0 +1,33 @@
+﻿@model IEnumerable<PaginaDefinitivaYolito.Models.FichaTecnica>
+
+@if (Model.Count() != 0)
+{
+    <table class="table table-hover " >
+        <thead>
+            <tr >
+                <td align="center" colspan="2">
+                    <span style="color: #000;font-size: 18px;text-transform: uppercase;font-family:'Arial Unicode MS'">Ficha técnica</span>
+                </td>
+            </tr>
+        </thead>
+        
+        <tr style="border:1px dotted #808080;background-color:#007A9F;color:#fff;">
+            <th><h4>Atributo</h4> </th>
+            <th><h4>Detalle</h4></th>
+        </tr>
+
+        @foreach (var tt in Model)
+        {
+            <tr style="border:1px dotted #808080;">
+                <td>
+                    <strong>@tt.ItemNameAttibute </strong>
+                </td>
+                <td>
+                    @tt.ItemAttibute
+                </td>
+            </tr>
+        }
+    </table>
+
+}
+

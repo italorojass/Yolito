@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "Fracaso";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container">
+    <div class="bg">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-danger">
+                    <h2 class="fontUpper">Transacción Rechazada: @ViewBag.OrdenFracasada </h2>
+                    <div class="single-blog-post ">
+                        
+                        <p>Las Posibles causas son:</p>
+                        <ul>
+                            <li>Error en el ingreso de los datos de su tarjeta de crédito o débito (fecha y/o código de seguridad.</li>
+                            <li>Su tarjeta de crédito o débito no cuenta con cupo necesario para cancelar la compra.</li>
+                            <li>Tarjeta aún no habilitada en el sistema financiero.</li>
+                        </ul>
+                        <a class="btn btn-default update" href="@Url.Action("CarroDeCompras", "Compra")">Volver a intentarlo</a>
+                    </div>
+
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+
+</div>
+<br />

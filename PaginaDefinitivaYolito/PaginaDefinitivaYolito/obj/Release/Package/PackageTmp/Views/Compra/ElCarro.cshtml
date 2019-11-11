@@ -1,0 +1,261 @@
+﻿@model IEnumerable<PaginaDefinitivaYolito.Models.DetalleCarro>
+
+@{ 
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string barcode ;
+    int nped = 0;
+    int total = 0;
+    int ct = 0;
+}
+
+@if (Session["cart"] != null)
+{
+    <section id="cart_items">
+        @if (Model.Count() == 0)
+        {
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1 ">
+                        <div style="border:dashed;border-width:1px;color:#000000">
+                            <div class="text-center">
+                                <i class="fa fa-shopping-cart fa-4x" aria-hidden="true"></i>
+                            </div>
+                            <h2 class="text-center title2">Carro de compras vacio</h2>
+                            <div class="text-center">
+                                <a href="@Url.Action("Home","Home")" class="btn btn-link">
+                                    <i class="fa fa-plus" aria-hidden="true" style="padding-right:10px;"></i>Agregar productos
+                                </a>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 pull-right buscador">
+                        <form action="/Home/Buscador/" method="get" id="formBusqueda">
+                            <div class="input-group">
+
+                                <input type="text" class="form-control" name="buscar" id="buscar" placeholder="¿Qué buscas?">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-primary " type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                                </span>
+                            </div>
+
+                        </form>
+                        <p id="empty-message" style="color:#ff0000;">
+
+                        </p>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-8 ">
+                        <div class="breadcrumbs">
+                            <ol class="breadcrumb">
+                                <li>
+                                    @Html.ActionLink("Home", "Home","Home")
+                                </li>
+                                <li class="active">
+                                    Carro de compras
+                                </li>
+                            </ol>
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12" style="margin-top:10px;" id="result1">
+                        @if (ViewBag.error != null)
+                        {
+                            <div class="alert">@ViewBag.error</div>
+                        }
+                        @*<p>@Session["cart"]</p>*@
+                        <div class="table-responsive cart_info">
+                            <table class="table " style="overflow:visible;">
+                                <thead>
+                                    <tr class="cart_menu">
+                                        <td class="image " align="center"></td>
+                                        <td class="description" align="center">PRODUCTOS</td>
+                                        <td class="quantity" align="center">CANTIDAD</td>
+                                        <td class="price" align="center">PRECIO CON IVA </td>
+                                        <td class="total" align="center">SUBTOTAL</td>
+                                        <td></td>
+                                    </tr>
+                                </thead>
+                                @foreach (var item in Model)
+                                {
+                                    int subtotal1 = item.Precio * item.Cantidad;
+                                    barcode = item.ItemBarCode;
+                                    nped = item.NPedido.Value;
+                                    ct++;
+                                    if (Session["cart"].ToString() == Convert.ToString(item.NPedido))
+                                    {
+                                        <tr>
+                                            <td>
+                                                <a href="@Url.Action("FichaTecnica", "Home", new { id = item.ItemBarCode, nombre = item.ItemName, ftec = item.RecRefId })">
+                                                    <img src="@Url.Content("~/Content/Productos/" + item.Photo)" alt="prod" class="img-responsive imgCarro" style="width:100%; height:200px;">
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <b>@item.ItemName </b>
+                                            </td>
+                                            <td class="cart_quantity">
+                                                <div class="cart_quantity_button">
+
+                                                    <form action="/Compra/ActualizaCantidad" method="post">
+                                                        <input class="cart_quantity_input" type="number" name="quantity" id="quantity" value="@item.Cantidad" size="2" style="width: 45px;height:35px;" min="1">
+                                                        <input type="hidden" name="barcode" id="barcode" value="@item.ItemBarCode" />
+
+                                                        <button type="submit" name="btn" id="btn" class="btn btn-link" value="Actualizar">Actualizar</button>
+                                                    </form>
+
+                                                </div>
+                                            </td>
+
+                                            <td align="center">
+                                                <label>$@string.Format("{0:#,##}", item.Precio) </label>
+                                            </td>
+                                            <td align="center">
+                                                <div id="subtotalResult1"></div>
+                                                <label>$</label><label id="subtotalResult">@string.Format("{0:#,##}", item.Subtotal) </label>
+
+                                            </td>
+                                            <td align="center">
+                                                <a class=" btn cart_quantity_delete btn-danger" href="@Url.Action("DeleteItem", "Compra", new { id = item.ItemBarCode })"><i class="fa fa-trash-o"></i></a>
+                                                <input type="hidden" value="@item.ItemBarCode" id="barcode" />
+
+                                            </td>
+                                        </tr>
+                                        total += Convert.ToInt32(subtotal1);
+                                    }
+
+                                }
+
+                            </table>
+                            <table class="table">
+                                <tr>
+                                    <td style="background-color:#c0c0c0" class="description">
+                                        <h4 class="fontUpper">TOTAL IVA INCLUIDO: $<span id="Total">@total.ToString("#,##")</span> </h4>
+                                    </td>
+
+                                    <td colspan="5" style="background-color:#c0c0c0"></td>
+
+                                </tr>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="pull-left">
+                            <a class="btn btn-primary" href="@Url.Action("Home","Home")"><span style="padding-right:10px">Agregar más productos</span><i class="fa fa-shopping-basket" aria-hidden="true"></i></a>
+                        </div>
+
+                        <div class="pull-right">
+                            <a class="btn btn-primary btn-block" href="@Url.Action("Despacho", "ConfirmaCompra", new { id = @nped })"><span style="padding-right:10px">Comprar</span> <i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+        }
+        
+    </section>
+}
+else
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1 ">
+                <div style="border:dashed;border-width:1px;color:#000000">
+                    <div class="text-center">
+                        <i class="fa fa-shopping-cart fa-4x" aria-hidden="true"></i>
+                    </div>
+                    <h2 class="text-center title2">No existe carro de compras.</h2>
+                    <div class="text-center">
+                        <a class="btn btn-link" href="@Url.Action("Home","Home")">
+                            <i class="fa fa-plus" aria-hidden="true" style="padding-right:10px;"></i>Agregar productos
+                        </a>
+                    </div>
+                    
+                </div>
+
+            </div>
+        </div>
+    </div>
+}
+
+
+<br />
+
+@*<script type="text/javascript">
+   
+    $('#btnActualiza').click(function (e) {
+        
+        $.ajax({
+            url: '@Url.Action("UpdateCarro", "Compra")',
+            data: { id: $('#barcode').val(), quantity: $('#quantity').val() },
+            datatype: "json",
+            traditional: true,
+            success: function (data) {
+                $('#subtotalResult').text(data);
+                
+            }
+        });
+    });
+
+
+</script>*@
+
+<script type="text/javascript">
+
+    function check_cantidad(element) {
+        var cant = element.value;
+        var cant_es_flotante = isFloat(cant);
+        //alert('Valor introducido: '+cant+' \n\n ID: '+element.id+' | Es flotante? '+cant_es_flotante);
+        // descomentar si quieres revisar los valores del id, value y si es flotante
+
+        if (isNaN(cant)) {
+            alert('Valor introducido:       ' + cant + ' \n\n Introduce solo valores numericos');
+            document.getElementById(element.id).value = "";
+        }
+        else if (cant < 1) {
+            alert('Valor introducido:       ' + cant + ' \n\n Introduce numeros enteros mayores que 0');
+            document.getElementById(element.id).value = "";
+        }
+        else if (cant_es_flotante == true) {
+            alert('Valor introducido:       ' + cant + ' \n\n El valor es decimal.  Será convertido a entero.');
+            cant = parseInt(cant);
+            document.getElementById(element.id).value = cant;
+        }
+    }
+    function isFloat(myNum) {
+        // es true si es 1, osea si es flotante
+        var myMod = myNum % 1;
+
+        if (myMod == 0) {
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+
+</script>
+
+
+
+
+
+
+

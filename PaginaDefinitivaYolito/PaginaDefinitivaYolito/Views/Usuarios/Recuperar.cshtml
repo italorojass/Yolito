@@ -1,0 +1,81 @@
+﻿@model PaginaDefinitivaYolito.Models.Resetpw
+@{
+    ViewBag.Title = "Recuperar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 ">
+                <div class="breadcrumbs">
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="@Url.Action("Home", "Home")">Home</a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("LogIn","Usuarios")">Inicia con tu cuenta</a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("ReinicioContrasena", "Usuarios")">Olvidé mi contraseña</a>
+                        </li>
+                        <li class="active">
+                            Nueva contraseña
+                        </li>
+                    </ol>
+
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="divlines">
+
+                </div>
+            </div>
+            
+            <div class="col-md-4 col-md-offset-4" style="padding-top:15px;">
+                
+                
+                
+                @if (ViewBag.badOldpw != null)
+                {
+                    <div class="alert alert-danger">
+                        <i class="fa fa-times" aria-hidden="true"></i>  @ViewBag.badOldpw
+                    </div>
+                }
+                @if (ViewBag.cambio != null)
+                {
+                    <div class="alert alert-success">
+                        <i class="fa fa-check-square-o" aria-hidden="true"></i> @ViewBag.cambio
+                    </div>
+                }
+                else
+                {
+                    <h2 class="title2 text-center " style="padding-bottom:8px;">Ingresa tu nueva contraseña</h2>
+                    using (Html.BeginForm("Recuperar", "Usuarios", new { ReturnUrl = ViewBag.ReturnUrl, FormMethod.Post }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+                        <label>Rut:</label>
+                        <input type="text" value="@ViewBag.rutUsuario" class="form-control largo" readonly />
+                        @*@Html.TextBoxFor(model => model.rutusuario, new { @class = "form-control largo", @placeholder = "Rut con guión" })
+                            @Html.ValidationMessageFor(model => model.rutusuario)*@
+                        <label>Contraseña antigua:</label>
+                        <input type="password" name="OldPw" id="OldPw" class="form-control largo" placeholder="Contraseña antigua" required />
+                        <label>Contraseña nueva:</label>
+                        @Html.PasswordFor(model => model.NewPassword, new { @class = "form-control largo", @placeholder = "Contraseña nueva" })
+                        @Html.ValidationMessageFor(model => model.NewPassword)
+                        <label>Confirmar contraseña nueva:</label>
+                        @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control largo", @placeholder = "Confirma tu contraseña" })
+                        @Html.ValidationMessageFor(model => model.ConfirmPassword)
+                        <input type="hidden" value="@ViewBag.rut" name="rutUser" id="rutUser" />
+                        <br /><button type="submit" class="btn btn-primary btn-block"><i class="fa fa-refresh" aria-hidden="true" style="padding-right:10px"></i> Recuperar</button>
+
+                    }
+                }
+                
+            </div>
+        </div>
+
+    </div>
+</section>
+<br />    

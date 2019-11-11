@@ -1,0 +1,357 @@
+﻿
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <meta charset="utf-8" />
+        <title>Yolito.cl</title>
+        <meta name="description" content="">
+        <meta name="author" content="Italo Rojas">
+        <meta name="ROBOTS" content="NOINDEX, NOFOLLOW">
+        <link href="~/Content/Imagenes/Sitio/favicon1.ico" rel="shortcut icon" type="image/x-icon" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        @Scripts.Render("~/bundles/modernizr")
+        @Scripts.Render("~/bundles/jquery")
+        <script src="~/Scripts/jquery-ui-1.12.0.min.js"></script>
+        <link href="~/Content/font-awesome.min.css" rel="stylesheet">
+        <link href="~/Content/bootstrap.min.css" rel="stylesheet">
+        <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+        <link href="~/Content/themes/base/autocomplete.css" rel="stylesheet" />
+        
+        <link href="~/Content/responsive.css" rel="stylesheet">
+        <link href="~/Content/main.css" rel="stylesheet">
+        <script src="~/Scripts/bootstrap.min.js"></script>
+        <script src="~/Scripts/jquery.validate.min.js"></script>
+        <script src="~/scripts/backtotop.js"></script>
+        <link href="~/Content/styleBacktotop.css" rel="stylesheet" />
+        <script src="~/Scripts/modernizr.js"></script>
+        
+    </head>
+
+    <body>
+        <header id="header" >
+            <div class="container" id="navbar-ex-collapse">
+                <div class="row">
+                    <div class="col-md-12 ">
+                        <nav class="navbar navbar-fixed-top" style="background:#cccccc;" >
+                            <div class="container">
+                                <img src="~/Content/Imagenes/Sitio/Barra color photoshop.jpg" style="width:100%;height:20px;" />
+
+                                <div class="col-md-4 col-sm-6 col-xs-8">
+                                    <div class="pull-left">
+                                        <a href="/Home/Home"><img src="~/Content/Imagenes/Sitio/WEB LOGO YOLITO.png" alt="Logo" class="img-responsive" /></a>
+                                    </div>
+                                </div>
+                                <div class="navbar-header">
+                                    <button type="button" class="navbar-toggle " data-toggle="collapse" data-target=".navbar-collapse">
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                    </button>
+
+                                </div>
+                                <div class="collapse navbar-collapse">
+                                    <div class="pull-right">
+                                        <ul class="nav navbar-nav ">
+                                            @if (Session["rutuser"] != null)
+                                            {
+                                                <li class="text-center" style="color: #003366;">
+                                                    @if (Session["nombreuser"] != null)
+                                                    {
+                                                        <label>Bienvenido: </label><strong>@Session["nombreuser"].ToString()</strong><br />
+                                                    }
+                                                    
+                                                    <p class="pull-left">@Html.ActionLink("Cerrar Sesión", "Logout", "Usuarios", null, new { @class = "float-left" })</p>
+                                                </li>
+                                                <li >
+                                                    @Html.ActionLink("Cotizar", "QuieroCotizar", "Cotizaciones", null, new { @class = "pull-right" })
+                                                    @*<a href="@Url.Action("QuieroCotizar", "Cotizaciones")" style="color:#003366;" class="pull-right">
+                                                        Cotizar
+                                                    </a>*@
+                                                </li>
+                                            }
+                                            else
+                                            {
+                                                <li>
+                                                    @Html.ActionLink("Iniciar sesión", "LogIn", "Usuarios")
+                                            @*<a href="@Url.Action("LogIn", "Usuarios")"> Iniciar sesión</a>*@
+                                                </li>
+                                                <li>
+                                                    @Html.ActionLink("Registrate", "Registration", "Usuarios")
+                                            @*<a href="@Url.Action("Registration", "Usuarios")">Registrate</a>*@
+                                                </li>
+                                                <li>
+                                                    @Html.ActionLink("Cotizar", "QuieroCotizar", "Cotizaciones")
+                                                    @*<a href="@Url.Action("QuieroCotizar", "Cotizaciones")">
+                                                        Cotizar
+                                                    </a>*@
+                                                </li>
+                                            }
+                                            <li >
+                                                <a href="/Compra/CarroDeCompras" style="color:#000000;" class="pull-right">
+                                                    <i class="fa fa-shopping-cart fa-3x" id="clickcart"></i>
+                                                    @{Html.RenderAction("GetCount", "Home");}
+                                                </a>
+                                            </li>
+                                        </ul>
+
+                                    </div>
+                                    
+                                </div>
+                                
+                            </div>
+                        </nav>
+
+                    </div>
+
+                    
+                </div>
+            </div>
+        </header>
+     
+        <br />
+        <div id="body" >
+            @*@RenderSection("featured", required: false)*@
+            <div class="col-md-12 " >
+              <br />
+                <br />
+                <br /><br />
+                
+                @RenderBody()
+                <a href="#0" class="cd-top" >Top</a>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4">
+                    <img src="~/Content/Imagenes/Sitio/ONLINE.jpg" class="img-responsive img-bannerfooter" />
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <img src="~/Content/Imagenes/Sitio/Barra color photoshop.jpg" style="width:100%;height:20px;" />
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-4" >
+                        <div class="table infosucursal">
+                            <table >
+                                <tr>
+                                    <td><strong>Horario de atención:</strong></td>
+                                </tr>
+                                <tr>
+                                    <td><p>Lunes a Viernes: 8:00 - 19:30 hrs.
+                                        <br />
+                                            Sábado: 8:00 - 14:00 hrs.
+                                        </p>
+                                        
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>
+                                        <strong><u>Sucursales</u></strong>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <b>Casa Matriz</b>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><p><a href="https://www.google.cl/maps/place/Av.+Las+Condes+7090,+Las+Condes,+Regi%C3%B3n+Metropolitana/-33.4727879,-70.6298313,11z/data=!4m5!3m4!1s0x9662cec391a210a3:0xa5a96cc5a1e47e1c!8m2!3d-33.404773!4d-70.5581971" target="_blank" style="color:#fff">Av. Las Condes 7090 - Las Condes, Santiago</a></p></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p>Teléfono: <a href="tel:+56227500600">22 750 0600</a></p>
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td><strong>Quilicura</strong></td>
+                                </tr>
+                                <tr>
+                                    <td><p><a href="https://www.google.cl/maps/place/Antillanca+500,+Quilicura,+Pudahuel,+Regi%C3%B3n+Metropolitana/-33.3761329,-70.7671829,17z/data=!3m1!4b1!4m5!3m4!1s0x9662c05565b25135:0xf3010891b1e72574!8m2!3d-33.3761374!4d-70.7649942" target="_blank" style="color:#fff">Calle Antillanca 500, Quilicura, Santiago</a></p></td>
+                                </tr>
+                                <tr>
+                                    <td><p>Teléfonos: <a href="tel:+56227500695">22 750 0695</a>  - <a href="tel:+56227500697">22 750 0697</a> </p></td>
+                                </tr>
+                                <tr>
+                                    <td><b>Colina - Chicureo</b></td>
+                                </tr>
+                                
+                                <tr>
+                                    <td><p><a href="https://www.google.com/maps/place/Yolito/-33.3096921,-70.7071665,1282m/data=!3m1!1e3!4m8!1m2!2m1!1sCarretera+Gral.+San+Mart%C3%83%C2%ADn+6800+,+Colina!3m4!1s0x9662b8ba39d44c25:0x4aeb834d5e1f7694!8m2!3d-33.3096921!4d-70.7027891?hl=es" target="_blank" style="color:#fff">Carretera Gral. San Martin 6800, Colina</a></p></td>
+                                </tr>
+                                <tr>
+                                    <td><p>Teléfono: <a href="tel:+56224990600">22 499 0600</a> </p></td>
+                                </tr>
+                            </table>
+                        </div>
+                        
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="table infosucursal">
+                            <table >
+                                <tr>
+                                    <td><strong><u><b>Información Empresa</b></u></strong></td>
+                                </tr>
+                                <tr>
+                                   <td>
+                                       <a href="@Url.Action("Politicas","Home")" style="color: #fff;" ><b>Políticas de devolución</b></a>
+                                   </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="@Url.Action("PoliticasDespacho","Home")" style="color: #fff;"><b>Políticas de despacho</b></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="@Url.Action("Nosotros","Home")" style="color: #fff;"><b>Sobre Nosotros</b></a>
+                                        
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <b>Nuestra Visión</b>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <b>Nuestra Misión</b>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <b>Valores</b>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="@Url.Action("Trabajo","Home")" style="color: #fff;">
+                                            <b>Trabaja con Nosotros</b>
+                                        </a>
+                                        
+                                    </td>
+                                </tr>
+                            </table>
+                            <br />
+                            <table >
+                                <tr>
+                                    <td><strong><u>Encuéntranos también en:</u></strong></td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>
+                                        <img src="~/Content/redsocial/social_fb_facebook_14206.png" />
+                                        <img src="~/Content/redsocial/Twitter_46983 (1).png" />
+                                        <img src="~/Content/redsocial/youtube_47003.png" />
+                                        <img src="~/Content/redsocial/instagram_socialnetwork_22374.png" />
+                                    </td>
+                                </tr>
+                            </table>
+                            <br />
+                            <table>
+                                <tr>
+                                    <td><b>Recibe primero nuestras ofertas:</b></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <form class="form-inline" action="~/Home/Suscribete" method="post">
+                                            <div class="input-group">
+                                                <input type="email" class="form-control" id="newslatter" name="newslatter" placeholder="Ingresa tu email">
+                                                <span class="input-group-btn">
+                                                    <button class="btn btn-default " type="submit">
+                                                        <i class="fa fa-caret-right" aria-hidden="true"></i>
+                                                        
+                                                    </button>
+                                                </span>
+
+                                            </div>
+                                        </form>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        
+                    </div>
+                    <div class="col-md-4" style="margin-top:35px;">
+                        <img src="~/Content/Imagenes/Sitio/Webpay_VertTarj_VA_Transb chica.jpg" class="img-responsive " style="width:80%;margin: 0 auto;" />
+                    </div>
+                    <div class="col-md-4 " style="margin-top:50px;">
+                        <div class="pull-right">
+                            <a href="/Home/Home"><img src="~/Content/Imagenes/Sitio/WEB LOGO YOLITO.png" alt="Logo" class="img-responsive"  /></a>
+                        </div>
+
+                    </div>
+                </div>
+
+
+            </div>
+        </footer><!--/Footer-->
+        
+
+    </body>
+</html>
+<script src="~/Scripts/validarut.js"></script>
+<script type="text/javascript">
+    var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+    (function () {
+        var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+        s1.async = true;
+        s1.src = 'https://embed.tawk.to/5850185ed6eaec04d66d8709/default';
+        s1.charset = 'UTF-8';
+        s1.setAttribute('crossorigin', '*');
+        s0.parentNode.insertBefore(s1, s0);
+    })();
+</script>
+<!--End of Tawk.to Script-->
+<style>
+    .ui-autocomplete {
+        max-height: 200px;
+        overflow-y: auto;
+    }
+
+    .ui-autocomplete {
+        height: 400px;
+    }
+</style>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('#buscar').autocomplete({
+            source: '@Url.Action("AutoComplete", "Home")',
+            response: function(event, ui) {
+                if (ui.content.length === 0) {
+                    $("#empty-message").text("No se encontraron resultados");
+
+                } else {
+                    $("#empty-message").empty();
+                }
+            }
+            //search: function () {
+            //    $(this).addClass('loading');
+                
+            //},
+            //open: function () {
+            //    $(this).removeClass('loading');
+            //},
+            
+        });
+    })
+
+</script>
+<script>
+    function imgError(image) {
+        image.onerror = "";
+        image.src = '@Url.Content("~/Content/Imagenes/Sitio/MARCA-DE-AGUA-YOLITO.jpg")';
+        return true;
+    }
+</script>

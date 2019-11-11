@@ -1,0 +1,148 @@
+﻿@model IEnumerable<PaginaDefinitivaYolito.Models.Slider>
+           
+@{
+    ViewBag.Title = "Home";
+}
+<link href="~/Content/owl-carousel/assets/js/google-code-prettify/prettify.css" rel="stylesheet" />
+<link href="~/Content/owl-carousel/owl.carousel.css" rel="stylesheet" />
+<link href="~/Content/owl-carousel/owl.theme.css" rel="stylesheet" />
+<link href="~/Content/owl-carousel/assets/css/custom.css" rel="stylesheet" />
+<link href="~/Content/owl-carousel/owl.transitions.css" rel="stylesheet" />
+<style>
+    #owl-demo .owl-item div {
+        padding: 5px;
+    }
+
+    #owl-demo .owl-item img {
+        display: block;
+        width: 100%;
+        height: auto;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        /*border-radius: 3px;*/
+    }
+</style>
+@if (ViewBag.add != null)
+{
+    <script>
+        alert('@ViewBag.add');
+    </script>
+}
+@if (ViewBag.error != null)
+{
+    <script>
+        alert('@ViewBag.error');
+    </script>
+}
+
+<section >
+    <!--slider-->
+    @{Html.RenderAction("ImagenesBanner", "Home");}
+    
+    <div class="container">
+        <div class="row">
+            
+            <div class="col-md-4 col-md-offset-4">
+                <form action="/Home/Buscador/" method="get" id="formBusqueda">
+                    <div class="input-group">
+
+                        <input type="text" class="form-control" name="buscar" id="buscar" placeholder="¿Qué buscas?">
+                        
+                        <span class="input-group-btn">
+                            <button class="btn btn-primary " type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                        </span>
+                        
+                    </div>
+
+                </form>
+                <p id="empty-message" style="color:#ff0000;">
+                    
+                </p>
+                
+                
+            </div>
+        </div>
+    </div>
+</section><!--/slider-->
+<!-- Button trigger modal -->
+<a class="btn" data-toggle="modal" href="#myModal" id="modal" style="display: none;">Launch Modal</a>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times" aria-hidden="true"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-info ">
+                    <p>
+                        Estimado Cliente, nuestro local de Colina se encuentra momentaneamente sin servicio telefónico.
+                    </p>
+                    <br />
+                    <p>
+                        Comunicarse con alguna de nuestras sucursales:
+                    </p>
+                    <br />
+                    <b>Las Condes</b>  <p>Teléfono: 22 750 0600 </p> 
+                    <br />
+                    <b>Quilicura</b>  <p>Teléfonos: 22 750 0695 - 22 750 0697</p> 
+                    <br />
+
+                    <p>También puedes comunicarte con nuestros vendedores al correo <a href="mailto:ventasinternet@yolito.cl" target="_blank">ventasinternet@yolito.cl</a></p>
+
+
+                </div>
+                
+            </div>
+            
+        </div>
+    </div>
+</div>
+<section >
+    <div class="container ">
+        
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="fonts">Nuestras Marcas</h3>
+            </div>
+            @Html.Action("RenderMarcas")
+        
+            <div class="col-md-12">
+                <h3 class="fonts">Buscar por categorías</h3>
+            </div>
+           
+            @Html.Action("Productos", "Home")
+        </div>
+
+    </div>
+</section>
+<script src="~/Content/owl-carousel/assets/js/google-code-prettify/prettify.js"></script>
+<script src="~/Content/owl-carousel/assets/application.js"></script>
+<script src="~/Content/owl-carousel/owl.carousel.js"></script>
+<script type="text/javascript">
+    $(window).load(function () {
+        $('#myModal').modal('show');
+    });
+
+    
+</script>
+@*<script>
+    jQuery(function () {
+        jQuery('#modal').click();
+    });
+</script>*@
+<script>
+    $(document).ready(function () {
+        $("#owl-demo").owlCarousel({
+            autoPlay: 3000,
+            stopOnHover: true,
+            navigation: true,
+            paginationSpeed: 1000,
+            goToFirstSpeed: 2000,
+            singleItem: true,
+            autoHeight: true,
+            transitionStyle: "backSlide"
+        });
+    });
+</script>

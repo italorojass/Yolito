@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="379ab2a1bb794e2aad96a878cf5551cf" Name="Diagram1" ZoomLevel="99">
+        <EntityTypeShape EntityType="pruebaModel.CabeceraPedido" Width="1.5" PointX="3" PointY="5.375" />
+        <EntityTypeShape EntityType="pruebaModel.Categoria1Set" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="pruebaModel.Categoria2Set" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="pruebaModel.Categoria3Set" Width="1.5" PointX="7.75" PointY="3.75" />
+        <EntityTypeShape EntityType="pruebaModel.CorreosVentasWeb" Width="1.5" PointX="0.75" PointY="8.75" />
+        <EntityTypeShape EntityType="pruebaModel.DetallePedido" Width="1.5" PointX="5.25" PointY="5.25" />
+        <EntityTypeShape EntityType="pruebaModel.Ordenes_pagadas" Width="1.5" PointX="3" PointY="1.125" />
+        <EntityTypeShape EntityType="pruebaModel.ProductosSet" Width="1.5" PointX="2.75" PointY="8.75" />
+        <EntityTypeShape EntityType="pruebaModel.Usuarios" Width="1.5" PointX="0.75" PointY="2.5" />
+        <AssociationConnector Association="pruebaModel.FK_CabeceraPedido_Usuarios" />
+        <AssociationConnector Association="pruebaModel.FK_DetallePedido_CabeceraPedido" />
+        <AssociationConnector Association="pruebaModel.FK_Ordenes_pagadas_Usuarios" />
+        <EntityTypeShape EntityType="pruebaModel.ADDRESSSTATE" Width="1.5" PointX="7.375" PointY="7" />
+        <EntityTypeShape EntityType="pruebaModel.ADDRESSCOUNTRYREGION" Width="1.5" PointX="10.375" PointY="0.75" />
+        <EntityTypeShape EntityType="pruebaModel.ADDRESSCOUNTY" Width="1.5" PointX="9.625" PointY="7" />
+        <AssociationConnector Association="pruebaModel.FK_ADDRESSCOUNTY_ADDRESSSTATE" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

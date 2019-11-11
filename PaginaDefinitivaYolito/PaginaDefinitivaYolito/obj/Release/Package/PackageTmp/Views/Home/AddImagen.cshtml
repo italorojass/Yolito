@@ -1,0 +1,23 @@
+﻿
+<div class="container">
+    @if (ViewBag.paso != null)
+    {
+        <div class="alert alert-success">
+            @ViewBag.paso
+        </div>
+    }
+
+    @if (ViewBag.error != null)
+    {
+        <div class="alert alert-danger">
+            @ViewBag.error
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-success">Guardado en la base de datos</div>
+    }
+    
+    
+    <a href="@Url.Action("ImgMarcas")" class="btn btn-primary"> Volver</a>
+</div>

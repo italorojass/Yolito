@@ -1,0 +1,100 @@
+﻿@model PaginaDefinitivaYolito.Models.EmailCotizacion
+@{
+    ViewBag.Title = "QuieroCotizar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container">
+    <div class="row">
+        <div class="row">
+            <div class="col-md-12 ">
+                <div class="col-md-4 pull-right buscador">
+                    <form action="/Home/Buscador/" method="get" id="formBusqueda">
+                        <div class="input-group">
+
+                            <input type="text" class="form-control" name="buscar" id="buscar" placeholder="¿Qué buscas?">
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary " type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                            </span>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="breadcrumbs">
+                        <ol class="breadcrumb">
+                            <li>
+                                <a href="@Url.Action("Home", "Home")">Home</a>
+                            </li>
+                            <li class="active">
+                                Cotizar
+                            </li>
+                        </ol>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+       
+
+        <div class="col-sm-12">
+            <div class="divlines"></div>
+
+            <div class="col-md-8">
+                <h2 class="title2 text-center " style="padding-top:15px;padding-bottom:15px;">Envianos tu cotizacion</h2>
+            </div>
+            <div class="col-sm-4">
+                <h2 class="title2 text-center" style="padding-top:15px;padding-bottom:15px;">Envianos tu cotizacion en formato word, pdf, excel.</h2>
+                
+            </div>
+            
+        </div>
+        
+    </div>
+    <div class="row">
+        <div class="col-sm-8">
+            <b class="text-center" >Yolito Centro Ferretero ha desarrollado para usted un sistema de envío de cotizaciones en línea para facilitar la realización de sus proyectos. Usted puede hacer los presupuestos de su obra desde la comodidad de su casa u oficina a través de este servicio disponible las 24 horas del día. </b>
+            @using (Html.BeginForm("EnviarCotizacion", "Cotizaciones", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="form-group col-md-6">
+                    @Html.TextBoxFor(m => m.nombre_cotizante, new { @class = "form-control", @placeholder = "Nombre", @required = "required" })
+                </div>
+                <div class="form-group col-md-6">
+                    @Html.TextBoxFor(m => m.apellido_cotizante, new { @class = "form-control", @placeholder = "Apellido", @required = "required" })
+                </div>
+                <div class="form-group col-md-6">
+                    @Html.TextBoxFor(m => m.From, new { @class = "form-control", @placeholder = "Email de contacto" })
+                </div>
+                <div class="form-group col-md-6">
+                    @Html.TextBoxFor(m => m.telefono_cotizante, new { @class = "form-control", @placeholder = "Teléfono de contacto" })
+                </div>
+
+                <div class="form-group col-md-12">
+                    @Html.TextBoxFor(m => m.Subject, new { @class = "form-control", @placeholder = "Asunto" })
+                </div>
+                <div class="form-group col-md-12">
+                    @Html.TextAreaFor(m => m.Body, new { @class = "form-control", @style = "width: 100%; height:150px;", @placeholder = "Escribe el detalle de los productos que necesita" })
+                </div>
+                <div class="col-md-12">
+                    <button type="submit" class="btn btn-primary btn-block ">Enviar Cotización</button>
+                </div>
+            }
+        </div>
+        <div class="col-md-4">
+            <p>Nos pondremos en contacto con usted dentro de las siguientes 72 hrs.</p>
+            <b><a href="mailto:ventasinternet@yolito.cl">ventasinternet@yolito.cl</a></b>
+            
+        </div>
+        <br />
+        
+    </div>
+  
+</div>
+<br />

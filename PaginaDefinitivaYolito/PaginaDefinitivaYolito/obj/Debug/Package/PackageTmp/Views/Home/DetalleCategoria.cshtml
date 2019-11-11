@@ -1,0 +1,140 @@
+﻿@model IEnumerable<PaginaDefinitivaYolito.Models.ProductosSet>
+    @using PaginaDefinitivaYolito.Models;       
+@{
+    ViewBag.Title = "Busca por categorias";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var Categoria1 = (List<Categoria1Set>)ViewBag.Categoria1;
+    var Categoria2 = (List<Categoria2Set>)ViewBag.Categoria2;
+    var Categoria3 = (List<Categoria3Set>)ViewBag.Categoria3;
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<link href="~/Content/main.css" rel="stylesheet">
+<link href="~/Content/MenuCategorias.css" rel="stylesheet">
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="left-sidebar">
+                    <h2>Categorias</h2>
+                    <div class="panel-group category-products" id="cssmenu">
+                        <!--Categorias 1-->
+                        <ul>
+                            @foreach (var item in Categoria1)
+                            {
+                                <li class="has-sub">
+                                    <span>
+                                        @Ajax.ActionLink(item.Name, "", "", new { id = item.Clasif1, nombre = item.Name },
+                                    new AjaxOptions { UpdateTargetId = "", InsertionMode = InsertionMode.Replace, HttpMethod = "POST" }, null)
+                                    </span>
+
+                                    <ul>
+                                        @foreach (var item2 in Categoria2)
+                                        {
+                                            if (item.Clasif1 == item2.Clasif1)
+                                            {
+                                                <li class="has-sub">
+                                                    <span>
+                                                        @Ajax.ActionLink(item2.Name, "", "", new { id = item2.Clasif2, nombre = item2.Name },
+                                                    new AjaxOptions { UpdateTargetId = "Cat1", InsertionMode = InsertionMode.Replace, HttpMethod = "POST" }, null)
+                                                    </span>
+
+                                                    <ul>
+                                                        @foreach (var item3 in Categoria3)
+                                                        {
+                                                            if (item2.Clasif2 == item3.Clasif2)
+                                                            {
+                                                                <li class="has-sub">
+                                                                    <span>
+                                                                        @Ajax.ActionLink(item3.Name, "DetalleCategoria", "Home", new { id = item3.Clasif3, nombre = item3.Name },
+                                                    new AjaxOptions { UpdateTargetId = "busca", InsertionMode = InsertionMode.Replace, HttpMethod = "POST" }, null)
+                                                                    </span>
+                                                                </li>
+                                                            }
+                                                        }
+                                                    </ul>
+                                                </li>
+                                            }
+                                        }
+                                    </ul>
+                                </li>
+                            }
+
+                        </ul>
+
+                    </div><!--/category-productsr-->
+
+                </div>
+            </div>
+            <!--parte de los productos-->
+            <div class="col-sm-9 padding-right">
+                <div class="features_items" id="busca">
+                    <!--features_items-->
+                @if(@ViewBag.name == null)
+                {
+                    <h2 class="title text-center">Sin Productos en la categoria : @ViewBag.name</h2>
+                }
+                else
+                {
+                    <h2 class="title text-center">@ViewBag.name</h2>
+
+                    foreach (var item in Model)
+                    {   
+                        <div class="col-sm-4">
+                            <div class="product-image-wrapper">
+                                <div class="single-products">
+                                    <div class="productinfo text-center">
+                                        <table class="table-responsive">
+                                            <tr>
+                                                <td><img src="~/Content/productos/@item.Photo" alt="" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td><h2>$ @string.Format(new System.Globalization.CultureInfo("es-CL"), "{0:#,##}", Math.Floor(Convert.ToDecimal(item.Price))) </h2></td>
+                                            </tr>
+                                            <tr>
+                                                <td height="50" align="center"><h5>Código: @item.ItemBarCode</h5></td>
+                                            </tr>
+                                            <tr>
+                                                <td height="50" align="center"><h5>@item.ItemName</h5></td>
+                                            </tr>
+                                            <tr>
+                                                <td height="50" align="center"><h5>Tamaño:@item.InventSizeId </h5></td>
+                                            </tr>
+                                            <tr>
+                                                <td height="50" align="center"><h5>Marca: @item.ConfigId</h5></td>
+                                            </tr>
+                                            <tr>
+                                                <td height="50" align="center"><h5>Color: @item.InventColorId</h5></td>
+                                            </tr>
+                                            <tr>
+                                                <td height="50"><a href="@Url.Action("MiCarro", "MiCarro", new { id = item.ItemBarCode })" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Agregar al carro</a></td>
+                                            </tr>
+                                        </table>
+                                        @*<img src="~/Content/productos/@item.Photo" alt="" style="max-width: 268px; max-height: 249px;" />
+                                        <h2>$ @string.Format(new System.Globalization.CultureInfo("es-CL"), "{0:#,##}", Math.Floor(Convert.ToDecimal(item.Price))) </h2>
+                                        <p>Código: @item.ItemBarCode</p>
+                                        <p>@item.ItemName</p>
+                                        <p>Marca: @item.ConfigId</p>
+                                        <p>Color: @item.InventColorId</p>
+                                        <p>Tamaño: @item.InventSizeId</p>
+                                        <a href="@Url.Action("MiCarro", "MiCarro", new { id = item.ItemBarCode })" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Agregar al carro</a>*@
+                                    </div>
+                                </div>
+                                @*<div class="choose">
+                                    <ul class="nav nav-pills nav-justified">
+                                        <li><a href=""><i class="fa fa-plus-square"></i>Añadir a cotización</a></li>
+                                        <li><a href=""><i class="fa fa-plus-square"></i>Añadir a Favoritos</a></li>
+                                    </ul>
+                                </div>*@
+                            </div>
+                        </div>
+                     }
+
+                 }
+
+</div><!--features_items-->
+            </div>
+        </div>
+    </div>
+</section>

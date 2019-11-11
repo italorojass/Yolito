@@ -1,0 +1,172 @@
+﻿@model IEnumerable<PaginaDefinitivaYolito.Models.DetalleCarro>
+@using System.Linq
+@{
+    ViewBag.Title = "MiCarro";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var rutcookie = Request.Cookies["namecookie"].Value;
+}
+
+<script>
+    $(document).ready(function () {
+        $("#quantity").change(function () {
+            $("#btn").click();
+        });
+    });
+    $(document).ready(function () {
+        $('#buscar').autocomplete({
+            source: '@Url.Action("Search","Home")'
+        });
+    })
+
+</script>
+ 
+@if (User.Identity.IsAuthenticated)
+{
+    int total = 0;
+    int price = 0;
+    int ncarro = 0;
+    int cantid = 0;
+
+    foreach (var v in Model)
+    {
+        if (v.NPedido == v.CabeceraCarro.NPedido && Convert.ToString(v.CabeceraCarro.RutCliente) == User.Identity.Name && v.NPedido == null)
+        {
+            <div class="row">
+                <div class="col-sm-12">
+                    
+                    <h2 class="title2 text-center">No tienes un carro con productossss</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <h2 class="text-center"><a href="@Url.Action("Home", "Home")" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Deseo comprar</a></h2>
+                </div>
+            </div>
+        }
+    }
+   
+<section id="cart_items">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        @*<h1>@rutcookie therut </h1>*@
+                        <div class="col-md-4 pull-right buscador">
+                            @using (Html.BeginForm("Buscador", "Home", new { ReturnUrl = ViewBag.ReturnUrl, FormMethod.Post }))
+                            {
+                                <div class="input-group">
+
+                                    <input type="text" class="form-control" name="buscar" id="buscar" placeholder="¿Que buscas?">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default " type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                                    </span>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <br />
+
+                @*<div class="row">
+                    <div class="col-sm-12">
+                        <map name="pasoscompra">
+                            <area shape="rect" coords="0,0,82,126" href="# " alt="paso1"/>
+                        </map>
+                    </div>
+                </div>*@
+                <div class="row">
+                    <div class="col-md-12 ">
+                        
+                        <div class="table-responsive cart_info">
+                            <table class="table "  style="overflow:visible;">
+                                <thead>
+                                    <tr class="cart_menu">
+                                        <td class="image " align="center"></td>
+                                        <td class="description" align="center">PRODUCTOS</td>
+                                        <td class="quantity" align="center">CANTIDAD</td>
+                                        <td class="price" align="center">PRECIO </td>
+                                        <td class="total" align="center">SUBTOTAL</td>
+                                        <td></td>
+                                    </tr>
+                                </thead>
+                                @foreach (var item in Model)
+                                {
+                                    cantid++;
+                                    if (item.NPedido == item.CabeceraCarro.NPedido && item.CabeceraCarro.RutCliente == User.Identity.Name)
+                                    {
+                                        if (item.CabeceraCarro.EstadoOc != true)
+                                        {
+                                            string precio = string.Format("{0:#,##}", item.Precio);
+                                            price = Convert.ToInt32(Double.Parse(precio));
+                                            double subtotal1 = Double.Parse(precio) * item.Cantidad;
+                                            ncarro = item.NPedido;
+                                            <tr >
+                                                <td>
+                                                    <a href="@Url.Action("FichaTecnica", "Home", new { id = item.ItemBarCode, nombre = item.ItemName })">
+
+                                                        <img src="~/Content/productos/@item.Photo" class="img-responsive imgCarro" alt="prod">
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <a href="@Url.Action("FichaTecnica", "Home", new { id = item.ItemBarCode, nombre = item.ItemName })">
+                                                        <b>@item.ItemName</b>
+                                                    </a>
+
+                                                    
+                                                </td>
+                                                
+                                                <td class="cart_quantity" >
+                                                    <div class="cart_quantity_button">
+                                                        <form action="/MiCarro/ActualizaCantidad" method="post">
+                                                            <input class="cart_quantity_input" type="number" name="quantity" id="quantity" value="@item.Cantidad" size="2" style="width: 45px;height:35px;">
+                                                            <input type="hidden" name="barcode" id="barcode" value="@item.ItemBarCode" />
+
+                                                            <button type="submit" name="btn" id="btn" class="btn btn-link"><i class="fa fa-refresh" aria-hidden="true"></i></button>
+                                                        </form>
+
+                                                    </div>
+                                                </td>
+                                                <td  align="center">
+                                                    <b>$@string.Format("{0:#,##}", price)</b>
+                                                </td>
+                                                <td  align="center">
+                                                    <b >$@string.Format("{0:#,##}", item.Subtotal)</b>
+                                                </td>
+                                                <td  align="center">
+                                                    <a class="cart_quantity_delete btn-danger" href="@Url.Action("DeleteItem", "MiCarro", new { id = item.ItemBarCode })"><i class="fa fa-times"></i></a>
+                                                </td>
+                                            </tr>
+                                            total += Convert.ToInt32(subtotal1);
+                                        }
+                                    }
+
+                                }
+                                <tr >
+                                    <td style="background-color:#c0c0c0" class="description">
+                                        <h4 class="fontUpper">TOTAL: $@total.ToString("#,##")</h4>
+                                    </td>
+                                    
+                                    <td  colspan="5" style="background-color:#c0c0c0"></td>
+                                    
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <a class="btn btn-primary " href="@Url.Action("Home", "Home")">Seguir comprando</a>
+                        @*<a class="btn btn-danger " href="@Url.Action("VaciarCarro", "MiCarro", new { id = @ncarro })">Limpiar Carro</a>*@
+                        <a class="btn btn-success" href="@Url.Action("Despacho", "MiCarro", new { id = @ncarro })">Ir a la selección de despacho</a>
+                    </div>
+                    
+                </div>
+               
+                
+            </div>
+        </section>
+   <br />
+}
+else
+{
+    
+    <h2 class="title2 text-center">Debes iniciar sesion para ver tu carro</h2>
+    <h2 class="text-center"><a href="@Url.Action("LogIn", "Usuarios")" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Iniciar Sesión</a></h2>
+}

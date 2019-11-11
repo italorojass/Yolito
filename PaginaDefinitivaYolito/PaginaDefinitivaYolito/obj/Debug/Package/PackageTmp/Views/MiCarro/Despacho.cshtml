@@ -1,0 +1,130 @@
+﻿@{
+    ViewBag.Title = "Despacho";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#buscar').autocomplete({
+            source: '@Url.Action("Search","Home")'
+        });
+    })
+</script>
+@if (User.Identity.IsAuthenticated)
+{
+    <section>
+        <div class="container">
+            <div class="col-md-12">
+                <div class="col-md-4 pull-right ">
+                    @using (Html.BeginForm("Buscador", "Home", new { ReturnUrl = ViewBag.ReturnUrl, FormMethod.Post }))
+                    {
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="buscar" id="buscar" placeholder="¿Que buscas?">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default " type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                                </span>
+                            </div>
+                        </div>
+
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="col-md-12">
+                <div class="panel-group">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading"><h4 class="fontUpper">Seleciona despacho</h4></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <h4 class="fontUpper">Modo de entrega</h4>
+                <div class="radio">
+                    <label><input type="radio" value="optradio" name="trans" id="trans" />Retiro en local</label>
+                    <div class="col-sm-12" id="divinfo">
+                        <div class="alert alert-info">
+                            Una vez realizado el pago , podrás retirar estos productos <strong>De inmediato</strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="radio">
+                    <label><input type="radio" name="optradio" value="d">Despacho a domicilio</label>
+                    <div class="col-sm-12" id="divalert1">
+                        <div class="alert alert-danger">
+                            <strong>Importante!</strong> El costo del despacho varía según el volumen del total de productos comprados.
+                        </div>
+                    </div>
+                    <div class="col-sm-12" id="divalert2">
+                        <div class="alert alert-danger">
+                            <strong>Importante!</strong> El despacho corre a partir de 72hr realizado su pago o su confirmación de pedido.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8" >
+                
+                @Html.Action("rendercarro", "MiCarro")
+            </div>
+
+            
+
+            <div class="col-md-4 " id="formDespacho">
+                <h4 class="fontUpper">Rellena el formulario de despacho</h4>
+                @using (Html.BeginForm("TipoPago", "ConfirmaCompra", FormMethod.Post, new { id = "formEnvio" }))
+                {
+                    <div class="form-group">
+                        <label class="control-label">Nombre contacto:</label>
+                        <input type="text" name="nombrecontacto" class="form-control" placeholder="Pedro" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Apellido contacto:</label>
+                        <input type="text" name="apecontacto" class="form-control" placeholder="Parra" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Comunas donde despachamos:</label>
+                        <select class="form-control" id="sel1">
+                            <option>Selecciona</option>
+                        </select>
+                        @*@Html.DropDownList("Comunas", new SelectList(ViewBag.Comunas, "NAME", "NAME", new { id = "Comunas", @class = "form-control" }))*@
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Calle:</label>
+                        <input type="text" name="calle" class="form-control" placeholder="Av Las Condes" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Número:</label>
+                        <input type="text" name="numerocasa" class="form-control" placeholder="7090" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Dpto/Oficina/Otros:</label>
+                        <input type="text" name="dpto" class="form-control" placeholder="Block C, dpto 401" />
+                    </div>
+                    <button class="btn btn-success update" type="submit">Elegir forma de pago</button>
+                }
+            </div>
+        </div>
+    </section>
+    <br />
+}
+else
+{
+    <div class="alert alert-danger">
+        <strong>Error</strong> Debes iniciar sesion para poder ver este contenido
+    </div>
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#formDespacho').hide();
+        //$('#divalert1').hide();
+        //$('#divalert2').hide()
+        //$('#divinfo').hide();
+
+        $("#optradio").click(function () { //retiro en local
+            $("#divTransferencia").slideDown();
+            $("#webpay").prop("checked", "");
+            $("#divWebpay").hide();
+        });
+    });
+</script>

@@ -1,0 +1,168 @@
+﻿@model IEnumerable<PaginaDefinitivaYolito.Models.Productos>
+@{
+    ViewBag.Title = "FichaTecnica";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    long refid = 0;
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $('#buscar').autocomplete({
+            source: '@Url.Action("Search","Home")'
+        });
+    })
+</script>
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 ">
+                <div class="col-md-4 pull-right buscador">
+                    @using (Html.BeginForm("Buscador", "Home", new { ReturnUrl = ViewBag.ReturnUrl, FormMethod.Post }))
+                    {
+                        <div class="input-group">
+
+                            <input type="text" class="form-control" name="buscar" id="buscar" placeholder="¿Que buscas?">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default " type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                            </span>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 divlines">
+                <div class="breadcrumbs">
+                    @Html.Raw(MvcBreadCrumbs.BreadCrumb.Display())
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="container">
+                <div class="col-md-12">
+                    <input type="checkbox" /> Comparar
+                    
+                </div>
+
+                <div class="col-xs-12">
+                    @if (ViewBag.err != null)
+                    {
+                        <div class="alert-danger">
+                            @ViewBag.err
+                        </div>
+                    }
+                </div>
+            
+                @foreach (var item in Model)
+                {
+                    <div class="col-sm-6" >
+                        <img src="@Url.Content("~/Content/Productos/" + item.Photo)" alt="prod" class="img-responsive " onerror="imgError(this);">
+                    </div>
+
+                <div class="col-md-4" >
+                    <h4 class="fontUpper">@item.ItemName @item.brandInternet</h4>
+                    <p>SKU: @item.ItemBarCode</p>
+                    @*<div class="rating-area" >
+                        <ul class="ratings">
+                            <li>
+                                <i class="fa fa-star color"></i>
+                                <i class="fa fa-star color"></i>
+                                <i class="fa fa-star color"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </li>
+                        </ul>
+                    </div>*@
+                    <h1> $ @string.Format(new System.Globalization.CultureInfo("es-CL"), "{0:#,##}", Math.Floor(Convert.ToDecimal(item.Price))) </h1><br />
+                    <table class="table-responsive">
+                        <tr>
+                            <td><b>Cantidad</b></td>
+                        </tr>
+                        <tr>
+                            <td align="center">
+                                <input type="number" value="1" name="canti" id="canti" class="form-control bfh-number" onchange="check_cantidad(this)" />
+                            </td>
+                        </tr>
+                    </table><br />
+                    <input type="hidden" value="@item.ItemBarCode" id="barc"/><input type="hidden" id="nombrepr" value="@item.ItemName"/>
+                    
+                </div>
+                    
+                    refid = item.RefRecId.Value;
+                }
+                <div class="col-md-4 col-xs-12">
+                    <a href="#" class="btn btn-default add-to-cart btn-block" id="lnk">Agregar al carro <i class="fa fa-shopping-cart"></i></a>
+                </div>
+            </div>
+            @*@Url.Action("ElCarro", "Compra", new { id = item.ItemBarCode, canti = ViewBag.cc })*@
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                @Html.Action("DetalleFTecnica", "Home", new { id = refid})
+               
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 divlines">
+                <h3 class="fontUpper">Los más vendidos</h3>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-12 divlines">
+                <h3 class="fontUpper">También te puede interesar</h3>
+
+            </div>
+        </div>
+
+    </div>
+</section><br />
+<script>
+    var baseurl = '@Url.Action("ElCarro","Compra")';
+    $('#lnk').click(function() {
+        var url = baseurl + '?id=' + $('#barc').val() + '&canti=' + $('#canti').val() + '&nombre=' + $('#nombrepr').val();
+        location.href=url;
+    });
+
+</script>
+<script type="text/javascript">
+    
+    function check_cantidad(element) {
+        var cant = element.value;
+        var cant_es_flotante = isFloat(cant);
+         //alert('Valor introducido: '+cant+' \n\n ID: '+element.id+' | Es flotante? '+cant_es_flotante);
+        // descomentar si quieres revisar los valores del id, value y si es flotante
+
+        if (isNaN(cant)) {
+            alert('Valor introducido:       ' + cant + ' \n\n Introduce solo valores numericos');
+            document.getElementById(element.id).value = "";
+        }
+        else if (cant < 1) {
+            alert('Valor introducido:       ' + cant + ' \n\n Introduce numeros enteros mayores que 0');
+            document.getElementById(element.id).value = "";
+        }
+        else if (cant_es_flotante == true) {
+            alert('Valor introducido:       ' + cant + ' \n\n El valor es decimal.  Será convertido a entero.');
+            cant = parseInt(cant);
+            document.getElementById(element.id).value = cant;
+        }
+    }
+    function isFloat(myNum) {
+        // es true si es 1, osea si es flotante
+        var myMod = myNum % 1;
+
+        if (myMod == 0)
+        { return false; }
+        else { return true; }
+    }
+
+    function imgError(image) {
+        image.onerror = "";
+        image.src = '@Url.Content("~/Content/Imagenes/Sitio/MARCA-DE-AGUA-YOLITO.jpg")';
+        return true;
+    }
+</script>
+

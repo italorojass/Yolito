@@ -1,0 +1,148 @@
+﻿
+@{
+    ViewBag.Title = "Despacho";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Session["rutuser"] != null)
+{
+    <section id="do_action">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 ">
+                    <div class="breadcrumbs">
+                        
+                    </div>
+                </div>
+
+                <div class="col-md-4 pull-right buscador">
+                    <form action="/Home/Buscador/" method="get" id="formBusqueda">
+                        <div class="input-group">
+
+                            <input type="text" class="form-control" name="buscar" id="buscar" placeholder="¿Qué buscas?">
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary " type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                            </span>
+                        </div>
+
+                    </form>
+                    <p id="empty-message" style="color:#ff0000;">
+
+                    </p>
+                </div>
+
+            </div>
+            <br />
+            <div class="row">
+                <div class="pull-left col-xs-6">
+                    <label class="radio-inline">
+                        <input type="radio" name="optradio">Despacho a domicilio
+                    </label>
+                </div>
+                <div class="pull-left col-xs-6">
+                    <label class="radio-inline">
+                        <input type="radio" name="optradio">Retire en tienda
+                    </label>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>Dirección de despacho</h3>
+                </div>
+            </div>
+
+            <div class="row">
+
+                @using (Html.BeginForm("Compra", "Paso2", new { ReturnUrl = ViewContext.HttpContext.Request.Url.PathAndQuery, FormMethod.Post }))
+                {
+                    <div class="col-xs-8">
+                        <label for="calleinp">Calle:</label>
+                        <input type="text" class="form-control " id="Calle" placeholder="Ejemplo: Las Tranqueras">
+                    </div>
+                    <div class="col-xs-4">
+                        <label for="calleinp">Numero:</label>
+                        <input type="text" class="form-control" id="numerocasa" placeholder="Ejemplo: 1936">
+                    </div>
+
+                    <div class="col-xs-2">
+                        <label for="calleinp">Dpto:</label>
+                        <input type="text" class="form-control" id="dpto" placeholder="Ejemplo: 1936">
+                    </div>
+                    <div class="col-xs-4">
+                        <label>Comuna:</label>
+                        <select class="form-control">
+                            <option>Santiago</option>
+                        </select>
+                    </div>
+                    <div class="col-xs-2">
+                        <label>Código Postal</label>
+                        <input type="text" class="form-control" id="zipcode" placeholder="Ejemplo: 7560738">
+                    </div>
+                    <div class="col-xs-4 ">
+                        <div class="pull-right" style="margin-top:25px;">
+                            <label class="radio-inline">
+                                <input type="radio" name="radiotipocasa">Casa
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="radiotipocasa">Oficina
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-xs-8">
+                        <label>Región:</label>
+                        <select class="form-control">
+                            <option>Región Metropolitana</option>
+                        </select>
+                    </div>
+
+                    <div class="col-xs-2">
+                        <label>Teléfono Fijo:</label>
+                        <input type="text" class="form-control" name="telfijo" id="telfijo" />
+                    </div>
+
+                    <div class="col-xs-2">
+                        <label>Teléfono Movil</label>
+                        <input type="text" class="form-control" name="telmovil" id="telmovil" />
+                    </div>
+
+                    <div class="col-md-12 " @*style="border:1px solid;"*@>
+                        <div class="pull-right">
+                            <button class="btn btn-success update" type="submit">Guardar dirección</button>
+                        </div>
+                    </div>
+                }
+                
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <h3>Nombre contacto</h3>
+                </div>
+                
+                <div class="col-md-8">
+                    <label>Nombre receptor despacho: </label>
+                    <input type="text" class="form-control" name="receptordesp" id="receptordesp" placeholder="Nombre receptor despacho"/>
+                </div>
+                <div class="col-md-4">
+                    <label>Rut: </label>
+                    <input type="text" class="form-control" name="rutreceptordesp" id="rutreceptordesp" />
+                </div>
+                <div class="col-md-12">
+                    <div class="pull-right">
+                        <button class="btn btn-success update" type="submit">Guardar Contacto</button>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section><!--/#do_action-->
+}else
+{
+
+    <p>Debes iniciar sesión para acceder.</p>
+}
+
+<script>
+
+</script>

@@ -1,0 +1,169 @@
+﻿@model IEnumerable<PaginaDefinitivaYolito.Models.DetalleCarro>
+
+@{ 
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string barcode ;
+    int nped = 0;
+    int total = 0;
+    
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#buscar').autocomplete({
+            source: '@Url.Action("Search","Home")'
+        });
+    })
+</script>
+@if (Session["cart"] != null)
+{
+    <section id="cart_items">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 ">
+                    <div class="breadcrumbs">
+                        @Html.Raw(MvcBreadCrumbs.BreadCrumb.Display())
+                    </div>
+                </div>
+
+                <div class="col-md-4 pull-right buscador">
+                    @using (Html.BeginForm("Buscador", "Home", new { ReturnUrl = ViewBag.ReturnUrl, FormMethod.Post }))
+                    {
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="buscar" id="buscar" placeholder="¿Que buscas?">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default " type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                            </span>
+                        </div>
+                    }
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-12" style="margin-top:10px;" id="result1">
+                    @if (ViewBag.error != null)
+                    {
+                        <div class="alert">ViewBag.error</div>
+                    }
+                    @*<p>@Session["cart"]</p>*@
+                    <div class="table cart_info">
+                        <table class="table " style="overflow:visible;">
+                            <thead>
+                                <tr class="cart_menu">
+                                    <td class="image " align="center"></td>
+                                    <td class="description" align="center">PRODUCTOS</td>
+                                    <td class="quantity" align="center">CANTIDAD</td>
+                                    <td class="price" align="center">PRECIO </td>
+                                    <td class="total" align="center">SUBTOTAL</td>
+                                    <td></td>
+                                </tr>
+                            </thead>
+                            @foreach (var item in Model)
+                            {
+                                int subtotal1 = Convert.ToInt32(item.Precio) * item.Cantidad;
+                                barcode = item.ItemBarCode;
+                                nped = item.NPedido.Value;
+
+                                if (Session["cart"].ToString() == Convert.ToString(item.NPedido))
+                                {
+                                    <tr>
+                                        <td>
+                                            <a href="@Url.Action("FichaTecnica", "Home", new { id = item.ItemBarCode, nombre = item.ItemName })">
+                                       
+                                        @if (item.Photo != "")
+                                        {
+                                            <img src="@Url.Content("~/Content/Productos/" + item.Photo)" alt="prod" class="img-responsive imgCarro" style="width:100%; height:200px;">
+                                        }
+                                        else
+                                        {
+                                            <img src="~/Content/Imagenes/Sitio/MARCA-DE-AGUA-YOLITO.jpg" alt="prod" class="img-responsive imgCarro" style="width:100%; height:200px;">
+                                        }
+                                        
+                                    </a>
+                                        </td>
+                                        <td>
+                                            <b>@item.ItemName </b>
+                                        </td>
+                                        <td class="cart_quantity">
+                                            <div class="cart_quantity_button">
+                                                <form action="/MiCarro/ActualizaCantidad" method="post">
+                                                    <input class="cart_quantity_input" type="number" name="quantity" id="quantity" value="@item.Cantidad" size="2" style="width: 45px;height:35px;">
+                                                    <input type="hidden" name="barcode" id="barcode" value="@item.ItemBarCode" />
+
+                                                    <button type="submit" name="btn" id="btn" class="btn btn-link"><i class="fa fa-refresh" aria-hidden="true"></i></button>
+                                                </form>
+                                            </div>
+                                        </td>
+                                        <td align="center">
+                                            <b>$@string.Format("{0:#,##}", item.Precio)</b>
+                                        </td>
+                                        <td align="center">
+                                            <b>$@string.Format("{0:#,##}", item.Subtotal)</b>
+                                        </td>
+                                        <td align="center">
+                                            <a class=" btn cart_quantity_delete btn-danger" href="@Url.Action("DeleteItem", "Compra", new { id = item.ItemBarCode })"><i class="fa fa-trash-o"></i></a>
+                                            <input type="hidden" value="@item.ItemBarCode" id="barcode" />
+
+                                        </td>
+                                    </tr>
+                                    total += Convert.ToInt32(subtotal1);
+                                }
+                                //price = Convert.ToInt32(Double.Parse(precio));
+
+
+                                
+                            }
+                            <tr>
+                                <td style="background-color:#c0c0c0" class="description">
+                                    <h4 class="fontUpper">TOTAL: $@total.ToString("#,##")</h4>
+                                </td>
+
+                                <td colspan="5" style="background-color:#c0c0c0"></td>
+
+                            </tr>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="pull-left">
+                        <a href="javascript:history.back(1)" class="btn btn-warning btn-block"> <i class="fa fa-chevron-left" aria-hidden="true"></i>Volver</a>
+                    </div>
+                    <div class="pull-right">
+                        <a class="btn btn-primary btn-block" href="@Url.Action("Despacho", "ConfirmaCompra", new { id = @nped })">Pagar <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+}
+else
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <div class="alert alert-danger">
+                    <i class="fa fa-exclamation-triangle fa-5x text-center"></i>
+                    <h1 class="text-center fontUpper">Sin Productos</h1>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+<br />
+<script type="text/javascript">
+    var itembar = $('#barcode').val();
+
+
+    
+</script>
+
+
+

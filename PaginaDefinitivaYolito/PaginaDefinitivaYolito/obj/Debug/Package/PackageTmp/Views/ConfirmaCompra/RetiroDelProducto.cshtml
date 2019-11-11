@@ -1,0 +1,61 @@
+﻿@*@model IEnumerable<PaginaDefinitivaYolito.Models.ADDRESSCOUNTY>*@
+@*@model PaginaDefinitivaYolito.Models.ADDRESSCOUNTY*@
+@{
+    ViewBag.Title = "RetiroDelProducto";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.scrollUp.min.js"></script>
+<script src="js/price-range.js"></script>
+<script src="js/jquery.prettyPhoto.js"></script>
+<script src="js/main.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+
+@if (User.Identity.IsAuthenticated)
+{
+    <section id="do_action">
+        <div class="container">
+            <div class="heading">
+                <div class="step-one">
+                    <h2 class="heading">Paso 1</h2>
+                    <h2 class="title2">Despacho.</h2>
+                </div>
+                <div class="register-req">
+                    <p>Antes de realizar su pago, completa la entrega de su producto.</p>
+                </div><!--/register-req-->
+            </div>
+            <div class="row">
+                <div class="col-md-12 ">
+                    <div class="chose_area">
+                        
+                        @using (Html.BeginForm("TipoPago", "ConfirmaCompra", FormMethod.Post, new { id = "formEnvio" }))
+                        {
+                            <ul>
+                                <li><h5 style="color: #ff0000">El costo del despacho es de $3.990</h5></li>
+                                <li>
+                                    <label>Comunas donde despachamos:</label>
+                                    @Html.DropDownList("Comunas", new SelectList(ViewBag.Comunas, "NAME", "NAME", new { id = "Comunas" }))
+                                </li>
+                                <li class="single_field zip-field">
+                                    <br />
+                                    <label>Calle y Observaciones: </label>
+                                    <textarea cols="10" rows="4" id="calle" name="Calle" placeholder="Escribe acá los detalles del retiro."></textarea>
+                                </li>
+                            </ul>
+                            <button class="btn btn-success update" type="submit">Elegir forma de pago</button>
+                        }
+
+                        
+                    </div>
+                </div>
+                @*<a class="btn btn-default check_out" href="@Url.Action("Pago_Webpay", "Webpay")">Pagar</a>*@
+            </div>
+        </div>
+    </section><!--/#do_action-->
+}else
+{
+    
+    <p>No tienes acceso.</p>
+}

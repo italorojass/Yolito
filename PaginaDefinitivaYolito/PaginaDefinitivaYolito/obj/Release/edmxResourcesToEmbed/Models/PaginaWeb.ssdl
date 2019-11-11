@@ -1,0 +1,353 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PaginaWebModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AddressCounty">
+    <Key>
+      <PropertyRef Name="Name" />
+    </Key>
+    <Property Name="StateId" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="80" Nullable="false" />
+    <Property Name="CountyId" Type="varchar" MaxLength="80" />
+    <Property Name="CountryRegionId" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="RecId" Type="varchar(max)" />
+    <Property Name="DlvRoute" Type="varchar" MaxLength="80" />
+  </EntityType>
+  <EntityType Name="CabeceraCarro">
+    <Key>
+      <PropertyRef Name="NPedido" />
+    </Key>
+    <Property Name="NPedido" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RutCliente" Type="varchar" MaxLength="50" />
+    <Property Name="NombreCliente" Type="varchar" MaxLength="50" />
+    <Property Name="EstadoOc" Type="bit" />
+    <Property Name="ComunaDespacho" Type="varchar" MaxLength="50" />
+    <Property Name="CalleDespacho" Type="varchar" MaxLength="50" />
+    <Property Name="ObservacionDespacho" Type="varchar" MaxLength="50" />
+    <Property Name="CostoDespacho" Type="varchar" MaxLength="50" />
+    <Property Name="RutResponsable" Type="varchar" MaxLength="50" />
+    <Property Name="ResponsableDespacho" Type="varchar" MaxLength="50" />
+    <Property Name="FechaDespacho" Type="date" />
+    <Property Name="MontoPagado" Type="varchar" MaxLength="50" />
+    <Property Name="IDCliente" Type="int" />
+    <Property Name="ModoEntrega" Type="varchar" MaxLength="50" />
+    <Property Name="Local" Type="varchar" MaxLength="50" />
+    <Property Name="EmailCliente" Type="varchar" MaxLength="50" />
+    <Property Name="IPAdress" Type="varchar" MaxLength="50" />
+    <Property Name="tipoDocumento" Type="varchar" MaxLength="50" />
+    <Property Name="FechaCarro" Type="datetime" />
+  </EntityType>
+  <EntityType Name="CarroPagado">
+    <Key>
+      <PropertyRef Name="IdOrden" />
+    </Key>
+    <Property Name="IdOrden" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NPedido" Type="int" />
+    <Property Name="RutCliente" Type="varchar" MaxLength="50" />
+    <Property Name="NombreCliente" Type="varchar" MaxLength="50" />
+    <Property Name="CodigoCompraTBK" Type="varchar" MaxLength="50" />
+    <Property Name="NumTarjetaTBK" Type="varchar" MaxLength="50" />
+    <Property Name="NCuotasTBK" Type="varchar" MaxLength="50" />
+    <Property Name="FechaCompra" Type="varchar" MaxLength="50" />
+    <Property Name="Monto" Type="varchar" MaxLength="50" />
+    <Property Name="EstadoOc" Type="bit" />
+    <Property Name="TipoCuota" Type="varchar" MaxLength="50" />
+    <Property Name="EmailCliente" Type="varchar" MaxLength="50" />
+    <Property Name="tipoDocumento" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Clientes">
+    <Key>
+      <PropertyRef Name="IDCliente" />
+    </Key>
+    <Property Name="IDCliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RutCliente" Type="varchar" MaxLength="50" />
+    <Property Name="DigCliente" Type="varchar" MaxLength="1" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" />
+    <Property Name="Apellido" Type="varchar" MaxLength="50" />
+    <Property Name="Email" Type="varchar" MaxLength="50" />
+    <Property Name="TelFijo" Type="int" />
+    <Property Name="TelMovil" Type="int" />
+    <Property Name="Direccion" Type="varchar" MaxLength="50" />
+    <Property Name="Comuna" Type="varchar" MaxLength="50" />
+    <Property Name="Password" Type="varchar" MaxLength="50" />
+    <Property Name="ConfirmPassword" Type="varchar" MaxLength="50" />
+    <Property Name="NPedido" Type="int" />
+  </EntityType>
+  <EntityType Name="Cotizaciones">
+    <Key>
+      <PropertyRef Name="IdCotiza" />
+    </Key>
+    <Property Name="IdCotiza" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NombreCliente" Type="varchar" MaxLength="50" />
+    <Property Name="Apellido" Type="varchar" MaxLength="50" />
+    <Property Name="Email" Type="varchar" MaxLength="50" />
+    <Property Name="TelefonoContacto" Type="varchar" MaxLength="50" />
+    <Property Name="Asunto" Type="varchar" MaxLength="50" />
+    <Property Name="BodyEmail" Type="varchar" MaxLength="100" />
+    <Property Name="FechaCotiza" Type="datetime" />
+  </EntityType>
+  <EntityType Name="DetalleCarro">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NPedido" Type="int" />
+    <Property Name="ItemBarCode" Type="nvarchar(max)" />
+    <Property Name="ItemName" Type="varchar(max)" />
+    <Property Name="Cantidad" Type="int" Nullable="false" />
+    <Property Name="Precio" Type="int" Nullable="false" />
+    <Property Name="Subtotal" Type="int" Nullable="false" />
+    <Property Name="Photo" Type="nvarchar(max)" />
+    <Property Name="RecRefId" Type="bigint" />
+  </EntityType>
+  <EntityType Name="FichaTecnica">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RefRecId" Type="bigint" Nullable="false" />
+    <Property Name="ItemNameAttibute" Type="varchar" MaxLength="100" />
+    <Property Name="ItemAttibute" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="MarcasAsoc">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NombreMarca" Type="varchar" MaxLength="50" />
+    <Property Name="FotoNormal" Type="varchar" MaxLength="100" />
+    <Property Name="FotoBN" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Nivel1">
+    <Key>
+      <PropertyRef Name="ICat1" />
+    </Key>
+    <Property Name="ICat1" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+    <Property Name="NameAlias" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Nivel2">
+    <Key>
+      <PropertyRef Name="ICat2" />
+    </Key>
+    <Property Name="ICat2" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ICat1" Type="varchar" MaxLength="50" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+    <Property Name="NameAlias" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Nivel3">
+    <Key>
+      <PropertyRef Name="ICat3" />
+    </Key>
+    <Property Name="ICat2" Type="varchar" MaxLength="50" />
+    <Property Name="ICat3" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+    <Property Name="NameAlias" Type="varchar" MaxLength="50" />
+    <Property Name="Link" Type="varchar" MaxLength="50" />
+    <Property Name="Orden" Type="int" />
+  </EntityType>
+  <EntityType Name="Productos">
+    <Key>
+      <PropertyRef Name="IdProd" />
+    </Key>
+    <Property Name="IdProd" Type="int" Nullable="false" />
+    <Property Name="ItemId" Type="nvarchar(max)" />
+    <Property Name="ItemName" Type="varchar(max)" />
+    <Property Name="Clasif1" Type="varchar" MaxLength="50" />
+    <Property Name="Clasif2" Type="varchar" MaxLength="50" />
+    <Property Name="Clasif3" Type="varchar" MaxLength="50" />
+    <Property Name="ConfigId" Type="varchar" MaxLength="50" />
+    <Property Name="InventSizeId" Type="varchar" MaxLength="50" />
+    <Property Name="InventColorId" Type="varchar" MaxLength="50" />
+    <Property Name="ItemBarCode" Type="nvarchar(max)" />
+    <Property Name="Price" Type="int" Nullable="false" />
+    <Property Name="Photo" Type="nvarchar(max)" />
+    <Property Name="HighLights" Type="varchar" MaxLength="1" />
+    <Property Name="ICat3" Type="varchar" MaxLength="50" />
+    <Property Name="Stock" Type="varchar" MaxLength="50" />
+    <Property Name="brandInternet" Type="varchar(max)" />
+    <Property Name="RefRecId" Type="bigint" />
+    <Property Name="UnitWeb" Type="varchar" MaxLength="50" />
+    <Property Name="Factor" Type="float" />
+    <Property Name="Orden" Type="int" />
+    <Property Name="Banner" Type="int" />
+  </EntityType>
+  <EntityType Name="ProductosKit">
+    <Key>
+      <PropertyRef Name="IdProd" />
+    </Key>
+    <Property Name="IdProd" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ItemId" Type="nvarchar(max)" />
+    <Property Name="ItemName" Type="varchar(max)" />
+    <Property Name="Clasif1" Type="varchar" MaxLength="50" />
+    <Property Name="Clasif2" Type="varchar" MaxLength="50" />
+    <Property Name="Clasif3" Type="varchar" MaxLength="50" />
+    <Property Name="ConfigId" Type="varchar" MaxLength="50" />
+    <Property Name="InventSizeId" Type="varchar" MaxLength="50" />
+    <Property Name="InventColorId" Type="varchar" MaxLength="50" />
+    <Property Name="ItemBarCode" Type="nvarchar(max)" />
+    <Property Name="Price" Type="int" Nullable="false" />
+    <Property Name="Photo" Type="nvarchar(max)" />
+    <Property Name="HighLights" Type="varchar" MaxLength="1" />
+    <Property Name="ICat3" Type="varchar" MaxLength="50" />
+    <Property Name="Stock" Type="varchar" MaxLength="50" />
+    <Property Name="brandInternet" Type="varchar(max)" />
+    <Property Name="RefRecId" Type="bigint" />
+    <Property Name="UnitWeb" Type="varchar" MaxLength="50" />
+    <Property Name="Factor" Type="float" />
+    <Property Name="Orden" Type="int" />
+  </EntityType>
+  <EntityType Name="ProductosOferta">
+    <Key>
+      <PropertyRef Name="IdProd" />
+    </Key>
+    <Property Name="IdProd" Type="int" Nullable="false" />
+    <Property Name="ItemId" Type="nvarchar(max)" />
+    <Property Name="ItemName" Type="varchar(max)" />
+    <Property Name="Clasif1" Type="varchar" MaxLength="50" />
+    <Property Name="Clasif2" Type="varchar" MaxLength="50" />
+    <Property Name="Clasif3" Type="varchar" MaxLength="50" />
+    <Property Name="ConfigId" Type="varchar" MaxLength="50" />
+    <Property Name="InventSizeId" Type="varchar" MaxLength="50" />
+    <Property Name="InventColorId" Type="varchar" MaxLength="50" />
+    <Property Name="ItemBarCode" Type="nvarchar(max)" />
+    <Property Name="Price" Type="int" Nullable="false" />
+    <Property Name="Photo" Type="nvarchar(max)" />
+    <Property Name="HighLights" Type="varchar" MaxLength="1" />
+    <Property Name="ICat3" Type="varchar" MaxLength="50" />
+    <Property Name="Stock" Type="varchar" MaxLength="50" />
+    <Property Name="brandInternet" Type="varchar(max)" />
+    <Property Name="RefRecId" Type="bigint" />
+    <Property Name="UnitWeb" Type="varchar" MaxLength="50" />
+    <Property Name="Factor" Type="float" />
+    <Property Name="Orden" Type="int" />
+    <Property Name="Banner" Type="int" />
+  </EntityType>
+  <EntityType Name="ProductosRelacionados">
+    <Key>
+      <PropertyRef Name="IdProd" />
+    </Key>
+    <Property Name="IdProd" Type="int" Nullable="false" />
+    <Property Name="ItemId" Type="nvarchar(max)" />
+    <Property Name="ConfigId" Type="varchar" MaxLength="50" />
+    <Property Name="InventSizeId" Type="varchar" MaxLength="50" />
+    <Property Name="InventColorId" Type="varchar" MaxLength="50" />
+    <Property Name="RefRecId" Type="bigint" />
+  </EntityType>
+  <EntityType Name="Sinonimos">
+    <Key>
+      <PropertyRef Name="IdSin" />
+    </Key>
+    <Property Name="IdSin" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Palabra" Type="varchar" MaxLength="50" />
+    <Property Name="Sinonimo" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="TablaBanner">
+    <Key>
+      <PropertyRef Name="ID_Banner" />
+    </Key>
+    <Property Name="ID_Banner" Type="int" Nullable="false" />
+    <Property Name="NombreBanner" Type="varchar" MaxLength="50" />
+    <Property Name="FotoBanner" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="temporal">
+    <Key>
+      <PropertyRef Name="IdProd" />
+    </Key>
+    <Property Name="IdProd" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ItemId" Type="nvarchar(max)" />
+    <Property Name="ItemName" Type="varchar(max)" />
+    <Property Name="Clasif1" Type="varchar" MaxLength="50" />
+    <Property Name="Clasif2" Type="varchar" MaxLength="50" />
+    <Property Name="Clasif3" Type="varchar" MaxLength="50" />
+    <Property Name="ConfigId" Type="varchar" MaxLength="50" />
+    <Property Name="InventSizeId" Type="varchar" MaxLength="50" />
+    <Property Name="InventColorId" Type="varchar" MaxLength="50" />
+    <Property Name="ItemBarCode" Type="nvarchar(max)" />
+    <Property Name="Price" Type="int" Nullable="false" />
+    <Property Name="Photo" Type="nvarchar(max)" />
+    <Property Name="HighLights" Type="varchar" MaxLength="1" />
+    <Property Name="ICat3" Type="varchar" MaxLength="50" />
+    <Property Name="Stock" Type="varchar" MaxLength="50" />
+    <Property Name="brandInternet" Type="varchar(max)" />
+    <Property Name="RefRecId" Type="bigint" />
+    <Property Name="UnitWeb" Type="varchar" MaxLength="50" />
+    <Property Name="Factor" Type="float" />
+    <Property Name="Orden" Type="int" />
+  </EntityType>
+  <EntityType Name="tempProdKit">
+    <Key>
+      <PropertyRef Name="IdProd" />
+    </Key>
+    <Property Name="IdProd" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ItemId" Type="nvarchar(max)" />
+    <Property Name="ConfigId" Type="varchar" MaxLength="50" />
+    <Property Name="InventSizeId" Type="varchar" MaxLength="50" />
+    <Property Name="InventColorId" Type="varchar" MaxLength="50" />
+    <Property Name="RefRecId" Type="bigint" />
+  </EntityType>
+  <Association Name="FK_Clientes_CabeceraCarro">
+    <End Role="CabeceraCarro" Type="Self.CabeceraCarro" Multiplicity="0..1" />
+    <End Role="Clientes" Type="Self.Clientes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CabeceraCarro">
+        <PropertyRef Name="NPedido" />
+      </Principal>
+      <Dependent Role="Clientes">
+        <PropertyRef Name="NPedido" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetalleCarro_CabeceraCarro">
+    <End Role="CabeceraCarro" Type="Self.CabeceraCarro" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="DetalleCarro" Type="Self.DetalleCarro" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CabeceraCarro">
+        <PropertyRef Name="NPedido" />
+      </Principal>
+      <Dependent Role="DetalleCarro">
+        <PropertyRef Name="NPedido" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="PaginaWebModelStoreContainer">
+    <EntitySet Name="AddressCounty" EntityType="Self.AddressCounty" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CabeceraCarro" EntityType="Self.CabeceraCarro" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CarroPagado" EntityType="Self.CarroPagado" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Cotizaciones" EntityType="Self.Cotizaciones" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DetalleCarro" EntityType="Self.DetalleCarro" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FichaTecnica" EntityType="Self.FichaTecnica" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MarcasAsoc" EntityType="Self.MarcasAsoc" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Nivel1" EntityType="Self.Nivel1" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Nivel2" EntityType="Self.Nivel2" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Nivel3" EntityType="Self.Nivel3" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Productos" EntityType="Self.Productos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProductosKit" EntityType="Self.ProductosKit" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProductosOferta" EntityType="Self.ProductosOferta" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProductosRelacionados" EntityType="Self.ProductosRelacionados" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Sinonimos" EntityType="Self.Sinonimos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TablaBanner" EntityType="Self.TablaBanner" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="temporal" EntityType="Self.temporal" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tempProdKit" EntityType="Self.tempProdKit" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Clientes_CabeceraCarro" Association="Self.FK_Clientes_CabeceraCarro">
+      <End Role="CabeceraCarro" EntitySet="CabeceraCarro" />
+      <End Role="Clientes" EntitySet="Clientes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetalleCarro_CabeceraCarro" Association="Self.FK_DetalleCarro_CabeceraCarro">
+      <End Role="CabeceraCarro" EntitySet="CabeceraCarro" />
+      <End Role="DetalleCarro" EntitySet="DetalleCarro" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

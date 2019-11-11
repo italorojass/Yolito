@@ -1,0 +1,319 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="PaginaWebModelStoreContainer" CdmEntityContainer="PaginaWebEntities1">
+    <EntitySetMapping Name="CarroPagado">
+      <EntityTypeMapping TypeName="PaginaWebModel.CarroPagado">
+        <MappingFragment StoreEntitySet="CarroPagado">
+          <ScalarProperty Name="tipoDocumento" ColumnName="tipoDocumento" />
+          <ScalarProperty Name="EmailCliente" ColumnName="EmailCliente" />
+          <ScalarProperty Name="IdOrden" ColumnName="IdOrden" />
+          <ScalarProperty Name="NPedido" ColumnName="NPedido" />
+          <ScalarProperty Name="RutCliente" ColumnName="RutCliente" />
+          <ScalarProperty Name="NombreCliente" ColumnName="NombreCliente" />
+          <ScalarProperty Name="CodigoCompraTBK" ColumnName="CodigoCompraTBK" />
+          <ScalarProperty Name="NumTarjetaTBK" ColumnName="NumTarjetaTBK" />
+          <ScalarProperty Name="NCuotasTBK" ColumnName="NCuotasTBK" />
+          <ScalarProperty Name="FechaCompra" ColumnName="FechaCompra" />
+          <ScalarProperty Name="Monto" ColumnName="Monto" />
+          <ScalarProperty Name="EstadoOc" ColumnName="EstadoOc" />
+          <ScalarProperty Name="TipoCuota" ColumnName="TipoCuota" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Nivel1">
+      <EntityTypeMapping TypeName="PaginaWebModel.Nivel1">
+        <MappingFragment StoreEntitySet="Nivel1">
+          <ScalarProperty Name="ICat1" ColumnName="ICat1" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="NameAlias" ColumnName="NameAlias" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Nivel2">
+      <EntityTypeMapping TypeName="PaginaWebModel.Nivel2">
+        <MappingFragment StoreEntitySet="Nivel2">
+          <ScalarProperty Name="ICat2" ColumnName="ICat2" />
+          <ScalarProperty Name="ICat1" ColumnName="ICat1" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="NameAlias" ColumnName="NameAlias" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Nivel3">
+      <EntityTypeMapping TypeName="PaginaWebModel.Nivel3">
+        <MappingFragment StoreEntitySet="Nivel3">
+          <ScalarProperty Name="Orden" ColumnName="Orden" />
+          <ScalarProperty Name="ICat2" ColumnName="ICat2" />
+          <ScalarProperty Name="ICat3" ColumnName="ICat3" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="NameAlias" ColumnName="NameAlias" />
+          <ScalarProperty Name="Link" ColumnName="Link" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="PaginaWebModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="definition" ColumnName="definition" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Clientes">
+      <EntityTypeMapping TypeName="PaginaWebModel.Clientes">
+        <MappingFragment StoreEntitySet="Clientes">
+          <ScalarProperty Name="NPedido" ColumnName="NPedido" />
+          <ScalarProperty Name="ConfirmPassword" ColumnName="ConfirmPassword" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Comuna" ColumnName="Comuna" />
+          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+          <ScalarProperty Name="TelMovil" ColumnName="TelMovil" />
+          <ScalarProperty Name="TelFijo" ColumnName="TelFijo" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="DigCliente" ColumnName="DigCliente" />
+          <ScalarProperty Name="RutCliente" ColumnName="RutCliente" />
+          <ScalarProperty Name="IDCliente" ColumnName="IDCliente" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AddressCounty">
+      <EntityTypeMapping TypeName="PaginaWebModel.AddressCounty">
+        <MappingFragment StoreEntitySet="AddressCounty">
+          <ScalarProperty Name="DlvRoute" ColumnName="DlvRoute" />
+          <ScalarProperty Name="RecId" ColumnName="RecId" />
+          <ScalarProperty Name="CountryRegionId" ColumnName="CountryRegionId" />
+          <ScalarProperty Name="CountyId" ColumnName="CountyId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="StateId" ColumnName="StateId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FichaTecnica">
+      <EntityTypeMapping TypeName="PaginaWebModel.FichaTecnica">
+        <MappingFragment StoreEntitySet="FichaTecnica">
+          <ScalarProperty Name="ItemAttibute" ColumnName="ItemAttibute" />
+          <ScalarProperty Name="ItemNameAttibute" ColumnName="ItemNameAttibute" />
+          <ScalarProperty Name="RefRecId" ColumnName="RefRecId" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MarcasAsoc">
+      <EntityTypeMapping TypeName="PaginaWebModel.MarcasAsoc">
+        <MappingFragment StoreEntitySet="MarcasAsoc">
+          <ScalarProperty Name="FotoBN" ColumnName="FotoBN" />
+          <ScalarProperty Name="FotoNormal" ColumnName="FotoNormal" />
+          <ScalarProperty Name="NombreMarca" ColumnName="NombreMarca" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DetalleCarro">
+      <EntityTypeMapping TypeName="PaginaWebModel.DetalleCarro">
+        <MappingFragment StoreEntitySet="DetalleCarro">
+          <ScalarProperty Name="RecRefId" ColumnName="RecRefId" />
+          <ScalarProperty Name="Photo" ColumnName="Photo" />
+          <ScalarProperty Name="Subtotal" ColumnName="Subtotal" />
+          <ScalarProperty Name="Precio" ColumnName="Precio" />
+          <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+          <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+          <ScalarProperty Name="ItemBarCode" ColumnName="ItemBarCode" />
+          <ScalarProperty Name="NPedido" ColumnName="NPedido" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductosRelacionados">
+      <EntityTypeMapping TypeName="PaginaWebModel.ProductosRelacionados">
+        <MappingFragment StoreEntitySet="ProductosRelacionados">
+          <ScalarProperty Name="RefRecId" ColumnName="RefRecId" />
+          <ScalarProperty Name="InventColorId" ColumnName="InventColorId" />
+          <ScalarProperty Name="InventSizeId" ColumnName="InventSizeId" />
+          <ScalarProperty Name="ConfigId" ColumnName="ConfigId" />
+          <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+          <ScalarProperty Name="IdProd" ColumnName="IdProd" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="temporal">
+      <EntityTypeMapping TypeName="PaginaWebModel.temporal">
+        <MappingFragment StoreEntitySet="temporal">
+          <ScalarProperty Name="Orden" ColumnName="Orden" />
+          <ScalarProperty Name="Factor" ColumnName="Factor" />
+          <ScalarProperty Name="UnitWeb" ColumnName="UnitWeb" />
+          <ScalarProperty Name="RefRecId" ColumnName="RefRecId" />
+          <ScalarProperty Name="brandInternet" ColumnName="brandInternet" />
+          <ScalarProperty Name="Stock" ColumnName="Stock" />
+          <ScalarProperty Name="ICat3" ColumnName="ICat3" />
+          <ScalarProperty Name="HighLights" ColumnName="HighLights" />
+          <ScalarProperty Name="Photo" ColumnName="Photo" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="ItemBarCode" ColumnName="ItemBarCode" />
+          <ScalarProperty Name="InventColorId" ColumnName="InventColorId" />
+          <ScalarProperty Name="InventSizeId" ColumnName="InventSizeId" />
+          <ScalarProperty Name="ConfigId" ColumnName="ConfigId" />
+          <ScalarProperty Name="Clasif3" ColumnName="Clasif3" />
+          <ScalarProperty Name="Clasif2" ColumnName="Clasif2" />
+          <ScalarProperty Name="Clasif1" ColumnName="Clasif1" />
+          <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+          <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+          <ScalarProperty Name="IdProd" ColumnName="IdProd" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cotizaciones">
+      <EntityTypeMapping TypeName="PaginaWebModel.Cotizaciones">
+        <MappingFragment StoreEntitySet="Cotizaciones">
+          <ScalarProperty Name="FechaCotiza" ColumnName="FechaCotiza" />
+          <ScalarProperty Name="BodyEmail" ColumnName="BodyEmail" />
+          <ScalarProperty Name="Asunto" ColumnName="Asunto" />
+          <ScalarProperty Name="TelefonoContacto" ColumnName="TelefonoContacto" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+          <ScalarProperty Name="NombreCliente" ColumnName="NombreCliente" />
+          <ScalarProperty Name="IdCotiza" ColumnName="IdCotiza" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sinonimos">
+      <EntityTypeMapping TypeName="PaginaWebModel.Sinonimos">
+        <MappingFragment StoreEntitySet="Sinonimos">
+          <ScalarProperty Name="Sinonimo" ColumnName="Sinonimo" />
+          <ScalarProperty Name="Palabra" ColumnName="Palabra" />
+          <ScalarProperty Name="IdSin" ColumnName="IdSin" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductosKit">
+      <EntityTypeMapping TypeName="PaginaWebModel.ProductosKit">
+        <MappingFragment StoreEntitySet="ProductosKit">
+          <ScalarProperty Name="Orden" ColumnName="Orden" />
+          <ScalarProperty Name="Factor" ColumnName="Factor" />
+          <ScalarProperty Name="UnitWeb" ColumnName="UnitWeb" />
+          <ScalarProperty Name="RefRecId" ColumnName="RefRecId" />
+          <ScalarProperty Name="brandInternet" ColumnName="brandInternet" />
+          <ScalarProperty Name="Stock" ColumnName="Stock" />
+          <ScalarProperty Name="ICat3" ColumnName="ICat3" />
+          <ScalarProperty Name="HighLights" ColumnName="HighLights" />
+          <ScalarProperty Name="Photo" ColumnName="Photo" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="ItemBarCode" ColumnName="ItemBarCode" />
+          <ScalarProperty Name="InventColorId" ColumnName="InventColorId" />
+          <ScalarProperty Name="InventSizeId" ColumnName="InventSizeId" />
+          <ScalarProperty Name="ConfigId" ColumnName="ConfigId" />
+          <ScalarProperty Name="Clasif3" ColumnName="Clasif3" />
+          <ScalarProperty Name="Clasif2" ColumnName="Clasif2" />
+          <ScalarProperty Name="Clasif1" ColumnName="Clasif1" />
+          <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+          <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+          <ScalarProperty Name="IdProd" ColumnName="IdProd" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tempProdKit">
+      <EntityTypeMapping TypeName="PaginaWebModel.tempProdKit">
+        <MappingFragment StoreEntitySet="tempProdKit">
+          <ScalarProperty Name="RefRecId" ColumnName="RefRecId" />
+          <ScalarProperty Name="InventColorId" ColumnName="InventColorId" />
+          <ScalarProperty Name="InventSizeId" ColumnName="InventSizeId" />
+          <ScalarProperty Name="ConfigId" ColumnName="ConfigId" />
+          <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+          <ScalarProperty Name="IdProd" ColumnName="IdProd" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Productos">
+      <EntityTypeMapping TypeName="PaginaWebModel.Productos">
+        <MappingFragment StoreEntitySet="Productos">
+          <ScalarProperty Name="Banner" ColumnName="Banner" />
+          <ScalarProperty Name="Orden" ColumnName="Orden" />
+          <ScalarProperty Name="Factor" ColumnName="Factor" />
+          <ScalarProperty Name="UnitWeb" ColumnName="UnitWeb" />
+          <ScalarProperty Name="RefRecId" ColumnName="RefRecId" />
+          <ScalarProperty Name="brandInternet" ColumnName="brandInternet" />
+          <ScalarProperty Name="Stock" ColumnName="Stock" />
+          <ScalarProperty Name="ICat3" ColumnName="ICat3" />
+          <ScalarProperty Name="HighLights" ColumnName="HighLights" />
+          <ScalarProperty Name="Photo" ColumnName="Photo" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="ItemBarCode" ColumnName="ItemBarCode" />
+          <ScalarProperty Name="InventColorId" ColumnName="InventColorId" />
+          <ScalarProperty Name="InventSizeId" ColumnName="InventSizeId" />
+          <ScalarProperty Name="ConfigId" ColumnName="ConfigId" />
+          <ScalarProperty Name="Clasif3" ColumnName="Clasif3" />
+          <ScalarProperty Name="Clasif2" ColumnName="Clasif2" />
+          <ScalarProperty Name="Clasif1" ColumnName="Clasif1" />
+          <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+          <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+          <ScalarProperty Name="IdProd" ColumnName="IdProd" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CabeceraCarro">
+      <EntityTypeMapping TypeName="PaginaWebModel.CabeceraCarro">
+        <MappingFragment StoreEntitySet="CabeceraCarro">
+          <ScalarProperty Name="FechaCarro" ColumnName="FechaCarro" />
+          <ScalarProperty Name="tipoDocumento" ColumnName="tipoDocumento" />
+          <ScalarProperty Name="IPAdress" ColumnName="IPAdress" />
+          <ScalarProperty Name="EmailCliente" ColumnName="EmailCliente" />
+          <ScalarProperty Name="Local" ColumnName="Local" />
+          <ScalarProperty Name="ModoEntrega" ColumnName="ModoEntrega" />
+          <ScalarProperty Name="IDCliente" ColumnName="IDCliente" />
+          <ScalarProperty Name="MontoPagado" ColumnName="MontoPagado" />
+          <ScalarProperty Name="FechaDespacho" ColumnName="FechaDespacho" />
+          <ScalarProperty Name="ResponsableDespacho" ColumnName="ResponsableDespacho" />
+          <ScalarProperty Name="RutResponsable" ColumnName="RutResponsable" />
+          <ScalarProperty Name="CostoDespacho" ColumnName="CostoDespacho" />
+          <ScalarProperty Name="ObservacionDespacho" ColumnName="ObservacionDespacho" />
+          <ScalarProperty Name="CalleDespacho" ColumnName="CalleDespacho" />
+          <ScalarProperty Name="ComunaDespacho" ColumnName="ComunaDespacho" />
+          <ScalarProperty Name="EstadoOc" ColumnName="EstadoOc" />
+          <ScalarProperty Name="NombreCliente" ColumnName="NombreCliente" />
+          <ScalarProperty Name="RutCliente" ColumnName="RutCliente" />
+          <ScalarProperty Name="NPedido" ColumnName="NPedido" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductosOferta">
+      <EntityTypeMapping TypeName="PaginaWebModel.ProductosOferta">
+        <MappingFragment StoreEntitySet="ProductosOferta">
+          <ScalarProperty Name="Banner" ColumnName="Banner" />
+          <ScalarProperty Name="Orden" ColumnName="Orden" />
+          <ScalarProperty Name="Factor" ColumnName="Factor" />
+          <ScalarProperty Name="UnitWeb" ColumnName="UnitWeb" />
+          <ScalarProperty Name="RefRecId" ColumnName="RefRecId" />
+          <ScalarProperty Name="brandInternet" ColumnName="brandInternet" />
+          <ScalarProperty Name="Stock" ColumnName="Stock" />
+          <ScalarProperty Name="ICat3" ColumnName="ICat3" />
+          <ScalarProperty Name="HighLights" ColumnName="HighLights" />
+          <ScalarProperty Name="Photo" ColumnName="Photo" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="ItemBarCode" ColumnName="ItemBarCode" />
+          <ScalarProperty Name="InventColorId" ColumnName="InventColorId" />
+          <ScalarProperty Name="InventSizeId" ColumnName="InventSizeId" />
+          <ScalarProperty Name="ConfigId" ColumnName="ConfigId" />
+          <ScalarProperty Name="Clasif3" ColumnName="Clasif3" />
+          <ScalarProperty Name="Clasif2" ColumnName="Clasif2" />
+          <ScalarProperty Name="Clasif1" ColumnName="Clasif1" />
+          <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+          <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+          <ScalarProperty Name="IdProd" ColumnName="IdProd" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TablaBanner">
+      <EntityTypeMapping TypeName="PaginaWebModel.TablaBanner">
+        <MappingFragment StoreEntitySet="TablaBanner">
+          <ScalarProperty Name="FotoBanner" ColumnName="FotoBanner" />
+          <ScalarProperty Name="NombreBanner" ColumnName="NombreBanner" />
+          <ScalarProperty Name="ID_Banner" ColumnName="ID_Banner" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
